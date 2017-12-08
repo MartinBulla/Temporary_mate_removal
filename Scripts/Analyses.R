@@ -1,70 +1,54 @@
-{# TOOLS
-	{# define working and output directories
-		wd="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Data/"	
-		out3="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Tabels/"
-		out2="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Figs/"	
-		out="C:/Users/mbulla/Documents/ownCloud/treat_constancy/"	
+# R Script generates statistical outputs for 
+
+{# SETTINGS & DATA
+	{# do you want plots within R (PNG=FALSE) or as PNG (PNG = TRUE)?
+		PNG=TRUE
+		#PNG = TRUE
 	}
-	{# load packages
-		require(AICcmodavg)
-		require(Amelia)
-		require(arm)
-		devtools::source_gist('45b49da5e260a9fc1cd7') #loads IwantHue fuctions https://gist.github.com/johnbaums/45b49da5e260a9fc1cd7
-		require(effects)
-		require(ggplot2)
-		require(lattice)
-		require(multcomp)
-		require(plyr)
-		require(randomcoloR) #install.packages('randomcoloR')
-		require(RColorBrewer)
-		require(RMySQL)
-		require(XLConnect)
-		require(zoo)
+	{# define working directories
+	     wd="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Analyses/"	
+		 outdir="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Outputs/"
+		#out3="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Tabels/"
+		#out2="C:/Users/mbulla/Documents/Dropbox/Science/Projects/MS/Removal/Figs/"	
 	}
-	{# connect to database
-		conMy=dbConnect(MySQL(),user='root',host='127.0.0.1', password='',dbname='')
-		wet=dbGetQuery	
+	{# load packages, constants and data
+		source(paste(wd, 'Scripts/Constants&Functions.R',sep=""))
+		#source(paste(wd, 'Scripts/Prepare_Data.R',sep=""))
 	}
-	
-	# define time and load packages
-		Sys.setenv(TZ="UTC")	
-	# define constants
-		fo=72/25.4 # use to multiply size of font (in mm) in ggplot2 to get to point size from base package 
-	# functions
-			Mode <- function(x) {
-						ux <- unique(x)
-						ux[which.max(tabulate(match(x, ux)))]
-						}
-}		
- 
+}
+
  # INTRODUCTION
-	{# Figure 1 predictions
-			dev.new(width=0.875*2, height=0.875*2) #dev.new(width=3.5, height=1.97)
-			#png(paste(out2,"Figure_1", ".png", sep = ""), width=0.875*2, height=0.875*2, units = "in", res = 600)	
-				#par(mfrow=c(2,2),mar=c(2,2,0.7,0.7), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5)) # cex is multiplied as in multiplot figure the cex is reduced to 0.66	
-			par(mfrow=c(2,2),mar=c(0,0,0,0), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5),col.axis="grey30",col.lab="grey30", col.main="grey30", fg="grey70") 
+	{# Figure 1 - predictions
+		if(PNG == TRUE) {
+					png(paste(out2,"Figure_1", ".png", sep = ""), width=0.875*2, height=0.875*2, units = "in", res = 600)	 
+					}else{
+					dev.new(width=0.875*2, height=0.875*2) #dev.new(width=3.5, height=1.97)
+					}	
+			
+		#par(mfrow=c(2,2),mar=c(2,2,0.7,0.7), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5)) # cex is multiplied as in multiplot figure the cex is reduced to 0.66	
+		par(mfrow=c(2,2),mar=c(0,0,0,0), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5),col.axis="grey30",col.lab="grey30", col.main="grey30", fg="grey70") 
 		
-			{#(a)	
+		{#(a)	
 							#par(mar=c(0,2,2.7,0), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 							#par(mar=c(0,0,1,0))
 							plot(c(0,1), c(0,1),xlab=NA, ylab=NA, xlim=c(-0.125,1.125),ylim=c(-0.05,1.1),type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
 							axis(2, at = seq(0,1, 0.5),cex.axis=0.5)	
 							mtext(expression(bold("a")),side=3,line=-0.65, cex=0.7, las=1,adj=0.04, col='black')
-							polygon(x=c(c(0.4, 1),rev(c(0.4, 1))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 							lines(c(0,0.4,0.4,0.8,0.8,1),c(0.9,0.9,0,0,0.9,0.9), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
 							box(col = "grey70")
-			}
-			{#(b) 
+		}
+		{#(b) 
 							#par(mar=c(0,0,2.7,2), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 							plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
 							mtext(expression(bold("b")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
-							polygon(x=c(c(0.4, 1),rev(c(0.4, 1))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 							lines(c(0,1),c(0.9,0.9), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
 							box(col = "grey70")
-			}
-			{#(c) 
+		}
+		{#(c) 
 							#par(mar=c(2.7,2,0,0), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 							#par(mgp=c(0.2,0.15,0))
 							plot(c(0,1), c(0,1),xlab=NA, ylab=NA, xlim=c(-0.125,1.125),ylim=c(-0.05,1.1),type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
@@ -73,32 +57,288 @@
 							axis(1, at = seq(0,1, 0.5),labels=seq(0,24,12),cex.axis=0.5,mgp=c(0,-0.15,0))
 							#text(seq(0,1, 0.5),  par("usr")[3], labels = seq(0,24,12),  xpd = TRUE, cex=0.6) 
 							#mtext(text = seq(0,24,12),seq(0,1, 0.5),  par("usr")[3],   outer = TRUE, cex=0.6) 
-							polygon(x=c(c(0.4, 1),rev(c(0.4, 1))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 							mtext(expression(bold("c")),side=3,line=-0.65, cex=0.7, las=1,adj=0.04, col='black')
 							lines(c(0,0.6,0.6,1),c(0.9,0.9,0,0), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
 							box(col = "grey70")
-			}
-			{#(d) 
+		}
+		{#(d) 
 						#par(mar=c(2.7,0,0,2), ps=12, mgp=c(0.5,0.35,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 						plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 
 						mtext(expression(bold("d")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
 						axis(1, at = seq(0,1, 0.5),labels=seq(0,24,12),cex.axis=0.5,mgp=c(0,-0.15,0))
-						polygon(x=c(c(0.4, 1),rev(c(0.4, 1))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+						polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 						lines(c(0,0.6,0.6,1),c(0.9,0.9,0.55,0.55), lwd=1.5, col='black')
 						#abline(v=0.4, col='red', lty=3, lwd=0.5)
 						box(col = "grey70")				
 				}
 				
-			mtext('Time [h]',side=1,line=0.6, cex=0.6, las=1, outer=TRUE, col="grey30")
-			mtext('Nest attendance',side=2,line=1.3, cex=0.6, las=0,outer=TRUE,col="grey30")
+		mtext('Time [h]',side=1,line=0.6, cex=0.6, las=1, outer=TRUE, col="grey30")
+		mtext('Nest attendance',side=2,line=1.3, cex=0.6, las=0,outer=TRUE,col="grey30")
 			
-			dev.off()	
+		if(PNG == TRUE) {dev.off()}
 	}
 				
 
 # METHODS
-	{# Experimental procedure - correlation between temperature based and rfid based constancy
+	{# Recordind incubation and escape distance
+	   {# escape distance - (note: sometimes we had two estimates (our and gps) for a single event)
+		load("C:\\Users\\mbulla\\Documents\\Dropbox\\Science\\Projects\\MS\\Removal\\Analyses\\Data\\escape.Rdata")
+		write.csv(vv,paste(wd,'Data/escape.csv', sep=""),row.names=FALSE)
+		str(vv)
+		table(vv$nest_sex)
+		ggplot(vv,aes(x = nest_sex, y = distm)) + geom_boxplot() + geom_dotplot(aes(fill = nest_sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+		densityplot(~vv$distm)
+		densityplot(~log(vv$distm+0.5))
+		
+		vg = vv[vv$type == 'gps',]	
+		ve = vv[!paste(vv$nest_sex, vv$datetime_)%in%paste(vg$nest_sex, vg$datetime_),]
+		v = rbind(vg,ve)
+		x = data.frame(table(v$nest_sex))
+		summary(factor(x$Freq))
+		summary(x$Freq)
+		nrow(x)+1 #1 bird had no escape distance estimate)
+		
+		m = lmer(distm ~ 1 + (1|nest_sex), v)
+		summary(m)
+		
+		xx = x$Var1[x$Freq>1]
+		m = lmer(distm ~ 1 + (1|nest_sex), v[v$nest_sex%in%xx,])
+			summary(m)
+		table(v$nest_sex[v$nest_sex%in%xx])
+		
+		vv = v
+		vv$time = as.numeric(difftime(vv$datetime_,trunc(vv$datetime_,"day"), units = "hours"))
+		vv$day_j=as.numeric(format(as.Date(trunc(vv$datetime_, "day")),"%j")) - as.numeric(format(as.Date(trunc(min(vv$datetime_), "day")),"%j"))+1
+		ggplot(vv,aes(x = day_j, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+			 load("C:\\Users\\mbulla\\Documents\\Dropbox\\Science\\Projects\\MS\\Removal\\Analyses\\Data\\inc_start_estimation_2013_new.Rdata")
+			 e$nest = tolower(e$nest)
+			vv$inc_start = e$inc_start[match(vv$nest,e$nest)] 	
+			vv$day_inc=as.numeric(difftime(vv$datetime_,vv$inc_start, units = "days"))	
+		ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+		ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth()
+		
+		m = lmer(distm ~ 1 + (1|nest_sex), vv)
+		m = lmer(distm ~ day_j + (day_j|nest_sex), vv)
+		m = lmer(distm ~ day_inc + (day_inc|nest_sex), vv)
+		m = lmer(distm ~ 1 + (day_inc|nest_sex), vv)
+		75.56/(75.56+0.08+269)
+		pp = profile(m)
+		confint(pp)
+		m = lmer(distm ~ day_inc + (day_inc|nest_sex), vv[vv$nest_sex%in%xx,])
+		plot(allEffects(m))
+		summary(glht(m))
+		summary(m)
+		
+		v = vv[paste(vv$datetime_,vv$nest_sex)%in%paste(vv$datetime_,vv$nest_sex)[duplicated(paste(vv$datetime_,vv$nest_sex))],]
+		v = v[order(v$nest_sex, v$datetime_),]
+		table(paste(v$nest_sex, v$datetime))
+		pd <- position_dodge(0.4)
+		ggplot(v,aes(x=type, y = distm, col = factor(paste(nest_sex, datetime_))))+geom_point(position = pd) +geom_line(position = pd, aes(group = factor(paste(nest_sex, datetime_)), col = factor(paste(nest_sex, datetime_)))) +
+				theme(legend.position = "none") + ylab('escape distance [m]') + xlab('type of estimation')
+		
+
+			
+		
+}
+{# escape distance 2011-2012
+ {# tools	
+	wet_=dbGetQuery
+	
+	
+	
+	db_barr12="M:\\Science\\Projects\\PHD\\FIELD_METHODS\\Barrow\\2012\\DATA\\Database\\Barrow_2012.sqlite"
+	con_barr12 = dbConnect(dbDriver("SQLite"),dbname = db_barr12)
+	
+	db_barr11="M:\\Science\\Projects\\PHD\\FIELD_METHODS\\Barrow\\2011\\DATA\\Database\\Barrow_2011.sqlite"
+	con_barr11 = dbConnect(dbDriver("SQLite"),dbname = db_barr11)
+}	
+ {# Barrow 2011
+	v=dbGetQuery(con_barr11,"SELECT date_time as datetime_, nest, dist_left_nest dist_est FROM NESTS where dist_left_nest is not null and species='sesa'")
+		v[nchar(v$datetime_)!=nchar('2012-06-12 20:36:00'),]
+		v = v[nchar(v$datetime_)>nchar('2012-06-12 20'),]
+		v$datetime_ = as.POSIXct(v$datetime_,format="%Y-%m-%d %H:%M:%S", tz = 'America/Anchorage')		
+	
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\weather_SESA_2011_MS_BeEc.Rdata")
+		d$nest = tolower(d$nest)
+	v = v[v$nest %in% unique(d$nest),]	
+			l = list()
+			for(i in 1:nrow(v)){
+							fi=v[i,]
+							di=d[which(d$nest==fi$nest & fi$datetime_>=d$bout_start & fi$datetime_<=d$bout_end+60),] # adding 1 min to the bout end to make the selection more robust
+							if(nrow(di)==0){#fi$sex=NA
+											 print(fi) #all these visits where before we had rfid on and hence sex cannot be determined
+											}else{	fi$sex=di$sex
+													fi$bird_ID_filled = di$bird_ID_filled
+													l[[i]]=fi
+													print(i)
+												 }
+							
+							
+							}
+	v=do.call(rbind,l)		
+	v$year = 2011	
+	v11 =v
+	}
+ {# Barrow 2012
+	require(sp)
+	v=dbGetQuery(con_barr12,"SELECT visits_pk pk,datetime_, nest, gps_left, wp_left, dist_left_nest dist_est FROM VISITS where gps_left is not null")
+	g=dbGetQuery(con_barr12,"SELECT*FROM GPS")
+	n=dbGetQuery(conMy,"SELECT nest, species, latit, longit FROM avesatbarrow.nests where year_=2012 and species = 'sesa'")
+	v$lat_g=g$latit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v$lon_g=g$longit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v=v[!is.na(v$lat_g),]
+	#v=v[-which(v$pk%in%c(45,259,607,1385)),]
+	v$lat=n$latit[match(v$nest,tolower(n$nest))]
+	v$lon=n$longit[match(v$nest,tolower(n$nest))]
+	v$sp=n$species[match(v$nest,tolower(n$nest))]
+		for(i in 1:nrow(v) ) { 
+			if(is.na(v$lat[i])){v$distm[i]==NA} else {
+					v[i,'distm'] = spDists( as.matrix(v[i, c("lon_g", "lat_g")]), v[i, c("lon", "lat")], longlat=TRUE)*1000
+						}
+						}
+	v=v[v$distm<1250,]					
+	v$issues=0				
+	v1=v
+	# add nests where dist estimated
+	v=dbGetQuery(con_barr12,"SELECT visits_pk pk,datetime_, nest, gps_left, wp_left, dist_left_nest dist_est FROM VISITS where dist_left_nest is not null and wp_left is NULL")
+	g=dbGetQuery(con_barr12,"SELECT*FROM GPS")
+	n=dbGetQuery(conMy,"SELECT nest, species, latit, longit FROM avesatbarrow.nests where year_=2012")
+	v$lat_g=g$latit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v$lon_g=g$longit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	
+	v$lat=n$latit[match(v$nest,tolower(n$nest))]
+	v$lon=n$longit[match(v$nest,tolower(n$nest))]
+	v$sp=n$species[match(v$nest,tolower(n$nest))]
+	
+	v$distm=NA
+	v$issues=0
+	v2=v
+	
+		v=rbind(v1,v2)
+		v$issues[!is.na(v$dist_est) & !is.na(v$distm)]=1
+		v_=v[v$issues==1,]
+		ggplot(v_,aes(y=v_$dist_est,x=v_$distm))+geom_point()+stat_smooth(method="lm")
+	v2$distm=v2$dist_est
+	v1$type="gps"
+	v2$type="est"
+	v=rbind(v1,v2)
+	v = v[!is.na(v$datetime_),]
+	v[nchar(v$datetime_)!=nchar('2012-06-12 20:36:00'),]
+	v$datetime_ = as.POSIXct(v$datetime_, tz = 'America/Anchorage')		
+	
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_inc_start.Rdata")
+		d1 = d
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_short_inc_start.Rdata")
+	d = rbind(d1,d)
+	d$nest= tolower(d$nest)	
+	v = v[v$nest %in% unique(d$nest),]	
+			l = list()
+			for(i in 1:nrow(v)){
+							fi=v[i,]
+							di=d[which(d$nest==fi$nest & fi$datetime_>=d$bout_start & fi$datetime_<=d$bout_end+60),] # adding 1 min to the bout end to make the selection more robust
+							if(nrow(di)==0){#fi$sex=NA
+											 print(fi) #all these visits where before we had rfid on and hence sex cannot be determined
+											}else{	fi$sex=di$sex
+													fi$bird_ID_filled = di$bird_ID_filled
+													l[[i]]=fi
+													print(i)
+												 }
+							
+							
+							}
+	v=do.call(rbind,l)		
+	v$year = 2012	
+	v12 =v
+}
+ {# combine
+	names(v11)[names(v11) == 'dist_est'] = 'distm'	
+	v11$type = 'est'
+	v12 = v12[v12$sp == 'SESA',]
+	v = rbind(v12[c('year','datetime_','nest','sex', 'bird_ID_filled','distm','type')], v11)
+	nrow(v)
+	save(v, file = paste(wd,'escpate_2011-2012.Rdata', sep=''))
+	}
+
+ {# analyses
+	load(file = paste(wd,'escpate_2011-2012.Rdata', sep=''))
+	nrow(v)
+	#nrow(v[is.na(v$bird_ID_filled),])
+	#v[v$nest == 's510',]
+	v$bird_ID_filled[is.na(v$bird_ID_filled)] = 'f'
+	v$nest_sex = paste(v$nest, v$sex)
+	nrow(v[duplicated(paste(v$nest_sex,v$datetime_)),])
+	#v[paste(v$nest_sex,v$datetime_) %in% paste(v$nest_sex,v$datetime_)[duplicated(paste(v$nest_sex,v$datetime_))],]
+	#v = v[!duplicated(paste(v$nest_sex,v$datetime_)),]
+	#vg = v[v$type == 'gps',]	
+	#ve = v[!paste(v$nest_sex, v$datetime_)%in%paste(vg$nest_sex, vg$datetime_),]
+	#v = rbind(vg,ve)
+	#nrow(v)
+	
+	x = data.frame(table(v$bird_ID_filled))
+	summary(factor(x$Freq))
+	summary(x$Freq)
+	
+	densityplot(~v$distm)
+	
+	v = v[v$distm<200,]
+	
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v)
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v[v$type=='est',])
+	summary(m)
+	
+	xx = x$Var1[x$Freq>1]
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v[v$bird_ID_filled%in%xx,])
+		summary(m)
+	table(v$nest_sex[v$nest_sex%in%xx])
+	
+	vv = v
+	vv$time = as.numeric(difftime(vv$datetime_,trunc(vv$datetime_,"day"), units = "hours"))
+	vv$day_j=as.numeric(format(as.Date(trunc(vv$datetime_, "day")),"%j")) - as.numeric(format(as.Date(trunc(min(vv$datetime_), "day")),"%j"))+1
+	ggplot(vv,aes(x = day_j, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+		 load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\inc_start_est_2011_SESA_NON-SESA.Rdata")
+		 e$year = 2011
+		 e1 = e
+		 
+		 load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\inc_start_est_2012_SESA_NON-SESA.Rdata")
+		  e$year = 2012
+		 e2 = e
+		 e = rbind(e1,e2)
+		 e = e[!is.na(e$inc_est),]
+		 e$inc_est = as.POSIXct(e$inc_est,format="%Y-%m-%d %H:%M:%S", tz = 'America/Anchorage')		
+		  e$nest = tolower(e$nest)
+		vv$inc_start = e$inc_est[match(paste(vv$year, vv$nest),paste(e$year,e$nest))] 	
+		vv$day_inc=as.numeric(difftime(vv$datetime_,vv$inc_start, units = "days"))	
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth()
+	
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), vv)
+	m = lmer(distm ~ day_j + (day_j|bird_ID_filled), vv)
+	m = lmer(distm ~ day_inc + (day_inc|bird_ID_filled), vv,na.action='na.omit')
+	m = lmer(distm ~ 1 + (day_inc|bird_ID_filled), vv,na.action='na.omit')
+	m = lmer(distm ~ day_inc + (day_inc|bird_ID_filled), vv[vv$bird_ID_filled%in%xx,])
+	m = lmer(distm ~ 1 + (day_inc|bird_ID_filled), vv[vv$bird_ID_filled%in%xx,])
+	plot(allEffects(m))
+	summary(glht(m))
+	summary(m)
+	pp = profile(m)
+	confint(pp)
+	library(MCMCglmm)
+		mm <- MCMCglmm(distm ~ 1,random = ~us(day_inc):bird_ID_filled, data=vv[vv$bird_ID_filled%in%xx & !is.na(vv$day_inc),])
+summary(mm)
+}
+}	
+
+	}
+	{# Experimental procedure 
+		{# period between capture of the 'removed' parent and return of the 'focal' parent
+			e=read.csv(file=paste(wd,'experiment_times.csv', sep=""), sep=",",stringsAsFactors =FALSE)
+			e$taken = as.POSIXct(e$taken)
+			e$start_ = as.POSIXct(e$start_)
+			summary(as.numeric(difftime(e$start_,e$taken, units = 'hours')))
+		}
+		{# correlation between temperature based and rfid based constancy
 			load(file=paste(wd,'bout.Rdata', sep=""))
 			bb=b[-which(is.na(b$inc_eff)|is.na(b$inc_eff_2)),] # use only bouts with both constancies
 			cor(bb$inc_eff,bb$inc_eff_2, method='spearman')
@@ -108,7 +348,9 @@
 			dd_=dd[-which(is.na(dd$inc_eff)|is.na(dd$inc_eff_2)),] # use only bouts with both constancies
 			cor(dd_$inc_eff,dd_$inc_eff_2, method='spearman')
 			cor(dd_$inc_eff,dd_$inc_eff_2, method='pearson')
+		}
 	}
+	
 	{# Explaining the diversity in compensation - Correlation nest attendance vs compensation
 				load(file=paste(wd,'experimental.Rdata', sep=""))
 				b=b[-which(b$nest%in%c('s410','s514','s524','s624')),] 
@@ -122,7 +364,60 @@
 				cor(bb$compensation,bb$inc_eff_treated,method='spearman')
 				plot(bb$inc_eff_treated~bb$compensation)
 			}
+	{# Mass of removed individuals
+		d =read.csv(paste(wd,'Data/captivity.csv', sep=""),stringsAsFactors=FALSE)
+		d = d[d$phase == 'start' & !is.na(d$mass),] # removing NAs where fat was scored by two observes
+		summary(d$mass)
+		nrow(d)
+	}
+	{# relative mass loss in removed parents (without two dead females)
+		d =read.csv(paste(wd,'captivity.csv', sep=""),stringsAsFactors=FALSE)
+		dd = d[!is.na(d$mass) & d$phase %in%c('start','end'),] # removes the dead females 257188570 257188566
+		length(unique(dd$ring_num))
+		v = ddply(dd,.(ring_num), summarise, rel_mass = (mass[phase=='end'] - mass[phase=='start'])/mass[phase=='start'], abs_mass = (mass[phase=='end'] - mass[phase=='start']))
+		v[duplicated(v$ring_num),]
+		length(unique(v$ring_num))
+		summary(v)
+		#unique(dd$ring_num)[!unique(dd$ring_num)%in%v$ring_num]
+		cor.test(v$rel_mass, v$abs_mass)
+		ggplot(v,aes(x=rel_mass, y = abs_mass)) + geom_point() + stat_smooth()
+		ggplot(v,aes(x=rel_mass, y = abs_mass)) + geom_point() + stat_smooth(method = 'lm')
+		
+		#u[!u$ID_taken%in%v$ring_num,] #257188570, 257188566
+		#v[!v$ring_num%in%u$ID_taken,] 
+		}
 
+	{# semipalmated sandpiper energetic requirements
+		# based on equation in Norton 1973 page 64 - given in cubic centimeter per gram and hour
+					# cc = 0.001 liters (thus to get the results in literes we divide them by by 1000)
+					# O2 in liters multiply by 20.10 to get KJ
+			#27g SESA and 6.2C - median tundra temperature in Barrow
+			27*((10.69+(-0.203)*6.2)/1000)*20.1 # kj/27g/h # 4.699782	
+			24*27*((10.69+(-0.203)*6.2)/1000)*20.1 # kj/27g/d # 4.699782	
+			
+		# based on Ashkenazei and Safriel 1979
+			# 19-59 duing incubation
+	}
+	{# Ethics
+		# starved birds (s402, s510 deaath
+			p = data.frame(bird_ID =c(257188558,257188571,257188564,255174350,257188570,257188566,255174353,257188572) , nest = c('s502','s702','s509','s711','s402','s510','s516','s404'), stringsAsFactors=FALSE)
+		# number of mealworms at the end
+			d =read.csv(paste(wd,'captivity.csv', sep=""),stringsAsFactors=FALSE)
+			d = d[d$phase == 'end',]
+			dd = d[!is.na(d$worms_num),]
+			summary(dd$worms_num)
+			summary(factor(dd$worms_num))
+		# number of returned birds according to sex and whether they were starved
+			d =read.csv(paste(wd,'experiment_metadata.csv', sep=""),stringsAsFactors=FALSE)
+			d = d[d$type == 'exp',]
+			d$sex=ifelse(d$ID_taken==d$IDfemale, 'f','m')
+			d$starved = ifelse(d$nest%in%p$nest, 'yes','no')
+			d$starved[d$comments=='died'] = 'died'
+			summary(factor(d$sex))
+			summary(factor(d$back))
+			table(paste(d$sex,d$back),d$starved)
+		# return times of the starved/non-starved parents	
+	}
 # RESULTS
 	{# run first
 		u=read.csv(paste(wd,'experiment_metadata.csv', sep=""),stringsAsFactors=FALSE)
@@ -226,25 +521,7 @@
 
 			}				
 			
-			{# AICc comparison - find out which model fits better
-				# a) model with or without control for bout length
-				# b )model with sex
-		
-			  m1=lmer(inc_eff~exper+(1|bird_ID),b, REML=FALSE) # best
-			  m2=lmer(inc_eff~scale(bout_length)+exper+(1|bird_ID),b, REML=FALSE)
-			  m3=lmer(inc_eff~exper*sex+(1|bird_ID),b, REML=FALSE)
-				o=data.frame(model=c('simple','control_bout','sex'), AIC=c(AICc(m1, nobs=25*2),AICc(m2,nobs=25*2),AICc(m3,nobs=25*2)))
-						o$delta=o$AIC-min(o$AIC)
-						o$prob=exp(-0.5*o$delta)/sum(exp(-0.5*o$delta))
-						o$ER=max(o$prob)/o$prob
-						o$AIC=round(o$AIC,2)
-						o$delta=round(o$delta,2)
-						o$prob=round(o$prob,3)
-						o$ER=round(o$ER,2)
-						#o[order(o$delta),]
-				
-			}
-		
+	
 			{# combine and export to excel table
 						sname = tempfile(fileext='.xls')
 						wb = loadWorkbook(sname,create = TRUE)	
@@ -389,7 +666,8 @@
 			
 			densityplot(~100*bt$inc_eff/bb$inc_eff)
 			densityplot(~100*bt$inc_eff/bb$inc_eff, groups=as.character(bt$sex))
-			histogram(~100*bt$inc_eff/bb$inc_eff)
+			histogram(~100*bt$inc_eff/bb$inc_eff, breaks = 9)
+			histogram(~100*bt$inc_eff/bb$inc_eff, type = 'count', breaks = 9)
 			hist(bt$inc_eff/bb$inc_eff, breaks=10, xlim=c(0,1.1))
 			plot(density(100*bt$inc_eff/bb$inc_eff), xlim=c(0,102))
 		}	
@@ -1317,6 +1595,14 @@
 				bt$esc=es$esc[match(paste(bt$nest, bt$sex),paste(es$nest,es$sex))]
 				bt$esc[bt$nest=='s628']=34.05681 # value based on imputation
 			}
+			{# add incubation start
+				load("C:\\Users\\mbulla\\Documents\\Dropbox\\Science\\Projects\\MS\\Removal\\Analyses\\Data\\inc_start_estimation_2013_new.Rdata")
+				 e$nest = tolower(e$nest)
+				 e$inc_start = as.character(e$inc_start)
+				 e$inc_start = as.POSIXct(e$inc_start, tz = 'UTC')
+				 bt$inc_start = e$inc_start[match(bt$nest,e$nest)] 	
+				 bt$day_inc=as.numeric(difftime(bt$bout_start,bt$inc_start, units = "days"))	
+			}
 			{# load 2011 data
 				g=read.csv(paste(wd,'B-bout_length_constancy.csv', sep=""), stringsAsFactors=FALSE)
 						g=g[-which(is.na(g$inc_eff)),]
@@ -1354,10 +1640,458 @@
 						Mode(u$esc[u$bird_ID==229194794])
 					}
 					
-
+		{# explore relationship between time of day and temperature
+			#dev.new(width = 1.9685, height = 1.9685)
+			ggplot(bt, aes(x = time, y = t_ambient_med)) + geom_point(size=1.15)+ stat_smooth(size=0.8, color='orange',fill='orange') + 
+			xlab('Time of day [h]') + ylab('Median tundra temperature [°C]') + annotate(geom="text", x=24, y=27, label="a",fontface =2, size = 8*0.352777778)+ scale_x_continuous(limits = c(0,24), breaks = c(0,6,12,18,24)) + scale_y_continuous(limits = c(-5,27), breaks = c(-5,0,5,10,15,20,25))+ 
+			theme_light()+
+			theme(	axis.ticks.length=unit(0.5,"mm"),
+					
+					axis.line.y = element_line(color="grey40", size = 0.25),
+					axis.text.y=element_text(size=6, color='grey20'),# margin=units(0.5,"mm")),
+					axis.title.y = element_text(size=7, color='grey20', margin = margin( r = 6)),		
+					
+					#axis.line.y = element_line(color="grey70", size = 0.25),
+					axis.text.x = element_text(size=6, colour = "white"),
+					axis.title.x = element_text(size=7, colour = "white"),
+					axis.ticks.x = element_blank(),
+							
+					panel.background=element_blank(),
+					panel.border=element_blank(),
+					panel.grid.major=element_blank(),
+					panel.grid.minor=element_blank(),
+					plot.background=element_blank()
+					)
+			ggsave(paste(out2,"Supplementary_Figure_Xa_new.png", sep=""),width = 5, height = 5, units = "cm",  dpi = 300)
+			
+			ggplot(bt, aes(x = time, y = t_amb_avg)) + geom_point(size=1.15)+ stat_smooth(size=0.8, color='orange',fill='orange') +
+			xlab('Time of day [h]') + ylab('Mean tundra temperature [°C]') + annotate(geom="text", x=24, y=27, label="b",fontface =2,size = 8*0.352777778)+ scale_x_continuous(limits = c(0,24), breaks = c(0,6,12,18,24)) + scale_y_continuous(limits = c(-5,27), breaks = c(-5,0,5,10,15,20,25))+ 
+			theme_light()+
+			theme(	axis.ticks.length=unit(0.5,"mm"),
+					
+					axis.line.y = element_line(color="grey40", size = 0.25),
+					axis.text.y=element_text(size=6, color='grey20'),# margin=units(0.5,"mm")),
+					axis.title.y = element_text(size=7, color='grey20', margin = margin( r = 6)),		
+					
+					#axis.line.y = element_line(color="grey70", size = 0.25),
+					axis.text.x = element_text(size=6, colour = "white"),
+					axis.title.x = element_text(size=7, colour = "white"),
+					axis.ticks.x = element_blank(),
+							
+					panel.background=element_blank(),
+					panel.border=element_blank(),
+					panel.grid.major=element_blank(),
+					panel.grid.minor=element_blank(),
+					plot.background=element_blank()
+					)
+			ggsave(paste(out2,"Supplementary_Figure_Xb_new.png", sep=""),width = 5, height = 5, units = "cm",  dpi = 300)
+			
+			ggplot(bt, aes(x = time, y = t_station_med)) + geom_point(size=1.15)+ stat_smooth(size=0.8, color='orange',fill='orange') +
+			xlab('Time of day [h]') + ylab('Median ambient temperature [°C]') + annotate(geom="text", x=24, y=27, label="c",fontface =2,size = 8*0.352777778)+ scale_x_continuous(limits = c(0,24), breaks = c(0,6,12,18,24)) + scale_y_continuous(limits = c(-5,27), breaks = c(-5,0,5,10,15,20,25))+ 
+			theme_light()+
+			theme(	axis.ticks.length=unit(0.5,"mm"),
+					
+					axis.line.y = element_line(color="grey40", size = 0.25),
+					axis.text.y=element_text(size=6, color='grey20'),# margin=units(0.5,"mm")),
+					axis.title.y = element_text(size=7, color='grey20', margin = margin( r = 6)),		
+					
+					axis.line.x = element_line(color="grey40", size = 0.25),
+					axis.text.x = element_text(size=6, colour = "grey20"),
+					axis.title.x = element_text(size=7, colour = "grey20"),
+					axis.ticks.x = element_blank(),
+							
+					panel.background=element_blank(),
+					panel.border=element_blank(),
+					panel.grid.major=element_blank(),
+					panel.grid.minor=element_blank(),
+					plot.background=element_blank()
+					)
+			ggsave(paste(out2,"Supplementary_Figure_Xc_new.png", sep=""),width = 5, height = 5, units = "cm",  dpi = 300)
+			# not used
+			ggplot(bt, aes(x = t_ambient_med, y = esc)) + geom_point()+ stat_smooth()
+			ggplot(bt, aes(x = t_ambient_med, y = inc_eff)) + geom_point()+ stat_smooth(method='lm')
+			ggplot(bt, aes(x = t_amb_avg, y = inc_eff)) + geom_point()+ stat_smooth(method='lm')
+			ggplot(bt, aes(x = t_station_med, y = inc_eff)) + geom_point()+ stat_smooth(method='lm')
+			m=lm(inc_eff~t_ambient_med+esc+prop, bt)
+		}
+		{# explore relationship between esc and day_inc and inc_start
+			ggplot(bt, aes(x = inc_start, y = day_inc)) + geom_point()+ stat_smooth(method='lm')
+			ggplot(bt, aes(x = inc_start, y = esc)) + geom_point()+ stat_smooth(method='lm')
+			m=lm(inc_eff~day_inc+prop, bt)
+			AICc(m,nobs = 25)
+		}
+		{# explore predictors with sex
+			ggplot(bt, aes(x=sex, y = time)) + geom_boxplot() + 
+				geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+
+				ylab('Time of day [h]') + xlab('Sex')+annotate(geom="text", x=2.5, y=20, label="a",fontface =2)+ 
+				scale_y_continuous(limits = c(0,20), breaks = c(0,5,10,15,20))+scale_x_discrete(labels=c("f" = "\u2640", "m" = "\u2642"))+ 	theme( 
+				legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="black", size = 0.25),
+				axis.title.y = element_text(margin = margin( r = 9)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_XXa.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)
+			
+			ggplot(bt, aes(x=sex, y = t_ambient_med)) + geom_boxplot() + geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('Tundra temperature [°C]')+ xlab('Sex')+annotate(geom="text", x=2.5, y=30, label="b",fontface =2)+ scale_y_continuous(limits = c(0,30), breaks = c(0,5,10,15,20,25,30))+scale_x_discrete(labels=c("f" = "\u2640", "m" = "\u2642"))+ 	theme( 
+				legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="black", size = 0.25),
+				axis.title.y = element_text(margin = margin( r = 9)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_XXb.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)
+			
+			ggplot(bt, aes(x=sex, y = prop)) + geom_boxplot() + geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('Proportion of incubation')+ xlab('Sex')+annotate(geom="text", x=2.5, y=0.56, label="c",fontface =2)+ scale_y_continuous(limits = c(0.40,0.56))+scale_x_discrete(labels=c("f" = "\u2640", "m" = "\u2642"))+ 	theme( 
+				legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="black", size = 0.25),
+				axis.title.y = element_text(margin = margin( r = 9)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_XXc.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)
+			ggplot(bt, aes(x=sex, y = esc)) + geom_boxplot() + geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('Escape distance [m]')+ xlab('Sex')+annotate(geom="text", x=2.5, y=65, label="d",fontface =2)+ scale_y_continuous(limits = c(0,65))+scale_x_discrete(labels=c("f" = "\u2640", "m" = "\u2642"))+ 	theme( 
+				legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="black", size = 0.25),
+				axis.title.y = element_text(margin = margin( r = 9)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_XXd.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)
+			
+			
+			ggplot(bt, aes(x=sex, y = log(esc))) + geom_boxplot() + geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+			
+			
+			
+		}
 
 		{# Supplementary Table 2
-			{# 1 - Time model - treated
+			{# 1 - Temperation, proportion, escape
+				m=lm(inc_eff~scale(t_ambient_med) + scale(prop)+scale(esc), bt)
+						pred=c('Intercept','T','Proportion','Escape')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o1=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+			}
+			{# 2 - Temperature model - treated
+					m=lm(inc_eff~scale(t_ambient_med), bt)
+						pred=c('Intercept','T')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='2',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o2=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+			}
+			{# 3 - Time model - treated
+					m=lm(inc_eff~sin_+cos_, bt)
+						pred=c('Intercept','Sin','Cos')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='3',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o3=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+				}
+			{# 4 - Proportion 
+					m=lm(inc_eff~scale(prop), bt)
+						pred=c('Intercept','Proportion')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='4',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o4=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+				}
+			{# 5 - Escape distance
+					m=lm(inc_eff~scale(esc), bt)
+						pred=c('Intercept','escape distance')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='5',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o5=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					}				
+			{# AICc comparison - find out which model fits better
+			  mf=lm(inc_eff~prop+esc+t_ambient_med, bt)
+			  m0=lm(inc_eff~t_amb_avg, bt)
+			  m1=lm(inc_eff~sin_+cos_, bt)
+			  m2=lm(inc_eff~prop, bt)
+			  m3=lm(inc_eff~esc, bt)
+				o=data.frame(model=c('mf','m0','m1','m2','m3'), AIC=c(AICc(mf, nobs=25),AICc(m0, nobs=25),AICc(m1, nobs=25),AICc(m2,nobs=25),AICc(m3,nobs=25)))
+						o$delta=o$AIC-min(o$AIC)
+						o$prob=exp(-0.5*o$delta)/sum(exp(-0.5*o$delta))
+						o$ER=max(o$prob)/o$prob
+						#o[order(o$delta),]
+						o$AIC=round(o$AIC,2)
+						o$delta=round(o$delta,2)
+						o$prob=round(o$prob,3)
+						o$ER=round(o$ER,2)
+						
+		}
+		
+			{# combine and export to excel table
+						sname = tempfile(fileext='.xls')
+						wb = loadWorkbook(sname,create = TRUE)	
+						createSheet(wb, name = "output")
+						writeWorksheet(wb, rbind(o1,o2,o3,o4,o5), sheet = "output")
+						createSheet(wb, name = "AIC")
+						writeWorksheet(wb, o, sheet = "AIC")
+						saveWorkbook(wb)
+						shell(sname)
+			}
+			
+			
+			{# model assumptions temperature - OK
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						m=lm(inc_eff~scale(t_ambient_med) + scale(prop)+scale(esc), bt)
+									
+						plot(m)
+						
+						scatter.smooth(resid(m)~bt$t_ambient_med);abline(h=0, lty=2)
+						scatter.smooth(resid(m)~bt$prop);abline(h=0, lty=2)
+						scatter.smooth(resid(m)~bt$esc);abline(h=0, lty=2)
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+			{# model assumptions temperature - OK
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						m=lm(inc_eff~t_ambient_med, bt)
+									
+						plot(m)
+						
+						scatter.smooth(resid(m)~bt$sin_);abline(h=0, lty=2)
+						scatter.smooth(resid(m)~bt$cos_);abline(h=0, lty=2)
+						
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+			{# model assumptions time - OK
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						m=lm(inc_eff~sin_+cos_, bt)
+									
+						plot(m)
+						
+						scatter.smooth(resid(m)~bt$sin_);abline(h=0, lty=2)
+						scatter.smooth(resid(m)~bt$cos_);abline(h=0, lty=2)
+						
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+			{# model assumptions proportion - OK
+						
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						
+						m=lm(inc_eff~prop, bt)
+						
+						plot(m)
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+			{# model assumptions escape - OK
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						m=lm(inc_eff~esc, bt)
+														
+						plot(m)
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+				
+		}
+		{# Supplementary Table 2 - with sex not used
+			{# 1 - Temperation, proportion, escape
+				m=lm(inc_eff~prop+esc+t_ambient_med, bt)
+						pred=c('Intercept','Proportion','Escape','T')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o1=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					m=lm(inc_eff~sin_*sex+cos_*sex, bt)
+						pred=c('Intercept','Sin','Cos','Sex', 'sin:sex','cos:sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o1s=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o1=rbind(o1,o1s)
+			}
+			{# 2 - Temperature model - treated
+					m=lm(inc_eff~scale(t_ambient_med), bt)
+						pred=c('Intercept','Sin','Cos')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o2=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					m=lm(inc_eff~sin_*sex+cos_*sex, bt)
+						pred=c('Intercept','Sin','Cos','Sex', 'sin:sex','cos:sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o2s=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o2=rbind(o2,o2s)
+			}
+			{# 3 - Time model - treated
 					m=lm(inc_eff~sin_+cos_, bt)
 						pred=c('Intercept','Sin','Cos')
 						nsim <- 2000
@@ -1370,9 +2104,24 @@
 						oi$lwr_r=round(oi$lwr,3)
 						oi$upr_r=round(oi$upr,3)
 						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
-					o1=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o3=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					m=lm(inc_eff~sin_*sex+cos_*sex, bt)
+						pred=c('Intercept','Sin','Cos','Sex', 'sin:sex','cos:sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o3s=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o3=rbind(o3,o3s)
 			}
-			{# 2 - Proportion 
+			{# 4 - Proportion 
 					m=lm(inc_eff~prop, bt)
 						pred=c('Intercept','Proportion')
 						nsim <- 2000
@@ -1385,11 +2134,25 @@
 						oi$lwr_r=round(oi$lwr,3)
 						oi$upr_r=round(oi$upr,3)
 						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
-					o2=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
-				
+					o4=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					m=lm(inc_eff~prop*sex, bt)
+						pred=c('Intercept','Proportion','Sex', 'Proportion:sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o4s=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o4=rbind(o4,o4s)
 						
 			}	
-			{# 3 - Escape distance
+			{# 5 - Escape distance
 					m=lm(inc_eff~esc, bt)
 						pred=c('Intercept','escape distance')
 						nsim <- 2000
@@ -1402,14 +2165,34 @@
 						oi$lwr_r=round(oi$lwr,3)
 						oi$upr_r=round(oi$upr,3)
 						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
-					o3=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o5=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					
+					m=lm(inc_eff~esc*sex, bt)
+						pred=c('Intercept','escape distance','Sex', 'escape distance:sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+					v <- apply(bsim@coef, 2,quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+					oi=data.frame(model='1',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,3)
+						oi$lwr_r=round(oi$lwr,3)
+						oi$upr_r=round(oi$upr,3)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					o5s=oi[c('model','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+					o5=rbind(o5,o5s)	
 				}				
 			{# AICc comparison - find out which model fits better
-				
+			  mf=lm(inc_eff~prop+esc+t_ambient_med, bt)
+			  m0=lm(inc_eff~t_amb_avg, bt)
+			  m0s=lm(inc_eff~t_ambient_med*sex, bt)
 			  m1=lm(inc_eff~sin_+cos_, bt)
+			  m1s=lm(inc_eff~sin_*sex+cos_*sex, bt)
 			  m2=lm(inc_eff~prop, bt)
+			  m2s=lm(inc_eff~prop*sex, bt)
 			  m3=lm(inc_eff~esc, bt)
-				o=data.frame(model=c('m1','m2','m3'), AIC=c(AICc(m1, nobs=25),AICc(m2,nobs=25),AICc(m3,nobs=25)))
+			  m3s=lm(inc_eff~esc*sex, bt)
+				o=data.frame(model=c('mf','m0','m0s','m1','m1s','m2','m2s','m3','m3s'), AIC=c(AICc(mf, nobs=25),AICc(m0, nobs=25),AICc(m0s, nobs=25),AICc(m1, nobs=25),AICc(m1s, nobs=25),AICc(m2,nobs=25),AICc(m2s,nobs=25),AICc(m3,nobs=25),AICc(m3s,nobs=25)))
 						o$delta=o$AIC-min(o$AIC)
 						o$prob=exp(-0.5*o$delta)/sum(exp(-0.5*o$delta))
 						o$ER=max(o$prob)/o$prob
@@ -1432,8 +2215,34 @@
 						shell(sname)
 			}
 			
-
-			{# model assumptions treated - OK
+			{# model assumptions temperature
+						dev.new(width=6,height=9)
+						par(mfrow=c(4,3))
+						m=lm(inc_eff~t_ambient_med, bt)
+									
+						plot(m)
+						
+						scatter.smooth(resid(m)~bt$sin_);abline(h=0, lty=2)
+						scatter.smooth(resid(m)~bt$cos_);abline(h=0, lty=2)
+						
+						
+						acf(resid(m), type="p", main=list("Temporal autocorrelation:\npartial series residual",cex=0.8))
+						
+						# spatial autocorrelations - nest location
+							spdata=data.frame(resid=resid(m), x=bt$lon, y=bt$lat)
+								spdata$col=ifelse(spdata$resid<0,rgb(83,95,124,100, maxColorValue = 255),ifelse(spdata$resid>0,rgb(253,184,19,100, maxColorValue = 255), 'red'))
+								#cex_=c(1,2,3,3.5,4)
+								cex_=c(1,1.5,2,2.5,3)
+								spdata$cex=as.character(cut(abs(spdata$resid), 5, labels=cex_))
+								plot(spdata$x, spdata$y,col=spdata$col, cex=as.numeric(spdata$cex), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								legend("topleft", pch=16, legend=c('>0','<0'), ,col=c(rgb(83,95,124,100, maxColorValue = 255),rgb(253,184,19,100, maxColorValue = 255)), cex=0.8)
+								
+								plot(spdata$x[spdata$resid<0], spdata$y[spdata$resid<0],col=spdata$col[spdata$resid<0], cex=as.numeric(spdata$cex[spdata$resid<0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+								plot(spdata$x[spdata$resid>=0], spdata$y[spdata$resid>=0],col=spdata$col[spdata$resid>=0], cex=as.numeric(spdata$cex[spdata$resid>=0]), pch= 16, main=list('Spatial distribution of residuals', cex=0.8))
+				
+				}
+			
+			{# model assumptions time - OK
 						dev.new(width=6,height=9)
 						par(mfrow=c(4,3))
 						m=lm(inc_eff~sin_+cos_, bt)
@@ -1729,8 +2538,8 @@
 								pt11=newD
 		}
 				}	
-				{# proportion of incubation priot to removal
-						m=lm(inc_eff~prop,bt)
+				{# temperature
+					m=lm(inc_eff~prop+esc+t_ambient_med, bt)
 						  
 						# simulation		
 							nsim <- 2000
@@ -1739,10 +2548,41 @@
 						# coefficients
 							v <-apply(bsim@coef, 2, quantile, prob=c(0.5))
 						# predicted values		
-							newD=data.frame(prop=seq(0.40,0.55,0.001))
+							newD=data.frame(prop=mean(bt$prop),
+											esc = mean(bt$esc),
+											t_ambient_med = seq(min(bt$t_ambient_med), max(bt$t_ambient_med), length.out=200)
+											)
 								
 						# exactly the model which was used has to be specified here 
-							X <- model.matrix(~ prop,data=newD)	
+							X <- model.matrix(~ prop+esc+t_ambient_med,data=newD)	
+										
+						# calculate predicted values and creditability intervals
+							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
+									predmatrix <- matrix(nrow=nrow(newD), ncol=nsim)
+									for(i in 1:nsim) predmatrix[,i] <- X%*%bsim@coef[i,]
+									newD$lwr <- apply(predmatrix, 1, quantile, prob=0.025)
+									newD$upr <- apply(predmatrix, 1, quantile, prob=0.975)
+									#newD$other <- apply(predmatrix, 1, quantile, prob=0.5)
+									#newD=newD[order(newD$t_tundra),]
+								pte=newD
+				}
+				{# proportion of incubation priot to removal
+					m=lm(inc_eff~prop+esc+t_ambient_med, bt)
+						  
+						# simulation		
+							nsim <- 2000
+							bsim <- sim(m, n.sim=nsim)  
+							apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+						# coefficients
+							v <-apply(bsim@coef, 2, quantile, prob=c(0.5))
+						# predicted values		
+							newD=data.frame(t_ambient_med=mean(bt$t_ambient_med),
+											esc = mean(bt$esc),
+											prop = seq(min(bt$prop), max(bt$prop), length.out=200)
+											)
+								
+						# exactly the model which was used has to be specified here 
+							X <- model.matrix(~ prop+esc+t_ambient_med,data=newD)	
 										
 						# calculate predicted values and creditability intervals
 							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
@@ -1755,7 +2595,7 @@
 								pp_=newD
 				}
 				{# escape distance
-						m=lm(inc_eff~esc,bt)
+					m=lm(inc_eff~prop+esc+t_ambient_med, bt)
 						  
 						# simulation		
 							nsim <- 2000
@@ -1764,10 +2604,13 @@
 						# coefficients
 							v <-apply(bsim@coef, 2, quantile, prob=c(0.5))
 						# predicted values		
-							newD=data.frame(esc=seq(0,65,0.2))
-									
+							newD=data.frame(t_ambient_med=mean(bt$t_ambient_med),
+											prop = mean(bt$prop),
+											esc = seq(min(bt$esc), max(bt$esc), length.out=200)
+											)
+								
 						# exactly the model which was used has to be specified here 
-							X <- model.matrix(~ esc,data=newD)	
+							X <- model.matrix(~ prop+esc+t_ambient_med,data=newD)	
 										
 						# calculate predicted values and creditability intervals
 							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
@@ -1783,16 +2626,17 @@
 			{# plot
 				{# with polygons
 				  #dev.new(width=3.5,height=1.85)
-				  png(paste(out2,"Figure_4_polygons_a-b.png", sep=""), width=3.5,height=1.85,units="in",res=600)
-				  par(mfrow=c(1,3),mar=c(0.0,0,0,0.4),oma = c(1.8, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
+				  #dev.new(width=4.5,height=1.85)
+				  png(paste(out2,"Figure_4_polygons_a-d.png", sep=""), width=4.5,height=1.85,units="in",res=600)
+				  par(mfrow=c(1,4),mar=c(0.0,0,0,0.4),oma = c(1.9, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70", bty='n') # 0.6 makes font 7pt, 0.7 8pt
 				{# time
 				#par(mar=c(2.2,2.1,0.5,0.1), ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
 				
-				par(ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
+				par(ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
 				plot(ptt$pred~ptt$time_, pch=19,xlim=c(0,24), ylim=c(0,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
 									
 					axis(1, at=seq(0,24,by=6),labels=c(0,'',12,'',24),cex.axis=0.5,mgp=c(0,-0.15,0))
-						mtext('Time of day [h]',side=1,line=0.4, cex=0.6, las=1, col='grey30')
+						mtext('Time of day\n[h]',side=1,line=1, cex=0.6, las=1, col='grey30')
 						
 					axis(2, at=seq(0,1,by=0.25), labels=c('0.0','','0.5','','1.0'))
 						mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
@@ -1822,17 +2666,36 @@
 					
 					
 				}
-				{# proportion
-					par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
-					plot(pp_$pred~pp_$prop, pch=19,xlim=c(40,55), ylim=c(0,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
+				{# temperature
+					par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
+					plot(pte$pred~pte$t_ambient_med, pch=19,xlim=c(0,28), ylim=c(0,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
 									
-					axis(1, at=seq(40,55,by=5),labels=seq(40,55,by=5),cex.axis=0.5,mgp=c(0,-0.15,0))
-						mtext('Incubation share [%]',side=1,line=0.4, cex=0.6, las=1, col='grey30')
+					axis(1, at=seq(0,28,by=7),labels=seq(0,28,by=7),cex.axis=0.5,mgp=c(0,-0.15,0))
+						mtext('Tundra temperature\n[°C]',side=1,line=1, cex=0.6, las=1, col='grey30')
+						#mtext('Tundra temperature [°C]',side=1,line=0.4, cex=0.6, las=1, col='grey30')
 						
-					axis(2, at=seq(0,1,by=0.25), labels=FALSE)
+					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
 					mtext(expression(bold("b")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					
+					# treated
+							polygon(c(pte$t_ambient_med, rev(pte$t_ambient_med)), c(pte$lwr, 
+								rev(pte$upr)), border=NA, col=adjustcolor(col_t ,alpha.f = 0.2)) #0,0,0 black 0.5 is transparents RED
+							lines(pte$t_ambient_med, pte$pred, col=col_t,lwd=1)
+							points(bt$t_ambient_med, bt$inc_eff, col=col_t,bg=adjustcolor(col_t ,alpha.f = 0.4), pch=21,cex=0.5)
+				}
+				{# proportion
+					par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
+					plot(pp_$pred~pp_$prop, pch=19,xlim=c(40,55), ylim=c(0,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
+									
+					axis(1, at=seq(40,55,by=5),labels=seq(40,55,by=5),cex.axis=0.5,mgp=c(0,-0.15,0))
+						mtext('Incubation share\n[%]',side=1,line=1, cex=0.6, las=1, col='grey30')
+						
+					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
+						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
+					
+					mtext(expression(bold("c")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# treated
 							polygon(c(pp_$prop*100, rev(pp_$prop*100)), c(pp_$lwr, 
@@ -1841,16 +2704,16 @@
 							points(bt$prop*100, bt$inc_eff, col=col_t,bg=adjustcolor(col_t ,alpha.f = 0.4), pch=21,cex=0.5)
 				}
 				{# escape
-					par(ps=12,	cex =1, cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
+					par(ps=12,	cex =1, cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
 					plot(pe$pred~pe$esc, pch=19,xlim=c(0,65), ylim=c(0,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
 									
 					axis(1, at=seq(0,65,by=15),labels=c(0,'',30,'',60),cex.axis=0.5,mgp=c(0,-0.15,0))
-						mtext('Escape distance [m]',side=1,line=0.4, cex=0.6, las=1, col='grey30')
+						mtext('Escape distance\n[m]',side=1,line=1, cex=0.6, las=1, col='grey30')
 						
-					axis(2, at=seq(0,1,by=0.25), labels=FALSE)
+					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
-					mtext(expression(bold("c")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("d")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# treated
 							polygon(c(pe$esc, rev(pe$esc)), c(pe$lwr, 
@@ -1862,8 +2725,8 @@
 				}										
 				{# 2011 add small panel on top
 					#dev.new(width=3.5,height=1.85/5)
-					png(paste(out2,"Figure_4_2011_.png", sep=""), width=3.5,height=1.85/5,units="in",res=600)
-						  par(mfrow=c(1,3),mar=c(0.0,0,0,0.4),oma = c(0.01, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
+					png(paste(out2,"Figure_4_2011_abcd.png", sep=""), width=4.5,height=1.85/5,units="in",res=600)
+						  par(mfrow=c(1,4),mar=c(0.0,0,0,0.4),oma = c(0.01, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
 					
 						par(ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
 						plot(pt11$pred~pt11$time_, pch=19,xlim=c(0,24), ylim=c(0.75,1), xlab=NA, ylab=NA, yaxt='n',xaxt='n', type='n')
@@ -2099,10 +2962,64 @@
 					}
 					   dev.off()
 					}						
+					{# based on a single model - not used
+				{# proportion of incubation priot to removal
+						m=lm(inc_eff~prop,bt)
+						  
+						# simulation		
+							nsim <- 2000
+							bsim <- sim(m, n.sim=nsim)  
+							apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+						# coefficients
+							v <-apply(bsim@coef, 2, quantile, prob=c(0.5))
+						# predicted values		
+							newD=data.frame(prop=seq(0.40,0.55,0.001))
+								
+						# exactly the model which was used has to be specified here 
+							X <- model.matrix(~ prop,data=newD)	
+										
+						# calculate predicted values and creditability intervals
+							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
+									predmatrix <- matrix(nrow=nrow(newD), ncol=nsim)
+									for(i in 1:nsim) predmatrix[,i] <- X%*%bsim@coef[i,]
+									newD$lwr <- apply(predmatrix, 1, quantile, prob=0.025)
+									newD$upr <- apply(predmatrix, 1, quantile, prob=0.975)
+									#newD$other <- apply(predmatrix, 1, quantile, prob=0.5)
+									#newD=newD[order(newD$t_tundra),]
+								pp_=newD
+				}
+				{# escape distance
+						m=lm(inc_eff~esc,bt)
+						  
+						# simulation		
+							nsim <- 2000
+							bsim <- sim(m, n.sim=nsim)  
+							apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+						# coefficients
+							v <-apply(bsim@coef, 2, quantile, prob=c(0.5))
+						# predicted values		
+							newD=data.frame(esc=seq(0,65,0.2))
+									
+						# exactly the model which was used has to be specified here 
+							X <- model.matrix(~ esc,data=newD)	
+										
+						# calculate predicted values and creditability intervals
+							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
+									predmatrix <- matrix(nrow=nrow(newD), ncol=nsim)
+									for(i in 1:nsim) predmatrix[,i] <- X%*%bsim@coef[i,]
+									newD$lwr <- apply(predmatrix, 1, quantile, prob=0.025)
+									newD$upr <- apply(predmatrix, 1, quantile, prob=0.975)
+									#newD$other <- apply(predmatrix, 1, quantile, prob=0.5)
+									#newD=newD[order(newD$t_tundra),]
+								pe=newD
+				}
+				}
+	
 		}
 	} 
 	
 	{# Post treatment effects -  only for nests where somebody returned
+		
 		{# number of days the widowed birds incubate after the treatment was over
 			# s402 1.5 (died female)
 			# s409 5
@@ -2352,17 +3269,179 @@
 				gapp$col_=ifelse(gapp$exper=='b', col_t,col_c)
 			}
 		
-		{# how long it took birds to return
+		# starved birds (s402, s510 deaath
+			p = data.frame(bird_ID =c(257188558,257188571,257188564,255174350,257188570,257188566,255174353,257188572) , nest = c('s502','s702','s509','s711','s402','s510','s516','s404'), stringsAsFactors=FALSE)
+		{# how long it took birds to return - also relative mass loss (N = 25 nests minus two were female died)
 			ee=read.csv(file=paste(wd,'experiment_times.csv', sep=""), sep=",",stringsAsFactors =FALSE)
 			ee$release=as.POSIXct(ee$release)
+			ee$starved = ifelse(ee$nest%in%p$nest, 'yes','no')
+			ee[ee$starved =='yes',]
+			nrow(ee[ee$starved =='no',])
+			ee_ = ee[ee$sex=='m',]
+			table(ee_$after, ee_$starved)
+			
 			inc$release=ee$release[match(inc$nest,ee$nest)]
 			inc_=ddply(inc[inc$exper=='a' & inc$treated_bird=='n',],.(nest), transform, st_=min(bout_start))
 			inc_=inc_[inc_$bout_start==inc_$st_,]
+			
 			nrow(inc_)
 			inc_[,c('nest','release','bout_start')]
 			summary(as.numeric(difftime(inc_$bout_start,inc_$release,unit='hours')))
+			inc_$return_time = as.numeric(difftime(inc_$bout_start,inc_$release,unit='hours'))
+			inc_$starved = ifelse(inc_$nest%in%p$nest, 'yes','no')
+			summary(factor(inc_$starved))
+			
+			ee$return_time = inc_$return_time[match(ee$nest, inc_$nest)]
+			ggplot(inc_,aes(x = starved, y = return_time)) + geom_boxplot() +geom_point(aes(fill = starved),shape = 21,  position = position_jitterdodge())
+			ggplot(ee[ee$after=='return',],aes(x = starved, y = return_time)) + geom_boxplot() +geom_point(aes(fill = starved),shape = 21,  position = position_jitterdodge())
+			
+			ggplot(ee[ee$after=='return',],aes(x = starved, y = return_time)) + geom_boxplot() +  geom_dotplot(aes(fill = starved),binaxis = 'y', stackdir = 'center',  position = position_dodge())+
+			ylab('Return time [h]')+xlab('Starved')+
+			scale_y_continuous(limits = c(0,20))+ 	
+			theme( 
+				legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="black", size = 0.25),
+				axis.title.y = element_text(margin = margin( r = 9)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_2.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)
+			
+			
+			u=read.csv(paste(wd,'experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
+			d =read.csv(paste(wd,'captivity.csv', sep=""),stringsAsFactors=FALSE)
+				dd = d[!is.na(d$mass) & d$phase %in%c('start','end'),]
+				v = ddply(dd,.(ring_num), summarise, rel_mass = (mass[phase=='end'] - mass[phase=='start'])/mass[phase=='start'], abs_mass = (mass[phase=='end'] - mass[phase=='start']))
+			u$rel_mass = v$rel_mass[match(u$ID_taken, v$ring_num)]
+			ee$mass_loss = 	-u$mass_loss[match(ee$nest, u$nest)]	#uu = u[9:nrow(u),]
+			ee$rel_mass_loss = 	u$rel_mass[match(ee$nest, u$nest)]	#uu = u[9:nrow(u),]
+			ee$returned = ifelse(ee$after == 'return','yes','no')
+			ee$sex = ifelse(ee$sex =='f','m','f')
+			ggplot(ee[ee$starved=='no',],aes(x = returned, y = mass_loss)) + geom_boxplot() +  geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('mass change [g]')
+			ggplot(ee[ee$starved=='no',],aes(x = returned, y = mass_loss, fill=sex)) + geom_boxplot() +  geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('mass change [g]')
+			
+			
+			med = ddply(ee,.(sex,starved,returned),summarise,mass_loss = median(mass_loss, na.rm =TRUE))
+			ggplot(ee,aes(x = returned, y = mass_loss, fill=sex)) + geom_boxplot() + geom_dotplot(aes(fill = sex, shape = starved),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('mass change [g]')
+			ggplot(ee,aes(x = returned, y = mass_loss, fill=sex)) + geom_boxplot() +  geom_dotplot(aes(fill = paste(sex, starved)),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('mass change [g]')
+			
+			ggplot(ee,aes(x = returned, y = mass_loss, fill=paste(sex, starved))) + geom_boxplot() + geom_dotplot(aes(fill = paste(sex, starved)),binaxis = 'y', stackdir = 'center',  position = position_dodge(),dotsize = 1.5)+xlab('Returned')+ylab('Mass change [g]') 
+			dev.new(width = 2.3622, height =1.9685)
+			ggplot(ee,aes(x = returned, y = mass_loss, fill=paste(sex, starved))) +  geom_dotplot(aes(fill = paste(sex, starved)),binaxis = 'y', stackdir = 'center',  position = position_dodge(),dotsize = 1.5)+xlab('Returned')+ylab('Mass change [g]') +geom_point(data = med, col = 'black',shape= 95, size =5 ) + #guides(shape = guide_legend(override.aes = list(size = 0.2)))+
+			theme( 
+				axis.ticks.length=unit(0.5,"mm"),
+				#legend.position="none",
+				#axis.text.x = element_text(colour = "white"), 
+				#axis.title.x = element_text(colour = "white"),
+				#axis.ticks.x = element_blank(),
+				axis.line.x = element_line(color="grey40", size = 0.25),
+				axis.text.x = element_text(size=6, colour = "grey20"),
+				axis.title.x = element_text(size=7, colour = "grey20"),
+				
+				axis.title.y = element_text(size=7, color='grey20', margin = margin( r = 6)),
+				axis.line.y = element_line(color="black", size = 0.25),
+				axis.text.y=element_text(size=6, color='grey20'),# margin=units(0.5,"mm")),
+				
+				legend.key = element_blank(),
+				legend.text = element_text(size=6, colour = "grey20"),
+				legend.title = element_blank(),#element_text(size=7, colour = "grey20"),
+				legend.key.size = unit(0.1,"points"),
+				panel.background=element_blank(),
+				panel.border=element_blank(),
+				panel.grid.major=element_blank(),
+				panel.grid.minor=element_blank(),
+				plot.background=element_blank()
+				) 
+			ggsave(paste(out2,"Supplementary_Figure_5new.png", sep=""),width = 6, height = 5, units = "cm",  dpi = 300)
+			
+		
+			ggplot(ee[ee$starved=='no',],aes(x = returned, y = rel_mass_loss)) + geom_boxplot() +  geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('relative mass change')
+			ggplot(ee[ee$starved=='no',],aes(x = returned, y = rel_mass_loss, fill=sex)) + geom_boxplot() +  geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+ylab('relative mass change')
+		
+			ggplot(ee[ee$starved=='no',],aes(x = mass_loss, y = return_time, col=sex)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('mass change [g]')
+			ggplot(ee[ee$starved=='no',],aes(x = mass_loss, y = return_time)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('mass change [g]')
+			ggplot(ee,aes(x = mass_loss, y = return_time, col=sex)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('mass change [g]')
+			
+			densityplot(ee$mass_loss, group = ee$sex)
+			densityplot(ee$return_time, group = ee$sex)
+			
+			ee$sex = as.factor(ee$sex)
+			m = lm(return_time~mass_loss*sex,ee[ee$starved=='no',])
+			m0 = lm(return_time~mass_loss,ee[ee$starved=='no',])
+			AICc(m)
+			AICc(m0)
+				summary(glht(m))
+				summary(m)
+				plot(allEffects(m))
+				
+			m = lm(return_time~mass_loss*sex,ee)
+			m0 = lm(return_time~mass_loss,ee)
+			AICc(m)
+			AICc(m0)
+				summary(glht(m))
+				summary(m0)
+				plot(allEffects(m))	
+			ggplot(ee[ee$starved=='no',],aes(x = rel_mass_loss, y = return_time, col=sex)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('relative mass change')
+			ggplot(ee[ee$starved=='no',],aes(x = rel_mass_loss, y = return_time)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('relative mass change')
+			ggplot(ee,aes(x = rel_mass_loss, y = return_time, col=sex)) + geom_point() +  stat_smooth(method = 'lm') + ylab('return time [h]')+ xlab('relative mass change')
+			{# Supplementary Table Z
+				nrow(ee[!(is.na(ee$return_time)|is.na(ee$mass_loss)),])
+				m = lm(return_time~scale(mass_loss)*sex,ee)	
+					pred=c('Intercept (female)','Mass_loss','Sex (male)','Mass:Sex')
+						nsim <- 2000
+						bsim <- sim(m, n.sim=nsim)  
+				# Fixed effects
+					v <- apply(bsim@coef, 2, quantile, prob=c(0.5))
+					ci=apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+						oi=data.frame(model='1',response='return time',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
+					rownames(oi) = NULL
+						oi$estimate_r=round(oi$estimate,2)
+						oi$lwr_r=round(oi$lwr,2)
+						oi$upr_r=round(oi$upr,2)
+						#oi$CI=paste("(", oi$lwr_r, "-", oi$upr_r, ")", sep = "", collapse = NULL)
+					oii=oi[c('model','response','type',"effect", "estimate_r","lwr_r",'upr_r')]	
+							sname = tempfile(fileext='.xls')
+							wb = loadWorkbook(sname,create = TRUE)	
+							createSheet(wb, name = "output")
+							writeWorksheet(wb, oii, sheet = "output")
+							saveWorkbook(wb)
+							shell(sname)
+			
+			}
+			}
+		{# effect of cage on before treatment
+			cc =  read.csv(paste(wd,'cages.csv', sep=""), stringsAsFactors = FALSE)
+			cc$on = as.POSIXct(cc$on)
+			cc$off = as.POSIXct(cc$off)
+			incb = inc[inc$exper=='b',]
+			incb$cage  = 'n'
+			for(i in 1:nrow(incb)){
+				n = incb$nest[i]
+				ci = cc[cc$nest == n,]
+				if(nrow(ci)!=0){
+				incb$cage[i] = ifelse(incb$bout_start[i]>ci$on & incb$bout_start[i]<ci$off, 'y','n')
+				}
+				print(i)
+			}
+			summary(factor(incb$cage))
+			table(incb$nest, incb$cage)
+			ggplot(incb,aes(x = cage, y = bout_length)) + geom_boxplot() + geom_dotplot(aes(fill = cage),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+			ggplot(incb,aes(x = cage, y = inc_eff)) + geom_boxplot() + geom_dotplot(aes(fill = cage),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+			
+		     incb$cage = as.factor(incb$cage)
+			 m1=lmer(bout_length~cage+(1|nest)+(1|bird_ID),incb, REML=FALSE)
+			 m1=lmer(inc_eff~cage+(1|nest)+(1|bird_ID),incb, weights=sqrt(bout_length),REML=FALSE)
+			 plot(allEffects(m1))
+			 summary(glht(m1))
+			 m1=lmer(bout_length~cage+(1|bird_ID),incb, REML=FALSE)
 		}
-
 		{# Supplementary Table 4
 			{# constancy
 				{# 1 - model of interest
@@ -2773,6 +3852,8 @@
 		}
 		{# Supplementary Table 5			
 			{# gap presence
+				table(gap$bird_ID_filled, gap$exper)
+				length(unique(gap$bird_ID_filled))
 				{# 1 - model of interest
 				 m1=glmer(present~exper*bout_start_j_c+(bout_start_j_c|bird_ID),gap, family='binomial',control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5))) # uses different optimizer (results same as without it, but without it model does not converge)
 				 pred=c('Intercept (before)','Period (after)','Day (centered)','Period:Day')
@@ -2858,6 +3939,9 @@
 				}
 			}				
 			{# gap
+				table(gapp$bird_ID_filled, gapp$exper)
+				length(unique(gapp$bird_ID_filled))
+				length(unique(gapp$bird_ID))
 				{# 1 - model of interest
 				 m1=lmer(bout_length~exper*bout_start_j_c+(bout_start_j_c|bird_ID),gapp, REML=FALSE)
 				 pred=c('Intercept (before)','Period (after)','Day (centered)','Period:Day')
@@ -3409,11 +4493,11 @@
 				{# gap
 					y=ddply(gapp,.(nest,sex,exper, treated_bird), summarise, med_gap=median(bout_length), num_gaps=sum(present))
 				
-					yb=y[y$exper=='b',]
-					ya=y[y$exper=='a',]
+					yb=y[y$exper=='b',] s622 s527 
+					ya=y[y$exper=='a',] s527 s519 
 					yb$med_gap_after=ya$med_gap[match(paste(yb$nest,yb$sex),paste(ya$nest,ya$sex))]
 					yb$col_=ifelse(yb$treated_bird=="y", "#FCB42C","#535F7C")
-				
+					yb = yb[!is.na(yb$med_gap_after),]
 				
 			}
 			}
@@ -5528,6 +6612,8 @@
 		{# Supplementary Table 6 - after bout of captive bird in relation to mass loss
 			{# run first - add mass loss to data
 				u=read.csv(paste(wd,'experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
+					#uu = u[9:nrow(u),]
+					#summary(-uu$mass_loss)
 				a=inc[inc$exper=='a' & inc$treated_bird=='n',]
 				a$mass_loss=-u$mass_loss[match(a$bird_ID_filled, u$ID_taken)]
 				a$bird_ID=as.factor(a$bird_ID)
@@ -6687,12 +7773,26 @@
 				text(seq(10,14,by=1), par("usr")[3]-0.35, labels = seq(10,14,by=1),  xpd = TRUE, cex=0.6, col="grey30") #labels = z_g$genus
 				mtext('Control bout length [h]',side=1,line=0.6, cex=0.7, las=1, col='grey30')
 		}
+		{# fat a change in removed parents
+		d =read.csv(paste(wd,'Data/captivity.csv', sep=""),stringsAsFactors=FALSE)
+		dd = d[!is.na(d$mass) & d$phase %in%c('start','end'),]
+		d = d[!is.na(d$fat) & d$phase %in%c('start','end'),]
+		d$n = 1
+		v = ddply(d,.(ring_num),summarise, n = sum(n))
+		v = ddply(d,.(ring_num, phase),summarise, fat = median(fat))
+		pd <- position_dodge(0.4)
+		v$phase = factor(v$phase, levels = c('start','end'))
+		ggplot(v,aes(x=phase, y = fat, col = factor(ring_num)))+geom_point( position = pd) +geom_line(position = pd, aes(group = factor(ring_num), col = factor(ring_num))) +
+		ggplot(v,aes(x=phase, y = fat, col = factor(ring_num)))+geom_point( position = pd) +geom_line(position = pd, aes(group = factor(ring_num), col = factor(ring_num))) +
+			theme(legend.position = "none") + ylab('fat score') + xlab('captivity phase')
+			xyplot(fat~numeric(phase), group = factor(ring_num), data = v)
+	}
 	}
 
 
 
 {# script to create metadata with what is happening on the nest
-			{# metadata - preparation
+	{# metadata - preparation
 		#con = dbcon(user='root',host='127.0.0.1', password='',database='barrow_2013')						   
 		#id=dbq(con, "select distinct(ring_num) as ring_num from barrow_2013.captivity")							   
 
@@ -9050,8 +10150,7 @@
     # nest without cage 
 		length(c('s514','s515','s516','s519','s520', 's527','s624','s625','s628','s629','s712','s806','s808'))
 	# nests with cage on
-	d=dbGetQuery(conMy, "select nest, datetime_, cage from barrow_2013.visits where cage is not null and nest in 		('s402','s404','s406','s409','s410','s502','s509','s510','s512','s514','s515','s516','s519','s520','s524','s526','s527','s622','s624','s625','s628','s629','s702','s704','s711','s712','s805','s806','s808')
-							")
+	d=dbGetQuery(conMy, "select nest, datetime_, cage from barrow_2013.visits where cage is not null and nest in 		('s402','s404','s406','s409','s410','s502','s509','s510','s512','s514','s515','s516','s519','s520','s524','s526','s527','s622','s624','s625','s628','s629','s702','s704','s711','s712','s805','s806','s808')")
 	length(unique(d$nest))		
 	
 	d[order(d$nest,d$datetime_),]						
@@ -9060,6 +10159,11 @@
 	off=d$nest[d$cage=="off"]
 	on[!on%in%off]
 	off[!off%in%on]
+	d$datetime_=as.POSIXct(d$datetime_)
+	dd = ddply(d,.(nest),summarise, on = min(datetime_[cage=='on']), off = max(datetime_[cage=='off']))
+	dd$off[dd$nest=='s622'] = as.POSIXct('2013-07-09 12:00:00')
+	write.csv(dd,paste(wd,'cages.csv', sep=""),row.names=FALSE)
+	
 	}
 {# mass change
 	g=dbGetQuery(conMy, "select*from barrow_2013.captivity")	
@@ -9071,7 +10175,625 @@
 	length(c('s402','s406','s409','s410','s510','s520','s524','s526','s527','s624','s702','s805'))
 }	
 
+{# cage effects 2012
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_inc_start.Rdata")
+	d1 = d
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_short_inc_start.Rdata")
+	d = rbind(d1,d)
+	d$nest= tolower(d$nest)	
+	d$bout_length = d$bout_length/60 
+		{# DONE identify when cage was on
+		require('RSQLite')
+		db=paste("M:/Science/Projects/PHD/FIELD_METHODS/Barrow/2012/DATA/Database/Barrow_2012.sqlite",sep="") # database name
+		conLite = dbConnect(dbDriver("SQLite"),dbname = db)
+		cc=dbGetQuery(conLite,paste("SELECT nest, datetime_, cage FROM visits WHERE cage is not null"))
+		dbDisconnect(conLite)
+		length(unique(cc$nest))		
+		cc$datetime_ = as.POSIXct(cc$datetime_)
+		cc = cc[order(cc$nest,cc$datetime_),]	
+		cc = cc[substring(cc$nest,1,1)== 's',]
+		on=cc$nest[cc$cage==1]
+		off=cc$nest[cc$cage==0]
+	
+		on[!on%in%off]
+		off[!off%in%on]
+		
+		dd = ddply(cc,.(nest),summarise, on = min(datetime_[cage==1]), off = max(datetime_[cage==0]))
+		dd$off= as.character(dd$off)
+		dd$off[is.na(dd$off)] = as.character(dd$on[is.na(dd$off)] + 30*24*60)
+		dd$off = as.POSIXct(dd$off)
+		#dd$on[dd$nest == 's101'] = as.POSIXct('2012-06-11 21:17:00')
+		dd = dd[!is.na(dd$on),]
+		write.csv(dd,paste(wd,'cages_2012.csv', sep=""),row.names=FALSE)
+		}
+		cc =  read.csv(paste(wd,'cages_2012.csv', sep=""), stringsAsFactors = FALSE)
+			cc$on = as.POSIXct(cc$on, tz='America/Anchorage')
+			cc$off = as.POSIXct(cc$off, tz='America/Anchorage')
+			d$cage  = 'n'
+			for(i in 1:nrow(d)){
+				n = d$nest[i]
+				ci = cc[cc$nest == n,]
+				if(nrow(ci)!=0){
+				d$cage[i] = ifelse(d$bout_start[i]>ci$on & d$bout_start[i]<ci$off, 'y','n')
+				}
+				print(i)
+			}
+			summary(factor(d$cage))
+			table(d$nest, d$cage)
+			ggplot(d,aes(x = cage, y = bout_length)) + geom_boxplot()
+			ggplot(d,aes(x = nest, y = bout_length, col = cage)) + geom_boxplot() #+ geom_dotplot(aes(fill = cage),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+			ggplot(d,aes(x = cage, y = inc_eff)) + geom_boxplot() 
+			ggplot(d,aes(x = nest, y = inc_eff, col = cage)) + geom_boxplot()
+			
+		     d$cage = as.factor(d$cage)
+			 m=lmer(bout_length~cage+(1|nest)+(1|bird_ID_filled),d, REML=FALSE)
+			 summary(m)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 m1=lmer(inc_eff~cage+(1|nest)+(1|bird_ID_filled),d, weights=sqrt(bout_length),REML=FALSE)
+			 plot(allEffects(m1))
+			 summary(glht(m1))
+			
+			{# median bout per bird, nest and cage 
+			dd = ddply(d,.(nest, bird_ID_filled, sex), summarise, cage_y = median(bout_length[cage=='y']), cage_n = median(bout_length[cage=='n']), n_y = length(bout_length[cage=='y']), n_n = length(bout_length[cage=='n']))
+			t.test(dd$cage_y,dd$cage_n,paired=TRUE)
+			dd = dd[!is.na(dd$cage_y) & !is.na(dd$cage_n),]
+			dd1 = dd
+			dd1$cage_n = dd1$n_n = NULL
+			names(dd1)[names(dd1) == 'cage_y'] = 'median_bout'
+			names(dd1)[names(dd1) == 'n_y'] = 'n_bouts'
+			dd1$cage = 'y'
+			
+			dd2 = dd
+			dd2$cage_y = dd2$n_y = NULL
+			names(dd2)[names(dd2) == 'cage_n'] = 'median_bout'
+			names(dd2)[names(dd2) == 'n_n'] = 'n_bouts'
+			dd2$cage = 'n'
+			dd = rbind(dd1,dd2)
+			dd$cage = as.factor(dd$cage)
+			#dd = ddply(d,.(nest, bird_ID_filled, cage), summarise, median_bout = median(bout_length), cn_y = length(bout_length[cage=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=cage, y = median_bout, col = factor(bird_ID_filled)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(bird_ID_filled), col = factor(bird_ID_filled))) +
+			theme(legend.position = "none") + ylab('median bird bout length [h]') + xlab('cage on the nest')
+			
+			m=lmer(median_bout~cage+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			{# median bout per  nest and cage 
+			dd = ddply(d,.(nest), summarise, cage_y = median(bout_length[cage=='y']), cage_n = median(bout_length[cage=='n']), n_y = length(bout_length[cage=='y']), n_n = length(bout_length[cage=='n']))
+			t.test(dd$cage_y,dd$cage_n,paired=TRUE)
+			dd = dd[!is.na(dd$cage_y) & !is.na(dd$cage_n),]
+			dd1 = dd
+			dd1$cage_n = dd1$n_n = NULL
+			names(dd1)[2] = 'median_bout'
+			names(dd1)[3] = 'n_bouts'
+			dd1$cage = 'y'
+			
+			dd2 = dd
+			dd2$cage_y = dd2$n_y = NULL
+			names(dd2)[2] = 'median_bout'
+			names(dd2)[3] = 'n_bouts'
+			dd2$cage = 'n'
+			dd = rbind(dd1,dd2)
+			dd$cage = as.factor(dd$cage)
+			#dd = ddply(d,.(nest, bird_ID_filled, cage), summarise, median_bout = median(bout_length), cn_y = length(bout_length[cage=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=cage, y = median_bout, col = factor(nest)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(nest), col = factor(nest))) +
+			theme(legend.position = "none") + ylab('median nest bout length [h]') + xlab('cage on the nest')
+			
+			m=lmer(median_bout~cage+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			
+			{# median nest attentiveness per bird, nest and cage 
+			dd = ddply(d,.(nest, bird_ID_filled), summarise, cage_y = median(inc_eff[cage=='y']), cage_n = median(inc_eff[cage=='n']), n_y = length(inc_eff[cage=='y']), n_n = length(inc_eff[cage=='n']))
+			t.test(dd$cage_y,dd$cage_n,paired=TRUE)
+			dd = dd[!is.na(dd$cage_y) & !is.na(dd$cage_n),]
+			dd1 = dd
+			dd1$cage_n = dd1$n_n = NULL
+			names(dd1)[3] = 'median_attentiveness'
+			names(dd1)[4] = 'n_bouts'
+			dd1$cage = 'y'
+			
+			dd2 = dd
+			dd2$cage_y = dd2$n_y = NULL
+			names(dd2)[3] = 'median_attentiveness'
+			names(dd2)[4] = 'n_bouts'
+			dd2$cage = 'n'
+			dd = rbind(dd1,dd2)
+			dd$cage = as.factor(dd$cage)
+			#dd = ddply(d,.(nest, bird_ID_filled, cage), summarise, median_bout = median(bout_length), cn_y = length(bout_length[cage=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=cage, y = median_attentiveness, col = factor(bird_ID_filled)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(bird_ID_filled), col = factor(bird_ID_filled))) +
+			theme(legend.position = "none") + ylab('median bird attentiveness') + xlab('cage on the nest')
+			
+			m=lmer(median_attentiveness~cage+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			{# median nest attentiveness per nest and cage 
+			dd = ddply(d,.(nest), summarise, cage_y = median(inc_eff[cage=='y']), cage_n = median(inc_eff[cage=='n']), n_y = length(inc_eff[cage=='y']), n_n = length(inc_eff[cage=='n']))
+			t.test(dd$cage_y,dd$cage_n,paired=TRUE)
+			dd = dd[!is.na(dd$cage_y) & !is.na(dd$cage_n),]
+			dd1 = dd
+			dd1$cage_n = dd1$n_n = NULL
+			names(dd1)[2] = 'median_attentiveness'
+			names(dd1)[3] = 'n_bouts'
+			dd1$cage = 'y'
+			
+			dd2 = dd
+			dd2$cage_y = dd2$n_y = NULL
+			names(dd2)[2] = 'median_attentiveness'
+			names(dd2)[3] = 'n_bouts'
+			dd2$cage = 'n'
+			dd = rbind(dd1,dd2)
+			dd$cage = as.factor(dd$cage)
+			#dd = ddply(d,.(nest, bird_ID_filled, cage), summarise, median_bout = median(bout_length), cn_y = length(bout_length[cage=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=cage, y = median_attentiveness, col = factor(nest)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(nest), col = factor(nest))) +
+			theme(legend.position = "none") + ylab('median nest attentiveness') + xlab('cage on the nest')
+			
+			m=lmer(median_attentiveness~cage+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
 
+}
+{# camera effects 2012
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_inc_start.Rdata")
+	#d1 = d
+	#load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_short_inc_start.Rdata")
+	#d = rbind(d1,d)
+	d$nest= tolower(d$nest)	
+	d$bout_length = d$bout_length/60 
+		{# DONE identify when recorder was on
+		require('RSQLite')
+		db=paste("M:/Science/Projects/PHD/FIELD_METHODS/Barrow/2012/DATA/Database/Barrow_2012.sqlite",sep="") # database name
+		conLite = dbConnect(dbDriver("SQLite"),dbname = db)
+		cc=dbGetQuery(conLite,paste("SELECT nest, datetime_, recorder FROM visits WHERE recorder is not null"))
+		dbDisconnect(conLite)
+		length(unique(cc$nest))		
+		cc$datetime_ = as.POSIXct(cc$datetime_)
+		cc = cc[order(cc$nest,cc$datetime_),]	
+		cc = cc[substring(cc$nest,1,1)== 's',]
+		on=cc$nest[cc$recorder==1]
+		off=cc$nest[cc$recorder==0]
+	
+		on[!on%in%off]
+		off[!off%in%on]
+		
+		dd = ddply(cc,.(nest),summarise, on = min(datetime_[recorder%in%c(1,2)]), off = max(datetime_[recorder%in%c(2,0)]))
+		dd$off= as.character(dd$off)
+		dd = dd[!is.na(dd$off),]
+		dd$off = as.POSIXct(dd$off)
+		#dd$on[dd$nest == 's101'] = as.POSIXct('2012-06-11 21:17:00')
+
+		write.csv(dd,paste(wd,'recorders_2012.csv', sep=""),row.names=FALSE)
+		}
+		cc =  read.csv(paste(wd,'recorders_2012.csv', sep=""), stringsAsFactors = FALSE)
+			cc$on = as.POSIXct(cc$on, tz='America/Anchorage')
+			cc$off = as.POSIXct(cc$off, tz='America/Anchorage')
+			d$recorder  = 'n'
+			for(i in 1:nrow(d)){
+				n = d$nest[i]
+				ci = cc[cc$nest == n,]
+				if(nrow(ci)!=0){
+				d$recorder[i] = ifelse(d$bout_start[i]>ci$on & d$bout_start[i]<ci$off, 'y','n')
+				}
+				print(i)
+			}
+			summary(factor(d$recorder))
+			unique(d$nest[d$recorder == 'y'])
+			length(unique(d$nest[d$recorder == 'n']))
+			table(d$nest, d$recorder)
+			ggplot(d,aes(x = recorder, y = bout_length)) + geom_boxplot()
+			ggplot(d,aes(x = nest, y = bout_length, col = recorder)) + geom_boxplot() #+ geom_dotplot(aes(fill = recorder),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+			ggplot(d,aes(x = recorder, y = inc_eff)) + geom_boxplot() 
+			ggplot(d,aes(x = nest, y = inc_eff, col = recorder)) + geom_boxplot()
+			
+		     d$recorder = as.factor(d$recorder)
+			 m=lmer(bout_length~recorder+(1|nest)+(1|bird_ID_filled),d, REML=FALSE)
+			 m=lmer(bout_length~recorder+(1|nest)+(1|bird_ID_filled),d[d$nest%in%unique(d$nest[d$recorder == 'y']),], REML=FALSE)
+			 nrow(d[d$nest%in%unique(d$nest[d$recorder == 'y']),])
+			 summary(d$recorder[d$nest%in%unique(d$nest[d$recorder == 'y'])])
+			 summary(m)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 m1=lmer(inc_eff~recorder+(1|nest)+(1|bird_ID_filled),d, weights=sqrt(bout_length),REML=FALSE)
+			  m1=lmer(inc_eff~recorder+(1|nest)+(1|bird_ID_filled),d[d$nest%in%unique(d$nest[d$recorder == 'y']),],weights=sqrt(bout_length), REML=FALSE)
+			 plot(allEffects(m1))
+			 summary(glht(m1))
+			
+			{# median bout per bird, nest and recorder 
+			dd = ddply(d,.(nest, bird_ID_filled, sex), summarise, recorder_y = median(bout_length[recorder=='y']), recorder_n = median(bout_length[recorder=='n']), n_y = length(bout_length[recorder=='y']), n_n = length(bout_length[recorder=='n']))
+			dd = dd[!is.na(dd$recorder_y) & !is.na(dd$recorder_n),]
+			t.test(dd$recorder_y,dd$recorder_n,paired=TRUE)
+			dd1 = dd
+			dd1$recorder_n = dd1$n_n = NULL
+			names(dd1)[names(dd1) == 'recorder_y'] = 'median_bout'
+			names(dd1)[names(dd1) == 'n_y'] = 'n_bouts'
+			dd1$recorder = 'y'
+			
+			dd2 = dd
+			dd2$recorder_y = dd2$n_y = NULL
+			names(dd2)[names(dd2) == 'recorder_n'] = 'median_bout'
+			names(dd2)[names(dd2) == 'n_n'] = 'n_bouts'
+			dd2$recorder = 'n'
+			dd = rbind(dd1,dd2)
+			dd$recorder = as.factor(dd$recorder)
+			#dd = ddply(d,.(nest, bird_ID_filled, recorder), summarise, median_bout = median(bout_length), cn_y = length(bout_length[recorder=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=recorder, y = median_bout, col = factor(bird_ID_filled)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(bird_ID_filled), col = factor(bird_ID_filled))) +
+			theme(legend.position = "none") + ylab('median bird bout length [h]') + xlab('recorder on the nest')
+			
+			m=lmer(median_bout~recorder+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			{# median bout per  nest and recorder 
+			dd = ddply(d,.(nest), summarise, recorder_y = median(bout_length[recorder=='y']), recorder_n = median(bout_length[recorder=='n']), n_y = length(bout_length[recorder=='y']), n_n = length(bout_length[recorder=='n']))
+			dd = dd[!is.na(dd$recorder_y) & !is.na(dd$recorder_n),]
+			t.test(dd$recorder_y,dd$recorder_n,paired=TRUE)
+			dd1 = dd
+			dd1$recorder_n = dd1$n_n = NULL
+			names(dd1)[2] = 'median_bout'
+			names(dd1)[3] = 'n_bouts'
+			dd1$recorder = 'y'
+			
+			dd2 = dd
+			dd2$recorder_y = dd2$n_y = NULL
+			names(dd2)[2] = 'median_bout'
+			names(dd2)[3] = 'n_bouts'
+			dd2$recorder = 'n'
+			dd = rbind(dd1,dd2)
+			dd$recorder = as.factor(dd$recorder)
+			#dd = ddply(d,.(nest, bird_ID_filled, recorder), summarise, median_bout = median(bout_length), cn_y = length(bout_length[recorder=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=recorder, y = median_bout, col = factor(nest)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(nest), col = factor(nest))) +
+			theme(legend.position = "none") + ylab('median nest bout length [h]') + xlab('recorder on the nest')
+			
+			m=lmer(median_bout~recorder+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			
+			{# median nest attentiveness per bird, nest and recorder 
+			dd = ddply(d,.(nest, bird_ID_filled), summarise, recorder_y = median(inc_eff[recorder=='y']), recorder_n = median(inc_eff[recorder=='n']), n_y = length(inc_eff[recorder=='y']), n_n = length(inc_eff[recorder=='n']))
+			dd = dd[!is.na(dd$recorder_y) & !is.na(dd$recorder_n),]
+			t.test(dd$recorder_y,dd$recorder_n,paired=TRUE)
+			dd1 = dd
+			dd1$recorder_n = dd1$n_n = NULL
+			names(dd1)[3] = 'median_attentiveness'
+			names(dd1)[4] = 'n_bouts'
+			dd1$recorder = 'y'
+			
+			dd2 = dd
+			dd2$recorder_y = dd2$n_y = NULL
+			names(dd2)[3] = 'median_attentiveness'
+			names(dd2)[4] = 'n_bouts'
+			dd2$recorder = 'n'
+			dd = rbind(dd1,dd2)
+			dd$recorder = as.factor(dd$recorder)
+			#dd = ddply(d,.(nest, bird_ID_filled, recorder), summarise, median_bout = median(bout_length), cn_y = length(bout_length[recorder=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=recorder, y = median_attentiveness, col = factor(bird_ID_filled)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(bird_ID_filled), col = factor(bird_ID_filled))) +
+			theme(legend.position = "none") + ylab('median bird attentiveness') + xlab('recorder on the nest')
+			
+			m=lmer(median_attentiveness~recorder+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+			{# median nest attentiveness per nest and recorder 
+			dd = ddply(d,.(nest), summarise, recorder_y = median(inc_eff[recorder=='y']), recorder_n = median(inc_eff[recorder=='n']), n_y = length(inc_eff[recorder=='y']), n_n = length(inc_eff[recorder=='n']))
+			dd = dd[!is.na(dd$recorder_y) & !is.na(dd$recorder_n),]
+			t.test(dd$recorder_y,dd$recorder_n,paired=TRUE)
+			dd1 = dd
+			dd1$recorder_n = dd1$n_n = NULL
+			names(dd1)[2] = 'median_attentiveness'
+			names(dd1)[3] = 'n_bouts'
+			dd1$recorder = 'y'
+			
+			dd2 = dd
+			dd2$recorder_y = dd2$n_y = NULL
+			names(dd2)[2] = 'median_attentiveness'
+			names(dd2)[3] = 'n_bouts'
+			dd2$recorder = 'n'
+			dd = rbind(dd1,dd2)
+			dd$recorder = as.factor(dd$recorder)
+			#dd = ddply(d,.(nest, bird_ID_filled, recorder), summarise, median_bout = median(bout_length), cn_y = length(bout_length[recorder=='y']), n_n = length(bout_length))
+			
+			pd <- position_dodge(0.4)
+			ggplot(dd,aes(x=recorder, y = median_attentiveness, col = factor(nest)))+geom_point(aes(size = n_bouts), position = pd) +geom_line(position = pd, aes(group = factor(nest), col = factor(nest))) +
+			theme(legend.position = "none") + ylab('median nest attentiveness') + xlab('recorder on the nest')
+			
+			m=lmer(median_attentiveness~recorder+(1|nest),dd, REML=FALSE)
+			 summary(glht(m))
+			 plot(allEffects(m))
+			 }
+
+}
+
+{# escape distance - careful we have sometimes two estimates (our and gps) for a single event
+	load("C:\\Users\\mbulla\\Documents\\Dropbox\\Science\\Projects\\MS\\Removal\\Analyses\\Data\\escape.Rdata")
+	str(vv)
+	table(vv$nest_sex)
+	ggplot(vv,aes(x = nest_sex, y = distm)) + geom_boxplot() + geom_dotplot(aes(fill = nest_sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())
+	densityplot(~vv$distm)
+	densityplot(~log(vv$distm+0.5))
+	
+	vg = vv[vv$type == 'gps',]	
+	ve = vv[!paste(vv$nest_sex, vv$datetime_)%in%paste(vg$nest_sex, vg$datetime_),]
+	v = rbind(vg,ve)
+	x = data.frame(table(v$nest_sex))
+	summary(factor(x$Freq))
+	summary(x$Freq)
+	nrow(x)+1 #1 bird had no escape distance estimate)
+	
+	m = lmer(distm ~ 1 + (1|nest_sex), v)
+	summary(m)
+	
+	xx = x$Var1[x$Freq>1]
+	m = lmer(distm ~ 1 + (1|nest_sex), v[v$nest_sex%in%xx,])
+		summary(m)
+	table(v$nest_sex[v$nest_sex%in%xx])
+	
+	vv = v
+	vv$time = as.numeric(difftime(vv$datetime_,trunc(vv$datetime_,"day"), units = "hours"))
+	vv$day_j=as.numeric(format(as.Date(trunc(vv$datetime_, "day")),"%j")) - as.numeric(format(as.Date(trunc(min(vv$datetime_), "day")),"%j"))+1
+	ggplot(vv,aes(x = day_j, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+		 load("C:\\Users\\mbulla\\Documents\\Dropbox\\Science\\Projects\\MS\\Removal\\Analyses\\Data\\inc_start_estimation_2013_new.Rdata")
+		 e$nest = tolower(e$nest)
+		vv$inc_start = e$inc_start[match(vv$nest,e$nest)] 	
+		vv$day_inc=as.numeric(difftime(vv$datetime_,vv$inc_start, units = "days"))	
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth()
+	
+	m = lmer(distm ~ 1 + (1|nest_sex), vv)
+	m = lmer(distm ~ day_j + (day_j|nest_sex), vv)
+	m = lmer(distm ~ day_inc + (day_inc|nest_sex), vv)
+	m = lmer(distm ~ 1 + (day_inc|nest_sex), vv)
+	75.56/(75.56+0.08+269)
+	pp = profile(m)
+	confint(pp)
+	m = lmer(distm ~ day_inc + (day_inc|nest_sex), vv[vv$nest_sex%in%xx,])
+	plot(allEffects(m))
+	summary(glht(m))
+	summary(m)
+	
+	v = vv[paste(vv$datetime_,vv$nest_sex)%in%paste(vv$datetime_,vv$nest_sex)[duplicated(paste(vv$datetime_,vv$nest_sex))],]
+	v = v[order(v$nest_sex, v$datetime_),]
+	table(paste(v$nest_sex, v$datetime))
+	pd <- position_dodge(0.4)
+	ggplot(v,aes(x=type, y = distm, col = factor(paste(nest_sex, datetime_))))+geom_point(position = pd) +geom_line(position = pd, aes(group = factor(paste(nest_sex, datetime_)), col = factor(paste(nest_sex, datetime_)))) +
+			theme(legend.position = "none") + ylab('escape distance [m]') + xlab('type of estimation')
+	
+
+		
+	
+}
+{# escape distance 2011-2012
+ {# tools	
+	wet_=dbGetQuery
+	
+	
+	
+	db_barr12="M:\\Science\\Projects\\PHD\\FIELD_METHODS\\Barrow\\2012\\DATA\\Database\\Barrow_2012.sqlite"
+	con_barr12 = dbConnect(dbDriver("SQLite"),dbname = db_barr12)
+	
+	db_barr11="M:\\Science\\Projects\\PHD\\FIELD_METHODS\\Barrow\\2011\\DATA\\Database\\Barrow_2011.sqlite"
+	con_barr11 = dbConnect(dbDriver("SQLite"),dbname = db_barr11)
+}	
+ {# Barrow 2011
+	v=dbGetQuery(con_barr11,"SELECT date_time as datetime_, nest, dist_left_nest dist_est FROM NESTS where dist_left_nest is not null and species='sesa'")
+		v[nchar(v$datetime_)!=nchar('2012-06-12 20:36:00'),]
+		v = v[nchar(v$datetime_)>nchar('2012-06-12 20'),]
+		v$datetime_ = as.POSIXct(v$datetime_,format="%Y-%m-%d %H:%M:%S", tz = 'America/Anchorage')		
+	
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\weather_SESA_2011_MS_BeEc.Rdata")
+		d$nest = tolower(d$nest)
+	v = v[v$nest %in% unique(d$nest),]	
+			l = list()
+			for(i in 1:nrow(v)){
+							fi=v[i,]
+							di=d[which(d$nest==fi$nest & fi$datetime_>=d$bout_start & fi$datetime_<=d$bout_end+60),] # adding 1 min to the bout end to make the selection more robust
+							if(nrow(di)==0){#fi$sex=NA
+											 print(fi) #all these visits where before we had rfid on and hence sex cannot be determined
+											}else{	fi$sex=di$sex
+													fi$bird_ID_filled = di$bird_ID_filled
+													l[[i]]=fi
+													print(i)
+												 }
+							
+							
+							}
+	v=do.call(rbind,l)		
+	v$year = 2011	
+	v11 =v
+	}
+ {# Barrow 2012
+	require(sp)
+	v=dbGetQuery(con_barr12,"SELECT visits_pk pk,datetime_, nest, gps_left, wp_left, dist_left_nest dist_est FROM VISITS where gps_left is not null")
+	g=dbGetQuery(con_barr12,"SELECT*FROM GPS")
+	n=dbGetQuery(conMy,"SELECT nest, species, latit, longit FROM avesatbarrow.nests where year_=2012 and species = 'sesa'")
+	v$lat_g=g$latit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v$lon_g=g$longit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v=v[!is.na(v$lat_g),]
+	#v=v[-which(v$pk%in%c(45,259,607,1385)),]
+	v$lat=n$latit[match(v$nest,tolower(n$nest))]
+	v$lon=n$longit[match(v$nest,tolower(n$nest))]
+	v$sp=n$species[match(v$nest,tolower(n$nest))]
+		for(i in 1:nrow(v) ) { 
+			if(is.na(v$lat[i])){v$distm[i]==NA} else {
+					v[i,'distm'] = spDists( as.matrix(v[i, c("lon_g", "lat_g")]), v[i, c("lon", "lat")], longlat=TRUE)*1000
+						}
+						}
+	v=v[v$distm<1250,]					
+	v$issues=0				
+	v1=v
+	# add nests where dist estimated
+	v=dbGetQuery(con_barr12,"SELECT visits_pk pk,datetime_, nest, gps_left, wp_left, dist_left_nest dist_est FROM VISITS where dist_left_nest is not null and wp_left is NULL")
+	g=dbGetQuery(con_barr12,"SELECT*FROM GPS")
+	n=dbGetQuery(conMy,"SELECT nest, species, latit, longit FROM avesatbarrow.nests where year_=2012")
+	v$lat_g=g$latit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	v$lon_g=g$longit[match(paste(v$gps_left,v$wp_left),paste(g$gps,g$wp))]
+	
+	v$lat=n$latit[match(v$nest,tolower(n$nest))]
+	v$lon=n$longit[match(v$nest,tolower(n$nest))]
+	v$sp=n$species[match(v$nest,tolower(n$nest))]
+	
+	v$distm=NA
+	v$issues=0
+	v2=v
+	
+		v=rbind(v1,v2)
+		v$issues[!is.na(v$dist_est) & !is.na(v$distm)]=1
+		v_=v[v$issues==1,]
+		ggplot(v_,aes(y=v_$dist_est,x=v_$distm))+geom_point()+stat_smooth(method="lm")
+	v2$distm=v2$dist_est
+	v1$type="gps"
+	v2$type="est"
+	v=rbind(v1,v2)
+	v = v[!is.na(v$datetime_),]
+	v[nchar(v$datetime_)!=nchar('2012-06-12 20:36:00'),]
+	v$datetime_ = as.POSIXct(v$datetime_, tz = 'America/Anchorage')		
+	
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_inc_start.Rdata")
+		d1 = d
+	load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\C_SESA_short_inc_start.Rdata")
+	d = rbind(d1,d)
+	d$nest= tolower(d$nest)	
+	v = v[v$nest %in% unique(d$nest),]	
+			l = list()
+			for(i in 1:nrow(v)){
+							fi=v[i,]
+							di=d[which(d$nest==fi$nest & fi$datetime_>=d$bout_start & fi$datetime_<=d$bout_end+60),] # adding 1 min to the bout end to make the selection more robust
+							if(nrow(di)==0){#fi$sex=NA
+											 print(fi) #all these visits where before we had rfid on and hence sex cannot be determined
+											}else{	fi$sex=di$sex
+													fi$bird_ID_filled = di$bird_ID_filled
+													l[[i]]=fi
+													print(i)
+												 }
+							
+							
+							}
+	v=do.call(rbind,l)		
+	v$year = 2012	
+	v12 =v
+}
+ {# combine
+	names(v11)[names(v11) == 'dist_est'] = 'distm'	
+	v11$type = 'est'
+	v12 = v12[v12$sp == 'SESA',]
+	v = rbind(v12[c('year','datetime_','nest','sex', 'bird_ID_filled','distm','type')], v11)
+	nrow(v)
+	save(v, file = paste(wd,'escpate_2011-2012.Rdata', sep=''))
+	}
+
+ {# analyses
+	load(file = paste(wd,'escpate_2011-2012.Rdata', sep=''))
+	nrow(v)
+	#nrow(v[is.na(v$bird_ID_filled),])
+	#v[v$nest == 's510',]
+	v$bird_ID_filled[is.na(v$bird_ID_filled)] = 'f'
+	v$nest_sex = paste(v$nest, v$sex)
+	nrow(v[duplicated(paste(v$nest_sex,v$datetime_)),])
+	#v[paste(v$nest_sex,v$datetime_) %in% paste(v$nest_sex,v$datetime_)[duplicated(paste(v$nest_sex,v$datetime_))],]
+	#v = v[!duplicated(paste(v$nest_sex,v$datetime_)),]
+	#vg = v[v$type == 'gps',]	
+	#ve = v[!paste(v$nest_sex, v$datetime_)%in%paste(vg$nest_sex, vg$datetime_),]
+	#v = rbind(vg,ve)
+	#nrow(v)
+	
+	x = data.frame(table(v$bird_ID_filled))
+	summary(factor(x$Freq))
+	summary(x$Freq)
+	
+	densityplot(~v$distm)
+	
+	v = v[v$distm<200,]
+	
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v)
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v[v$type=='est',])
+	summary(m)
+	
+	xx = x$Var1[x$Freq>1]
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), v[v$bird_ID_filled%in%xx,])
+		summary(m)
+	table(v$nest_sex[v$nest_sex%in%xx])
+	
+	vv = v
+	vv$time = as.numeric(difftime(vv$datetime_,trunc(vv$datetime_,"day"), units = "hours"))
+	vv$day_j=as.numeric(format(as.Date(trunc(vv$datetime_, "day")),"%j")) - as.numeric(format(as.Date(trunc(min(vv$datetime_), "day")),"%j"))+1
+	ggplot(vv,aes(x = day_j, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+		 load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\inc_start_est_2011_SESA_NON-SESA.Rdata")
+		 e$year = 2011
+		 e1 = e
+		 
+		 load("M:\\Science\\Projects\\PHD\\STATS\\DATASETS\\inc_start_est_2012_SESA_NON-SESA.Rdata")
+		  e$year = 2012
+		 e2 = e
+		 e = rbind(e1,e2)
+		 e = e[!is.na(e$inc_est),]
+		 e$inc_est = as.POSIXct(e$inc_est,format="%Y-%m-%d %H:%M:%S", tz = 'America/Anchorage')		
+		  e$nest = tolower(e$nest)
+		vv$inc_start = e$inc_est[match(paste(vv$year, vv$nest),paste(e$year,e$nest))] 	
+		vv$day_inc=as.numeric(difftime(vv$datetime_,vv$inc_start, units = "days"))	
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth(method = 'lm')
+	ggplot(vv,aes(x = day_inc, y = distm)) + geom_point() +stat_smooth()
+	
+	m = lmer(distm ~ 1 + (1|bird_ID_filled), vv)
+	m = lmer(distm ~ day_j + (day_j|bird_ID_filled), vv)
+	m = lmer(distm ~ day_inc + (day_inc|bird_ID_filled), vv,na.action='na.omit')
+	m = lmer(distm ~ 1 + (day_inc|bird_ID_filled), vv,na.action='na.omit')
+	m = lmer(distm ~ day_inc + (day_inc|bird_ID_filled), vv[vv$bird_ID_filled%in%xx,])
+	m = lmer(distm ~ 1 + (day_inc|bird_ID_filled), vv[vv$bird_ID_filled%in%xx,])
+	plot(allEffects(m))
+	summary(glht(m))
+	summary(m)
+	pp = profile(m)
+	confint(pp)
+	library(MCMCglmm)
+		mm <- MCMCglmm(distm ~ 1,random = ~us(day_inc):bird_ID_filled, data=vv[vv$bird_ID_filled%in%xx & !is.na(vv$day_inc),])
+summary(mm)
+}
+}	
+	
+{# hatching success
+	d=read.csv(paste(wd,'experiment_metadata.csv', sep=""),stringsAsFactors=FALSE)
+	d = d[d$type == 'exp',]
+	u=readWorksheetFromFile(paste(wd,'endstates_actogram_based_2016-06-15.xls', sep=""), sheet="temp")
+	u$nest = tolower(u$nest)
+	u$state = ifelse(is.na(u$state), u$nest_endstate, u$state)
+	u_ = ddply(u,.(nest), summarise, end_state = ifelse('hd'%in%state | 'hg'%in%state | '?hg'%in%state |'fl'%in%state | 'hd or fledged?'%in%state |  '?hd'%in%state |  'fledged?'%in%state |  'hs'%in%state |  'hg load MSR first'%in%state|  '1d, 3?hd'%in%state, 'success', ifelse( 'ud'%in%state |'ud?'%in%state |'w'%in%state | 'p? hg?'%in%state | '1b,3w'%in%state | 'un'%in%state | '1b, 1ho, 2'%in%state | 'ud - shall we include ud states?'%in%state, 'unknown', 'failed')))
+	
+	u_ = u_[substring(u_$nest,1,1) == 's',]
+	summary(factor(u_$end_state))
+	
+	d$end_state = u$state[match(d$nest,u$nest)]
+		summary(factor(d$end_state))
+	d$end_s = ifelse(d$end_state%in%c('hd','hg','?hg'), 'success', ifelse(d$end_state%in%c('un','ud','un'), 'unknown', 'failed'))
+		summary(factor(d$end_s))
+	d_$end_s2 = u_$end_state[match(d$nest,u_$nest)]	
+		summary(factor(d$end_s2))
+		
+	
+	uc = u_[!u_$nest%in%d$nest,]	
+		summary(factor(uc$end_state))
+	uu = u
+	u$
+	
+}
+	
 {# not used - makes little sense
 {# bout length
 	{# run first - prepare data	
