@@ -1,134 +1,134 @@
-"author","datetime_","box","ring_num","phase","fat","mass","mass_worms","worms_num","mass_cat","sperm","ringing_end","partner_present","captivity_pk","remarks","ti_m","ti_s"
-"mb",2013-06-20 18:16:00,2,257188558,"start",1,22.8,NA,NA,NA,"Ms",NA,NA,1,"mass with tag; 30min walk nest s502, partner absent",NA,NA
-"mb",2013-06-21 06:16:00,2,257188558,"middle",0,20.1,7.3,100,NA,NA,NA,NA,2,"mass with tag",NA,NA
-"mb",2013-06-21 18:06:00,2,257188558,"end",0,19.9,0,0,NA,"M",NA,NA,3,NA,NA,NA
-"lv",2013-06-21 18:41:00,2,257188558,"released",NA,NA,NA,NA,NA,NA,NA,NA,5,"gps 1, wp 52, sesa around flying alarming",NA,NA
-"lv",2013-06-20 22:29:00,1,257188571,"start",3,24.7,NA,NA,NA,"Ms",NA,"N",6,"mass with tag, s702, 30min walk, partner absent",NA,NA
-"mb",2013-06-21 10:54:00,1,257188571,"middle",0,21,7.6,100,NA,NA,NA,NA,7,NA,NA,NA
-"mb",2013-06-21 22:13:00,1,257188571,"end",3,22,0.2,3,NA,"Ms",NA,NA,8,NA,NA,NA
-"lv",2013-06-21 22:52:00,1,257188571,"released",NA,NA,NA,NA,NA,NA,NA,NA,9,"gps1 wp53; before releasing bird a sesa came flying from direction nest + was chased by the neighbours, no reaction of bird in bag; stood with my back towards chasing birds, released bird in bag, flew out hand, landed a few meters away, looked confused, s",NA,NA
-"lv",2013-06-21 09:32:00,3,257188564,"start",3,26.9,NA,NA,NA,"Ms","2013-06-21 09:55:00","Y",10,"mass with tag, s509, brought in with atv, partner present",NA,NA
-"lv",2013-06-21 21:32:00,3,257188564,"middle",1,22.8,15.4,200,NA,NA,NA,NA,11,"mass with taq",NA,NA
-"lv",2013-06-22 08:56:00,3,257188564,"end",3,25.1,2.1,27,NA,NA,NA,NA,12,"mass with tag, sperm taken, but sample thrown away",NA,NA
-"ms",2013-06-22 09:32:00,3,257188564,"released",NA,NA,NA,NA,NA,NA,NA,NA,13,"w 7/115",NA,NA
-"mb",2013-06-21 14:37:00,5,255174350,"start",1,23.9,NA,NA,NA,"S","2013-06-21 14:58:00","N",14,"mass with tag, s711, 30 min walk, partner absent",NA,NA
-"fh",2013-06-22 02:34:00,5,255174350,"middle",1,20.2,15.2,200,NA,NA,NA,NA,15,"was jumping, completley quiet afterwards",NA,NA
-"mb",2013-06-22 14:08:00,5,255174350,"end",3,22.6,3,43,NA,"Ms",NA,NA,16,"no antenna",NA,NA
-"lv",2013-06-22 10:11:00,4,257188570,"start",3,27,NA,NA,NA,"Clf",NA,"N",17,"mass with tag, s402, 30min walk",NA,NA
-"lv",2013-06-22 22:18:00,4,257188570,"middle",0,21.2,13.9,200,NA,NA,NA,NA,18,"bird very weak when taken out box, died shortly after, fed it 6 worms",NA,NA
-"ms",2013-06-22 14:37:00,5,255174350,"released",NA,NA,NA,NA,NA,NA,NA,NA,21,NA,NA,NA
-"lv",2013-06-22 13:52:00,6,257188566,"start",0,26.8,NA,NA,NA,"Ms","2013-06-22 14:01:00","other_bird",22,"mass with tag, s510, 15min walk",NA,NA
-"mb",2013-06-23 01:52:00,6,257188566,"middle",0,23,NA,NA,NA,NA,NA,NA,26,"bird found dead in  box",NA,NA
-"mb",2013-06-22 15:12:00,7,255174353,"start",0,27.4,NA,NA,NA,"Ms","2013-06-22 15:21:00","N",29,"s516, 35 min walk, partner absent",NA,NA
-"mb",2013-06-22 22:45:00,7,255174353,"middle",NA,24.5,13.9,194,NA,NA,NA,NA,30,NA,NA,NA
-"lv",2013-06-23 14:41:00,7,255174353,"end",3,25.1,1.5,11,NA,NA,NA,NA,31,NA,NA,NA
-"ms",2013-06-23 15:14:00,7,255174353,"released",NA,NA,NA,NA,NA,NA,NA,NA,32,NA,NA,NA
-"lv",2013-06-23 01:22:00,8,257188572,"start",0,29,NA,NA,NA,"Clf","2013-06-23 01:30:00","N",33,"s404, 35 min walk, mass with tag",NA,NA
-"mb",2013-06-23 07:40:00,8,257188572,"middle",0,26.2,24.1,300,NA,NA,NA,NA,34,NA,NA,NA
-"lv",2013-06-24 01:46:00,8,257188572,"released",NA,NA,NA,NA,NA,NA,NA,NA,35,"gps1, wp 46, released in direction of nest, flew off perpendicular on direction nest, landed after 50m (few min observation) ",NA,NA
-"lv",2013-06-24 01:00:00,8,257188572,"end",3,28.1,89,106,NA,"M",NA,NA,36,NA,NA,NA
-"lv",2013-06-23 03:05:00,7,255174353,"middle",NA,NA,NA,100,NA,NA,NA,NA,37,NA,NA,NA
-"lv",2013-06-23 03:05:00,8,257188572,"middle",NA,NA,NA,50,NA,NA,NA,NA,38,"bird was very skinny, give it some meelworms before end shift",NA,NA
-"mb",2013-06-23 11:25:00,9,255174356,"start",0,27.4,25.8,400,NA,NA,"2013-06-23 11:36:00","other_bird",39,"s624, 5 min walk",NA,NA
-"lv",2013-06-23 23:36:00,9,255174356,"middle",3,26.5,NA,NA,NA,NA,NA,NA,40,NA,NA,NA
-"lv",2013-06-24 11:02:00,9,255174356,"end",3,26.9,0.3,4,NA,NA,NA,NA,41,NA,NA,NA
-"lv",2013-06-24 11:23:00,9,255174356,"released",NA,NA,NA,NA,NA,NA,NA,NA,42,"gps1, wp 37. flew off,+/- 30m, landed, walked around, a bit forward, a bit backward, as trying to figure out where it was, looked confused. flew off again, landed 10-15m further in grass and disappeared. 4min observations",NA,NA
-"lv",2013-06-23 18:21:00,10,255174349,"start",0,26.1,33.8,366,NA,NA,"2013-06-23 18:34:00","N",43,"s628, 5 min walk, 400 worms at start, but fabi later exchanged what was left 234 for new 200 worms  in at middle, so the full number is not 400, but less",NA,NA
-"fh",2013-06-24 06:15:00,10,255174349,"middle",1,25.7,NA,NA,NA,NA,NA,NA,44,NA,NA,NA
-"mb",2013-06-24 18:15:00,10,255174349,"end",6,26.2,3.5,44,NA,NA,NA,NA,45,"really fatty",NA,NA
-"mb",2013-06-24 18:21:00,10,255174349,"released",NA,NA,NA,NA,NA,NA,NA,NA,46,"had a hard time to fly",NA,NA
-"lv",2013-06-24 01:09:00,9,255174356,"middle",3,26.7,NA,NA,NA,NA,NA,NA,47,NA,NA,NA
-"mb",2013-06-24 05:06:00,11,255174359,"start",0,25,15.5,400,NA,NA,"2013-06-24 05:17:00","N",48,"s512, 30min walk",NA,NA
-"mb",2013-06-24 06:18:00,11,255174359,"middle",NA,NA,NA,-200,NA,NA,NA,NA,49,"taken out because we were running out of the worms",NA,NA
-"mb",2013-06-25 04:46:00,11,255174359,"end",3,24.8,0,5,22.5,NA,NA,NA,50,NA,NA,NA
-"fh",2013-06-25 05:23:00,11,255174359,"released",NA,NA,NA,NA,NA,NA,NA,NA,51,NA,NA,NA
-"lv",2013-06-24 14:12:00,12,255174346,"start",1,24.1,3.6,50,30,NA,"2013-06-24 14:27:00","other_bird",52,"s515, 30min walk, male",NA,NA
-"lv",2013-06-25 02:14:00,12,255174346,"middle",NA,22,8.2,100,NA,NA,NA,NA,53,"cat food still there",NA,NA
-"lv",2013-06-25 14:43:00,12,255174346,"released",NA,NA,NA,NA,NA,NA,NA,NA,54,"gps1, wp60. released direction of nest. flew off, away from nest, landed 5m away, looked confused. flew a few meters further, walked a bit back, walked a bit forward, preened a bit. Then started to preen longer and more torough, walked back as a normal se",NA,NA
-"lv",2013-06-24 21:03:00,13,255174342,"start",0,24.9,3.2,50,30,"S","2013-06-24 21:10:00","N",56,"s712, 40min walk, male",NA,NA
-"mb",2013-06-25 07:08:00,13,255174342,"middle",1,21.2,15.5,200,-30,NA,NA,NA,57,"cat food taken out, 40 meal worms were left and taken out",NA,NA
-"lv",2013-06-25 20:44:00,13,255174342,"end",4,23.5,0.4,6,NA,NA,NA,NA,58,"no sperm sample, there came nothing out",NA,NA
-"lv",2013-06-25 21:13:00,13,255174342,"released",NA,NA,NA,NA,NA,NA,"2013-06-26 00:47:55","N",59,"gps1, wp61. flew off, very strong wind coming from direction of nest, so was blown away. landed 100m further. maybe difficulties to fly (stiff muscles)? a bit unusual flapping of wings? less then 1 min observation.",NA,NA
-"lv",2013-06-24 22:20:00,14,255174347,"start",0,24.6,3.8,50,30,"S","2013-06-24 22:32:00","N",60,"s406, 40min walk, male, S+M sample",NA,NA
-"mb",2013-06-25 07:19:00,14,255174347,"middle",2,22.3,NA,50,NA,NA,NA,NA,61,"cat food hat 27.6g, 1 worm left in the tray 40 from box 13 and 10 new were thrown in",NA,NA
-"mb",2013-06-25 10:41:00,14,255174347,"middle",4,22.4,15.1,200,-27.8,NA,NA,NA,62,"no worms left in the tray, cat food taken out, 200 worms in",NA,NA
-"lv",2013-06-24 22:50:00,15,255174400,"start",0,24.8,4.2,50,30,"M","2013-06-24 23:52:00","N",64,"s625, 40min walk, male, ringing start at bird hut 23:36",NA,NA
-"mb",2013-06-25 07:26:00,15,255174400,"middle",0,22.5,NA,36,NA,NA,NA,NA,65,"cat food still weighs 30g, 42 old worms left, added 36 new",NA,NA
-"lv",2013-06-25 22:39:00,15,255174400,"end",3,24,0.2,2,NA,"Ms",NA,NA,66,NA,NA,NA
-"lv",2013-06-25 23:32:00,15,255174400,"released",NA,NA,NA,NA,NA,NA,NA,"other_bird",67,"only 30m-40m away from nest. flew 10m away after releasing, disappeared in the grass. confused behaviour. calls. seem to recover, walks in the direction of the nest. flies off to the nest, flies over it, lands close by, flies back to the where it was stan",NA,NA
-"mb",2013-06-25 06:36:00,16,255174362,"start",1,29,3.5,50,30,"Clf","2013-06-25 06:54:00","N",68,"nest s520, 1min walk, female",NA,NA
-"mb",2013-06-25 20:16:00,16,255174362,"middle",3,28.5,3.7,50,NA,NA,NA,NA,69,"fat possibly 4",NA,NA
-"mb",2013-06-26 06:30:00,16,255174362,"end",2,25.9,0.5,4,NA,NA,NA,NA,70,"fat possibly 3",NA,NA
-NA,2013-06-26 06:36:00,16,255174362,"released",NA,NA,NA,NA,NA,NA,NA,NA,71,"flies off, sits for 3 minutes, then takes a bath and preens",NA,NA
-"mb",2013-06-25 10:39:00,16,255174362,"middle",0,27.4,-4.7,-49,-30,NA,NA,NA,72,"cat food taken out, old worms taken out",NA,NA
-"mb",2013-06-25 09:45:00,17,255174363,"start",0,25.8,14.4,200,0,"Clf","2013-06-25 09:56:00","N",73,"s808, female, 24min walk",NA,NA
-"mb",2013-06-25 07:08:00,13,255174342,"middle",NA,NA,NA,-40,0,NA,NA,NA,75,"cat food taken out, 40 meal worms were left and taken out",NA,NA
-"mb",2013-06-25 10:39:00,16,255174362,"middle",0,27.4,13.9,200,0,NA,NA,NA,76,"cat food taken out, old worms taken out",NA,NA
-"mb",2013-06-25 10:33:00,12,255174346,"middle",2,21.4,NA,50,NA,NA,NA,NA,77,"only cat food left, therefore cat food taken out, 50 meal worms added",NA,NA
-"lv",2013-06-25 14:07:00,12,255174346,"end",3,NA,NA,NA,NA,NA,NA,NA,78,NA,NA,NA
-"mb",2013-06-25 05:45:00,12,255174346,"middle",1,22.7,NA,NA,NA,NA,NA,NA,79,"cat food and meal worms still present",NA,NA
-"mb",2013-06-25 14:07:00,12,255174346,"end",3,22.1,NA,2,0.1,"N",NA,NA,80,NA,NA,NA
-"mb",2013-06-25 17:00:00,13,255174342,"middle",3,23.5,3.8,50,0,NA,NA,NA,81,"fat possibly 4",NA,NA
-"lv",2013-06-25 22:30:00,14,255174347,"end",4,23,0.1,4,NA,"S",NA,NA,82,NA,NA,NA
-"mb",2013-06-25 10:35:00,15,255174400,"middle",0,23.1,-5.7,-63,-30,NA,NA,NA,83,"old tray taken out - still mealworms left ",NA,NA
-"lv",2013-06-25 22:31:00,17,255174363,"middle",3,25.2,7.9,100,NA,NA,NA,NA,84,NA,NA,NA
-"fh",2013-06-26 09:57:00,17,255174363,"released",NA,NA,NA,NA,NA,NA,NA,NA,86,"fo toward the nest, preening, feeding, walks back and forth",NA,NA
-"mb",2013-06-25 11:34:00,18,255174364,"start",1,23.5,16.6,200,0,"S","2013-06-25 11:50:00","N",87,"s805, male, 30min walk ",NA,NA
-"lv",2013-06-25 00:20:00,18,255174364,"middle",4,22.9,8.1,100,NA,NA,NA,NA,88,"still minimum 50 worms left over",NA,NA
-"mb",2013-06-26 11:50:00,18,255174364,"end",6,23.3,0.9,12,NA,"Ms",NA,NA,89,NA,NA,NA
-"fh",2013-06-26 12:05:00,18,255174364,"released",NA,NA,NA,NA,NA,NA,NA,NA,90,"fo, called, partner flew off nest toward the released bird, kept distance of 10m then flew back, focal bird preens",NA,NA
-"mb",2013-06-25 12:19:00,19,255174396,"start",0,24.4,14.7,200,0,"Ms","2013-06-25 12:27:00","N",91,"s514, female, 20min walk",NA,NA
-"lv",2013-06-25 03:02:00,19,255174396,"middle",2,23.6,7.5,100,0,"N",NA,NA,92,NA,NA,NA
-"mb",2013-06-25 13:25:00,20,255174365,"start",0,25.2,13.3,200,0,"Clf","2013-06-25 13:35:00","N",93,"s519, female, 10min walk",NA,NA
-"mb",2013-06-26 11:45:00,19,255174396,"end",3,23.6,0.3,5,0,"S",NA,NA,94,"fat foto camera 8 3033-3051",NA,NA
-"mb",2013-06-26 12:19:00,19,255174396,"released",NA,NA,NA,NA,NA,NA,NA,NA,95,"flies a little,, walks, alarms, 1min later flies toward little pond",NA,NA
-"lv",2013-06-26 03:06:00,20,255174365,"middle",2,23.7,6.4,100,0,NA,NA,NA,96,NA,NA,NA
-"mb",2013-06-26 13:10:00,20,255174365,"end",2,23.2,0,1,NA,NA,NA,NA,97,NA,NA,NA
-"mb",2013-06-26 13:26:00,20,255174365,"released",NA,NA,NA,NA,NA,NA,NA,NA,98,"fo, w, p",NA,NA
-"mb",2013-06-25 16:40:00,21,255174326,"start",1,22,15.1,200,0,"Ms","2013-06-25 16:50:00","N",99,"s629, male, 5min walk",NA,NA
-"mb",2013-06-26 05:01:00,21,255174326,"middle",2,21.1,8.2,100,NA,NA,NA,NA,100,"water frozen",NA,NA
-"mb",2013-06-26 16:27:00,21,255174326,"end",4,21.4,0.6,9,NA,"Ms",NA,NA,101,NA,NA,NA
-"mb",2013-06-26 16:40:00,21,255174326,"released",NA,NA,NA,NA,NA,NA,NA,NA,102,"fo, walked in the water and at the water edge, alarming from time to time, sometimes pecking on some insects",NA,NA
-"lv",2013-06-25 16:48:00,22,257188600,"start",0,24.7,13.6,200,0,"M","2013-06-25 16:58:00","N",103,"s704, 40min walk, mass with antenna, male",NA,NA
-"mb",2013-06-25 16:48:00,22,257188600,"start",3,NA,NA,NA,NA,NA,NA,NA,104,NA,NA,NA
-"mb",2013-06-24 17:27:00,11,255174359,"middle",3,26.6,4.3,50,30,NA,NA,NA,105,"cat food added",NA,NA
-"mb",2013-06-26 05:10:00,22,257188600,"middle",3,23.1,7.5,100,0,NA,NA,NA,106,"water was frozen, mass with tag",NA,NA
-"mb",2013-06-26 16:14:00,22,257188600,"end",5,24.3,2.1,30,NA,"Ms",NA,NA,107,"fat also on breast",NA,NA
-"lv",2013-06-26 17:18:00,22,257188600,"released",NA,NA,NA,NA,NA,NA,NA,"N",108,"released into direction of nest. flew off, then typical behaviour (looking confused, walking short distances - a few steps only, shortly preening). preened for a few seconds, started walking again. called. other sesa ""answered"" once, then sound of motorbo",NA,NA
-"lv",2013-06-25 23:22:00,14,255174347,"released",NA,NA,NA,NA,NA,NA,NA,"N",109,"walked off, confused behaviour (walking a bit, looking around, shortly preening), flew again off for few m, looked like it had stiff muscles. stands a few m away from me, calls several times. stands a bit huddled, doing nothing. stops calling",NA,NA
-"lv",2013-06-25 21:55:00,23,255174374,"start",0,22.8,16.1,200,NA,NA,"2013-06-25 22:06:00","N",110,"s806, 20min walk, female",NA,NA
-"mb",2013-06-26 09:30:00,23,255174374,"middle",1,22.2,7.8,100,NA,NA,NA,NA,111,"still had at last 100 meal worms left",NA,NA
-"lv",2013-06-26 21:37:00,23,255174374,"end",4,23.1,2.1,26,NA,NA,NA,NA,112,NA,NA,NA
-"lv",2013-06-26 22:01:00,23,255174374,"released",NA,NA,NA,NA,NA,NA,NA,"other_bird",113,"released into direction of nest. bird flies off for short distance, the usual confused behaviour. calls. there is motorboating at my right side (I'm looking perpendicular to the nest), bird seems to respond on it. stands still for quite a while, calling. ",NA,NA
-"mb",2013-06-26 05:46:00,24,255174366,"start",4,27.2,15.2,200,0,"Clf","2013-06-26 06:39:00","N",114,"fat was spread like 4, but was not much of it there",NA,NA
-"mb",2013-06-26 18:11:00,24,255174366,"middle",6,26.7,8.4,100,0,NA,NA,NA,115,"fat could be also super 5; had still some worms in the tray (about 100)",NA,NA
-"mb",2013-06-27 05:24:00,24,255174366,"end",6,26.5,3.3,41,NA,NA,NA,NA,116,"fat also on the breast",NA,NA
-"fh",2013-06-27 05:57:00,24,255174366,"released",NA,NA,NA,NA,NA,NA,NA,NA,117,"fo in oposite direction than nest, sat + preened, walked around",NA,NA
-"mb",2013-06-25 10:35:00,15,255174400,"middle",0,23.1,14.5,200,NA,NA,NA,NA,118,NA,NA,NA
-"lv",2013-06-27 01:14:00,25,257188506,"start",0,22.8,14.2,200,0,"S","2013-06-27 01:23:00","other_bird",119,"s622, 30min walk, male",NA,NA
-"lv",2013-06-27 13:29:00,25,257188506,"middle",4,22.5,7.3,100,NA,NA,NA,NA,120,"no worms left in tray",NA,NA
-"lv",2013-06-28 01:05:00,25,257188506,"end",0,21.3,3.5,43,NA,"M",NA,NA,121,NA,NA,NA
-"ms",2013-06-28 01:29:00,25,257188506,"released",NA,NA,NA,NA,NA,NA,NA,NA,122,"wp7/159, flew short distance, walk on and disappeared in gras",NA,NA
-"lv",2013-06-26 16:27:00,21,255174326,"end",4,NA,NA,NA,NA,NA,NA,NA,123,NA,NA,NA
-"mb",2013-06-26 16:14:00,22,257188600,"end",5,24.3,2.1,30,NA,"Ms",NA,NA,124,"fat also on breast, score 4-5",NA,NA
-"lv",2013-06-26 16:14:00,22,257188600,"end",4,NA,NA,NA,NA,NA,NA,NA,125,"fat possibly 5",NA,NA
-"lv",2013-06-26 16:14:00,22,257188600,"end",5,NA,NA,NA,NA,NA,NA,NA,126,"fat 4-5",NA,NA
-"lv",2013-06-28 20:46:00,26,253178816,"start",5,29.7,14.6,200,NA,"S","2013-06-28 21:01:00","other_bird",127,"30min walk,s524. 17min before partner flew out the cage. 21:37 in box",NA,NA
-"mb",2013-06-29 08:52:00,26,253178816,"middle",4,26.2,7.6,100,NA,NA,NA,NA,128,NA,NA,NA
-"mb",2013-06-29 20:15:00,26,253178816,"end",6,27.9,4.6,66,NA,NA,NA,NA,129,NA,NA,NA
-"fh",2013-06-29 21:04:00,26,253178816,"released",NA,NA,NA,NA,NA,NA,NA,"N",130,"bird flew off from hand, sat down 50m away, started preening and walking, approached nest, sat next to it, called, no reaction, then flew off again",NA,NA
-"lv",2013-06-29 20:15:00,26,253178816,"end",5,NA,NA,NA,NA,NA,NA,NA,131,NA,NA,NA
-"mb",2013-07-01 14:18:00,28,255174397,"start",0,26.3,15.3,200,NA,"Ms","2013-07-01 14:27:00","other_bird",132,"30min walk, s409, female, while catching there was a 2nd bird (noba) around that was alarming and courted the female that was caught.",NA,NA
-"lv",2013-07-02 02:20:00,28,255174397,"middle",4,25.9,8.2,100,NA,NA,NA,NA,133,NA,NA,NA
-"mb",2013-07-02 13:45:00,28,255174397,"end",4,NA,NA,NA,NA,NA,NA,NA,134,NA,NA,NA
-"ms",2013-07-02 14:18:00,28,255174397,"released",NA,NA,NA,NA,NA,NA,NA,NA,135,"wp 7/178, flew off few meter, then sitting in the gras doing nothing for long time",NA,NA
-"lv",2013-07-02 13:28:00,28,255174397,"end",4,25,0.9,11,NA,NA,NA,NA,136,NA,NA,NA
-"mb",2013-07-06 22:03:00,27,255174847,"start",1,23.5,14.2,200,NA,"Ms","2013-07-07 22:20:00","N",137,"s527, bird was processed in the lab",NA,NA
-"mb",2013-07-07 10:08:00,27,255174847,"middle",3,22.1,6.2,100,NA,NA,NA,NA,138,"50 to 100 worms left, fat could possibly be 4 as well",NA,NA
-"mb",2013-07-07 22:01:00,27,255174847,"end",5,22.8,1.4,22,NA,"Ms",NA,NA,139,"fat could be 6, fat also on breast",NA,NA
-"mb",2013-07-07 22:10:00,27,255174847,"released",NA,NA,NA,NA,NA,NA,NA,NA,140,"flew 10m, walked around, preened, started feeding a bit, noba male was around",NA,NA
-"mb",2013-07-08 09:55:00,29,255174892,"start",1,25,17.8,200,NA,"Ms","2013-07-08 10:05:00","N",141,"15 min walk, s526",NA,NA
-"mb",2013-07-08 22:19:00,29,255174892,"middle",4,25,7.7,100,NA,NA,NA,NA,142,"about 50 worms left",NA,NA
-"mb",2013-07-09 09:25:00,29,255174892,"end",4,24.1,0.5,10,NA,"N",NA,NA,143,NA,NA,NA
-"mb",2013-07-09 09:57:00,29,255174892,"released",NA,NA,NA,NA,NA,NA,NA,NA,144,"flew off approx. 150m",NA,NA
-"mb",2013-06-26 09:25:00,17,255174363,"end",2,23.8,1.5,18,NA,NA,NA,NA,145,"fat possibly 3",NA,NA
+treat,author,datetime_,box,ring_num,phase,fat,mass,mass_worms,worms_num,mass_cat,sperm,ringing_end,partner_present,captivity_pk,remarks
+s,mb,2013-06-20 18:16,2,257188558,start,1,22.8,0,0,0,Ms,NA,N,1,"mass with tag; 30min walk nest s502, partner absent"
+s,mb,2013-06-21 06:16,2,257188558,middle,0,20.1,7.3,100,0,N,NA,NA,2,mass with tag
+s,mb,2013-06-21 18:06,2,257188558,end,0,19.9,0,0,0,M,NA,NA,3,NA
+s,lv,2013-06-21 18:41,2,257188558,released,NA,NA,NA,NA,NA,N,NA,NA,5,"gps 1, wp 52, sesa around flying alarming"
+s,lv,2013-06-20 22:29,1,257188571,start,3,24.7,0,0,0,Ms,NA,N,6,"mass with tag, s702, 30min walk, partner absent"
+s,mb,2013-06-21 10:54,1,257188571,middle,0,21,7.6,100,0,N,NA,NA,7,NA
+s,mb,2013-06-21 22:13,1,257188571,end,3,22,0.2,3,0,Ms,NA,NA,8,NA
+s,lv,2013-06-21 22:52,1,257188571,released,NA,NA,NA,NA,NA,N,NA,NA,9,"gps1 wp53; before releasing bird a sesa came flying from direction nest + was chased by the neighbours, no reaction of bird in bag; stood with my back towards chasing birds, released bird in bag, flew out hand, landed a few meters away, looked confused, s"
+s,lv,2013-06-21 09:32,3,257188564,start,3,26.9,0,0,0,Ms,2013-06-21 09:55,Y,10,"mass with tag, s509, brought in with atv, partner present"
+s,lv,2013-06-21 21:32,3,257188564,middle,1,22.8,15.4,200,0,N,NA,NA,11,mass with taq
+s,lv,2013-06-22 08:56,3,257188564,end,3,25.1,2.1,27,0,N,NA,NA,12,"mass with tag, sperm taken, but sample thrown away"
+s,ms,2013-06-22 09:32,3,257188564,released,NA,NA,NA,NA,NA,N,NA,NA,13,w 7/115
+s,mb,2013-06-21 14:37,5,255174350,start,1,23.9,0,0,0,S,2013-06-21 14:58,N,14,"mass with tag, s711, 30 min walk, partner absent"
+s,fh,2013-06-22 02:34,5,255174350,middle,1,20.2,15.2,200,0,N,NA,NA,15,"was jumping, completley quiet afterwards"
+s,mb,2013-06-22 14:08,5,255174350,end,3,22.6,3,43,0,Ms,NA,NA,16,no antenna
+s,ms,2013-06-22 14:37,5,255174350,released,NA,NA,NA,NA,NA,N,NA,NA,21,NA
+s,lv,2013-06-22 10:11,4,257188570,start,3,27,0,0,0,Clf,NA,N,17,"mass with tag, s402, 30min walk"
+s,lv,2013-06-22 22:18,4,257188570,middle,0,21.2,13.9,200,0,N,NA,NA,18,"bird very weak when taken out box, died shortly after, fed it 6 worms"
+s,lv,2013-06-22 13:52,6,257188566,start,0,26.8,NA,NA,0,Ms,2013-06-22 14:01,other_bird,22,"mass with tag, s510, 15min walk"
+s,mb,2013-06-23 01:52,6,257188566,middle,0,23,NA,NA,0,N,NA,NA,26,bird found dead in  box
+s,mb,2013-06-22 15:12,7,255174353,start,0,27.4,0,0,0,Ms,2013-06-22 15:21,N,29,"s516, 35 min walk, partner absent"
+s,mb,2013-06-22 22:45,7,255174353,middle,NA,24.5,13.9,194,0,N,NA,NA,30,NA
+s,lv,2013-06-23 03:05,7,255174353,middle,NA,NA,NA,100,0,N,NA,NA,37,NA
+s,lv,2013-06-23 14:41,7,255174353,end,3,25.1,1.5,11,0,N,NA,NA,31,NA
+s,ms,2013-06-23 15:14,7,255174353,released,NA,NA,NA,NA,NA,N,NA,NA,32,NA
+s,lv,2013-06-23 01:22,8,257188572,start,0,29,0,0,0,Clf,2013-06-23 01:30,N,33,"s404, 35 min walk, mass with tag"
+s,lv,2013-06-23 03:05,8,257188572,middle,NA,NA,NA,50,0,N,NA,NA,38,"bird was very skinny, give it some meelworms before end shift"
+s,mb,2013-06-23 07:40,8,257188572,middle,0,26.2,24.1,300,0,N,NA,NA,34,NA
+s,lv,2013-06-24 01:00,8,257188572,end,3,28.1,89,106,0,M,NA,NA,36,NA
+s,lv,2013-06-24 01:46,8,257188572,released,NA,NA,NA,NA,NA,N,NA,NA,35,"gps1, wp 46, released in direction of nest, flew off perpendicular on direction nest, landed after 50m (few min observation) "
+n,mb,2013-06-23 11:25,9,255174356,start,0,27.4,25.8,400,0,N,2013-06-23 11:36,other_bird,39,"s624, 5 min walk"
+n,lv,2013-06-23 23:36,9,255174356,middle,3,26.5,NA,NA,0,N,NA,NA,40,NA
+n,lv,2013-06-24 01:09,9,255174356,middle,3,26.7,NA,NA,0,N,NA,NA,47,NA
+n,lv,2013-06-24 11:02,9,255174356,end,3,26.9,0.3,4,0,N,NA,NA,41,NA
+n,lv,2013-06-24 11:23,9,255174356,released,NA,NA,NA,NA,NA,N,NA,NA,42,"gps1, wp 37. flew off,+/- 30m, landed, walked around, a bit forward, a bit backward, as trying to figure out where it was, looked confused. flew off again, landed 10-15m further in grass and disappeared. 4min observations"
+n,lv,2013-06-23 18:21,10,255174349,start,0,26.1,33.8,366,0,N,2013-06-23 18:34,N,43,"s628, 5 min walk, 400 worms at start, but fabi later exchanged what was left 234 for new 200 worms  in at middle, so the full number is not 400, but less"
+n,fh,2013-06-24 06:15,10,255174349,middle,1,25.7,NA,NA,0,N,NA,NA,44,NA
+n,mb,2013-06-24 18:15,10,255174349,end,6,26.2,3.5,44,0,N,NA,NA,45,really fatty
+n,mb,2013-06-24 18:21,10,255174349,released,NA,NA,NA,NA,NA,N,NA,NA,46,had a hard time to fly
+n,mb,2013-06-24 05:06,11,255174359,start,0,25,15.5,400,0,N,2013-06-24 05:17,N,48,"s512, 30min walk"
+n,mb,2013-06-24 06:18,11,255174359,middle,NA,NA,NA,-200,0,N,NA,NA,49,taken out because we were running out of the worms
+n,mb,2013-06-24 17:27,11,255174359,middle,3,26.6,4.3,50,30,N,NA,NA,105,cat food added
+n,mb,2013-06-25 04:46,11,255174359,end,3,24.8,0,5,22.5,N,NA,NA,50,NA
+n,fh,2013-06-25 05:23,11,255174359,released,NA,NA,NA,NA,NA,N,NA,NA,51,NA
+n,lv,2013-06-24 14:12,12,255174346,start,1,24.1,3.6,50,30,N,2013-06-24 14:27,other_bird,52,"s515, 30min walk, male"
+n,lv,2013-06-25 02:14,12,255174346,middle,NA,22,8.2,100,0,N,NA,NA,53,cat food still there
+n,mb,2013-06-25 05:45,12,255174346,middle,1,22.7,NA,NA,0,N,NA,NA,79,cat food and meal worms still present
+n,mb,2013-06-25 10:33,12,255174346,middle,2,21.4,NA,50,-29.9,N,NA,NA,77,"only cat food left, therefore cat food taken out, 50 meal worms added"
+n,mb,2013-06-25 14:07,12,255174346,end,3,22.1,NA,2,0.1,N,NA,NA,80,NA
+n,lv,2013-06-25 14:07,12,255174346,end,3,NA,NA,NA,NA,N,NA,NA,78,NA
+n,lv,2013-06-25 14:43,12,255174346,released,NA,NA,NA,NA,NA,N,NA,NA,54,"gps1, wp60. released direction of nest. flew off, away from nest, landed 5m away, looked confused. flew a few meters further, walked a bit back, walked a bit forward, preened a bit. Then started to preen longer and more torough, walked back as a normal se"
+n,lv,2013-06-24 21:03,13,255174342,start,0,24.9,3.2,50,30,S,2013-06-24 21:10,N,56,"s712, 40min walk, male"
+n,mb,2013-06-25 07:08,13,255174342,middle,1,21.2,15.5,200,-30,N,NA,NA,57,"cat food taken out, 40 meal worms were left and taken out"
+n,mb,2013-06-25 07:08,13,255174342,middle,NA,NA,NA,-40,0,N,NA,NA,75,"cat food taken out, 40 meal worms were left and taken out"
+n,mb,2013-06-25 17:00,13,255174342,middle,3,23.5,3.8,50,0,N,NA,NA,81,fat possibly 4
+n,lv,2013-06-25 20:44,13,255174342,end,4,23.5,0.4,6,0,N,NA,NA,58,"no sperm sample, there came nothing out"
+n,lv,2013-06-25 21:13,13,255174342,released,NA,NA,NA,NA,NA,N,2013-06-26 00:47,N,59,"gps1, wp61. flew off, very strong wind coming from direction of nest, so was blown away. landed 100m further. maybe difficulties to fly (stiff muscles)? a bit unusual flapping of wings? less then 1 min observation."
+n,lv,2013-06-24 22:20,14,255174347,start,0,24.6,3.8,50,30,S,2013-06-24 22:32,N,60,"s406, 40min walk, male, S+M sample"
+n,mb,2013-06-25 07:19,14,255174347,middle,2,22.3,NA,50,0,N,NA,NA,61,"cat food hat 27.6g, 1 worm left in the tray 40 from box 13 and 10 new were thrown in"
+n,mb,2013-06-25 10:41,14,255174347,middle,4,22.4,15.1,200,-27.8,N,NA,NA,62,"no worms left in the tray, cat food taken out, 200 worms in"
+n,lv,2013-06-25 22:30,14,255174347,end,4,23,0.1,4,0,S,NA,NA,82,NA
+n,lv,2013-06-25 23:22,14,255174347,released,NA,NA,NA,NA,NA,N,NA,N,109,"walked off, confused behaviour (walking a bit, looking around, shortly preening), flew again off for few m, looked like it had stiff muscles. stands a few m away from me, calls several times. stands a bit huddled, doing nothing. stops calling"
+n,lv,2013-06-24 22:50,15,255174400,start,0,24.8,4.2,50,30,M,2013-06-24 23:52,N,64,"s625, 40min walk, male, ringing start at bird hut 23:36"
+n,mb,2013-06-25 07:26,15,255174400,middle,0,22.5,NA,36,0,N,NA,NA,65,"cat food still weighs 30g, 42 old worms left, added 36 new"
+n,mb,2013-06-25 10:35,15,255174400,middle,0,23.1,-5.7,-63,-30,N,NA,NA,83,old tray taken out - still mealworms left 
+n,mb,2013-06-25 10:35,15,255174400,middle,0,23.1,14.5,200,0,N,NA,NA,118,NA
+n,lv,2013-06-25 22:39,15,255174400,end,3,24,0.2,2,0,Ms,NA,NA,66,NA
+n,lv,2013-06-25 23:32,15,255174400,released,NA,NA,NA,NA,NA,N,NA,other_bird,67,"only 30m-40m away from nest. flew 10m away after releasing, disappeared in the grass. confused behaviour. calls. seem to recover, walks in the direction of the nest. flies off to the nest, flies over it, lands close by, flies back to the where it was stan"
+n,mb,2013-06-25 06:36,16,255174362,start,1,29,3.5,50,30,Clf,2013-06-25 06:54,N,68,"nest s520, 1min walk, female"
+n,mb,2013-06-25 10:39,16,255174362,middle,0,27.4,-4.7,-49,-30,N,NA,NA,72,"cat food taken out, old worms taken out"
+n,mb,2013-06-25 10:39,16,255174362,middle,0,27.4,13.9,200,0,N,NA,NA,76,"cat food taken out, old worms taken out"
+n,mb,2013-06-25 20:16,16,255174362,middle,3,28.5,3.7,50,NA,N,NA,NA,69,fat possibly 4
+n,mb,2013-06-26 06:30,16,255174362,end,2,25.9,0.5,4,0,N,NA,NA,70,fat possibly 3
+n,NA,2013-06-26 06:36,16,255174362,released,NA,NA,NA,NA,NA,N,NA,NA,71,"flies off, sits for 3 minutes, then takes a bath and preens"
+n,mb,2013-06-25 09:45,17,255174363,start,0,25.8,14.4,200,0,Clf,2013-06-25 09:56,N,73,"s808, female, 24min walk"
+n,lv,2013-06-25 22:31,17,255174363,middle,3,25.2,7.9,100,0,N,NA,NA,84,NA
+n,mb,2013-06-26 09:25,17,255174363,end,2,23.8,1.5,18,0,N,NA,NA,145,fat possibly 3
+n,fh,2013-06-26 09:57,17,255174363,released,NA,NA,NA,NA,NA,N,NA,NA,86,"fo toward the nest, preening, feeding, walks back and forth"
+n,mb,2013-06-25 11:34,18,255174364,start,1,23.5,16.6,200,0,S,2013-06-25 11:50,N,87,"s805, male, 30min walk "
+n,lv,2013-06-25 00:20,18,255174364,middle,4,22.9,8.1,100,0,N,NA,NA,88,still minimum 50 worms left over
+n,mb,2013-06-26 11:50,18,255174364,end,6,23.3,0.9,12,0,Ms,NA,NA,89,NA
+n,fh,2013-06-26 12:05,18,255174364,released,NA,NA,NA,NA,NA,N,NA,NA,90,"fo, called, partner flew off nest toward the released bird, kept distance of 10m then flew back, focal bird preens"
+n,mb,2013-06-25 12:19,19,255174396,start,0,24.4,14.7,200,0,Ms,2013-06-25 12:27,N,91,"s514, female, 20min walk"
+n,lv,2013-06-25 03:02,19,255174396,middle,2,23.6,7.5,100,0,N,NA,NA,92,NA
+n,mb,2013-06-26 11:45,19,255174396,end,3,23.6,0.3,5,0,S,NA,NA,94,fat foto camera 8 3033-3051
+n,mb,2013-06-26 12:19,19,255174396,released,NA,NA,NA,NA,NA,N,NA,NA,95,"flies a little,, walks, alarms, 1min later flies toward little pond"
+n,mb,2013-06-25 13:25,20,255174365,start,0,25.2,13.3,200,0,Clf,2013-06-25 13:35,N,93,"s519, female, 10min walk"
+n,lv,2013-06-26 03:06,20,255174365,middle,2,23.7,6.4,100,0,N,NA,NA,96,NA
+n,mb,2013-06-26 13:10,20,255174365,end,2,23.2,0,1,0,N,NA,NA,97,NA
+n,mb,2013-06-26 13:26,20,255174365,released,NA,NA,NA,NA,NA,N,NA,NA,98,"fo, w, p"
+n,mb,2013-06-25 16:40,21,255174326,start,1,22,15.1,200,0,Ms,2013-06-25 16:50,N,99,"s629, male, 5min walk"
+n,mb,2013-06-26 05:01,21,255174326,middle,2,21.1,8.2,100,0,N,NA,NA,100,water frozen
+n,mb,2013-06-26 16:27,21,255174326,end,4,21.4,0.6,9,0,Ms,NA,NA,101,NA
+n,mb,2013-06-26 16:40,21,255174326,released,NA,NA,NA,NA,NA,N,NA,NA,102,"fo, walked in the water and at the water edge, alarming from time to time, sometimes pecking on some insects"
+n,lv,2013-06-25 16:48,22,257188600,start,0,24.7,13.6,200,0,M,2013-06-25 16:58,N,103,"s704, 40min walk, mass with antenna, male"
+n,mb,2013-06-25 16:48,22,257188600,start,3,NA,NA,NA,NA,N,NA,NA,104,NA
+n,mb,2013-06-26 05:10,22,257188600,middle,3,23.1,7.5,100,0,N,NA,NA,106,"water was frozen, mass with tag"
+n,mb,2013-06-26 16:14,22,257188600,end,5,NA,NA,NA,0,Ms,NA,NA,107,fat also on breast
+n,mb,2013-06-26 16:14,22,257188600,end,5,24.3,2.1,30,NA,Ms,NA,NA,124,"fat also on breast, score 4-5"
+n,lv,2013-06-26 16:14,22,257188600,end,4,NA,NA,NA,NA,N,NA,NA,125,fat possibly 5
+n,lv,2013-06-26 16:14,22,257188600,end,5,NA,NA,NA,NA,N,NA,NA,126,fat 4-5
+n,lv,2013-06-26 17:18,22,257188600,released,NA,NA,NA,NA,NA,N,NA,N,108,"released into direction of nest. flew off, then typical behaviour (looking confused, walking short distances - a few steps only, shortly preening). preened for a few seconds, started walking again. called. other sesa ""answered"" once, then sound of motorbo"
+n,lv,2013-06-25 21:55,23,255174374,start,0,22.8,16.1,200,0,N,2013-06-25 22:06,N,110,"s806, 20min walk, female"
+n,mb,2013-06-26 09:30,23,255174374,middle,1,22.2,7.8,100,0,N,NA,NA,111,still had at last 100 meal worms left
+n,lv,2013-06-26 21:37,23,255174374,end,4,23.1,2.1,26,0,N,NA,NA,112,NA
+n,lv,2013-06-26 22:01,23,255174374,released,NA,NA,NA,NA,NA,N,NA,other_bird,113,"released into direction of nest. bird flies off for short distance, the usual confused behaviour. calls. there is motorboating at my right side (I'm looking perpendicular to the nest), bird seems to respond on it. stands still for quite a while, calling. "
+n,mb,2013-06-26 05:46,24,255174366,start,4,27.2,15.2,200,0,Clf,2013-06-26 06:39,N,114,"fat was spread like 4, but was not much of it there"
+n,mb,2013-06-26 18:11,24,255174366,middle,6,26.7,8.4,100,0,N,NA,NA,115,fat could be also super 5; had still some worms in the tray (about 100)
+n,mb,2013-06-27 05:24,24,255174366,end,6,26.5,3.3,41,0,N,NA,NA,116,fat also on the breast
+n,fh,2013-06-27 05:57,24,255174366,released,NA,NA,NA,NA,NA,N,NA,NA,117,"fo in oposite direction than nest, sat + preened, walked around"
+n,lv,2013-06-27 01:14,25,257188506,start,0,22.8,14.2,200,0,S,2013-06-27 01:23,other_bird,119,"s622, 30min walk, male"
+n,lv,2013-06-27 13:29,25,257188506,middle,4,22.5,7.3,100,0,N,NA,NA,120,no worms left in tray
+n,lv,2013-06-28 01:05,25,257188506,end,0,21.3,3.5,43,0,M,NA,NA,121,NA
+n,ms,2013-06-28 01:29,25,257188506,released,NA,NA,NA,NA,NA,N,NA,NA,122,"wp7/159, flew short distance, walk on and disappeared in gras"
+n,lv,2013-06-26 16:27,21,255174326,end,4,NA,NA,NA,NA,N,NA,NA,123,NA
+n,lv,2013-06-28 20:46,26,253178816,start,5,29.7,14.6,200,0,S,2013-06-28 21:01,other_bird,127,"30min walk,s524. 17min before partner flew out the cage. 21:37 in box"
+n,mb,2013-06-29 08:52,26,253178816,middle,4,26.2,7.6,100,0,N,NA,NA,128,NA
+n,mb,2013-06-29 20:15,26,253178816,end,6,27.9,4.6,66,0,N,NA,NA,129,NA
+n,lv,2013-06-29 20:15,26,253178816,end,5,NA,NA,NA,NA,N,NA,NA,131,NA
+n,fh,2013-06-29 21:04,26,253178816,released,NA,NA,NA,NA,NA,N,NA,N,130,"bird flew off from hand, sat down 50m away, started preening and walking, approached nest, sat next to it, called, no reaction, then flew off again"
+n,mb,2013-07-01 14:18,28,255174397,start,0,26.3,15.3,200,0,Ms,2013-07-01 14:27,other_bird,132,"30min walk, s409, female, while catching there was a 2nd bird (noba) around that was alarming and courted the female that was caught."
+n,lv,2013-07-02 02:20,28,255174397,middle,4,25.9,8.2,100,0,N,NA,NA,133,NA
+n,mb,2013-07-02 13:45,28,255174397,end,4,NA,NA,NA,0,N,NA,NA,134,NA
+n,lv,2013-07-02 13:28,28,255174397,end,4,25,0.9,11,NA,N,NA,NA,136,NA
+n,ms,2013-07-02 14:18,28,255174397,released,NA,NA,NA,NA,NA,N,NA,NA,135,"wp 7/178, flew off few meter, then sitting in the gras doing nothing for long time"
+n,mb,2013-07-06 22:03,27,255174847,start,1,23.5,14.2,200,0,Ms,2013-07-07 22:20,N,137,"s527, bird was processed in the lab"
+n,mb,2013-07-07 10:08,27,255174847,middle,3,22.1,6.2,100,0,N,NA,NA,138,"50 to 100 worms left, fat could possibly be 4 as well"
+n,mb,2013-07-07 22:01,27,255174847,end,5,22.8,1.4,22,0,Ms,NA,NA,139,"fat could be 6, fat also on breast"
+n,mb,2013-07-07 22:10,27,255174847,released,NA,NA,NA,NA,NA,N,NA,NA,140,"flew 10m, walked around, preened, started feeding a bit, noba male was around"
+n,mb,2013-07-08 09:55,29,255174892,start,1,25,17.8,200,0,Ms,2013-07-08 10:05,N,141,"15 min walk, s526"
+n,mb,2013-07-08 22:19,29,255174892,middle,4,25,7.7,100,0,N,NA,NA,142,about 50 worms left
+n,mb,2013-07-09 09:25,29,255174892,end,4,24.1,0.5,10,0,N,NA,NA,143,NA
+n,mb,2013-07-09 09:57,29,255174892,released,NA,NA,NA,NA,NA,N,NA,NA,144,flew off approx. 150m
