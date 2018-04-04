@@ -99,7 +99,7 @@ CONTENT
 		type		: type of escape distance estimate: estimated - a person estimated its distance to the nest when the parent left; gps - a person marked its position when the parent left
 		distm		: estimated distance of a person to the nest (in meteres) when the incubating parent left the nest
 		
-		 - escape_2011-2012.csv 		- escape distances of experimental birds
+	    - escape_2011-2012.csv 		- escape distances of experimental birds
 		year		: year of data collection
 		datetime_	: date and time of the visit to the nest when the escape distance was estimated
 		nest		: identity of the nest within given year
@@ -126,7 +126,7 @@ CONTENT
 			bout_start	: date and time when the particular incubation bout started
 			bout_length	: length of particular incubation bout
 			lat				: latitude of the nest in decimals
-		    lon				: longitude of the nest in decimals
+		    	lon				: longitude of the nest in decimals
 			
 	   - non_experimental_nests.csv 	- fate of the nests that were not part of the experiment
 		nest		: identity of the nest 
@@ -140,7 +140,7 @@ CONTENT
 
     c) Prepared for analyses 
 	    - bout.Rdata - contains object 'b' with all incubation bouts of the studied nests 
-		- experimental.Rdata - contains object 'b' (a subset of bout.Rdata) with only control and treatment bouts	
+	    - experimental.Rdata - contains object 'b' (a subset of bout.Rdata) with only control and treatment bouts	
 			"pk"             primary key - unique identity of each row
 			"species"        sesa - indicates semipalmated sandpiper
 			"nest"           unique identity of the nest
