@@ -32,7 +32,7 @@ CONTENT
 
 --------------------------------------------------------------------------------------------------------
 
-2a. Scripts (run with the below described datasets)
+2a. Scripts (plase in 'Scripts' directory and run with the below described datasets placed in the Data folder of the working directory sepcified as 'wd')
 	- Functions&Constants.R necessary to run the  Analyses.R	
 	- Analyses.R generates the resutls, figures and supporting information.
 	
@@ -125,6 +125,7 @@ CONTENT
 			sex			: f-female, m-male of the incubating parent
 			bout_start	: date and time when the particular incubation bout started
 			bout_length	: length of particular incubation bout
+			inc_eff		: incubation constancy based on temperature data   
 			lat				: latitude of the nest in decimals
 		    	lon				: longitude of the nest in decimals
 			
