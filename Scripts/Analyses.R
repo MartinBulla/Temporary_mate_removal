@@ -23,9 +23,12 @@
  # INTRODUCTION
 	{# Figure 1 - predictions
 		if(PNG == TRUE) {
-					png(paste(outdir,"Figure_1", ".png", sep = ""), width=0.875*2, height=0.875*2, units = "in", res = 600)	 
+					
+					#png(paste(outdir,"Figure_1", ".png", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
+					
+					jpeg(paste(outdir,"Figure_1", ".jpeg", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
 					}else{
-					dev.new(width=0.875*2, height=0.875*2) #dev.new(width=3.5, height=1.97)
+					dev.new(width=0.984252*2, height=0.984252*2) #dev.new(width=3.5, height=1.97)
 					}	
 			
 		#par(mfrow=c(2,2),mar=c(2,2,0.7,0.7), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5)) # cex is multiplied as in multiplot figure the cex is reduced to 0.66	
@@ -36,7 +39,7 @@
 							#par(mar=c(0,0,1,0))
 							plot(c(0,1), c(0,1),xlab=NA, ylab=NA, xlim=c(-0.125,1.125),ylim=c(-0.05,1.1),type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
 							axis(2, at = seq(0,1, 0.5),cex.axis=0.5)	
-							mtext(expression(bold("a")),side=3,line=-0.65, cex=0.7, las=1,adj=0.04, col='black')
+							mtext(expression(bold("A")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
 							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 							lines(c(0,0.4,0.4,0.8,0.8,1),c(0.9,0.9,0,0,0.9,0.9), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
@@ -45,7 +48,7 @@
 		{#(b) 
 							#par(mar=c(0,0,2.7,2), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 							plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
-							mtext(expression(bold("b")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+							mtext(expression(bold("B")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
 							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 							lines(c(0,1),c(0.9,0.9), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
@@ -61,7 +64,7 @@
 							#text(seq(0,1, 0.5),  par("usr")[3], labels = seq(0,24,12),  xpd = TRUE, cex=0.6) 
 							#mtext(text = seq(0,24,12),seq(0,1, 0.5),  par("usr")[3],   outer = TRUE, cex=0.6) 
 							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
-							mtext(expression(bold("c")),side=3,line=-0.65, cex=0.7, las=1,adj=0.04, col='black')
+							mtext(expression(bold("C")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
 							lines(c(0,0.6,0.6,1),c(0.9,0.9,0,0), lwd=1.5, col='black')
 							#abline(v=0.4, col='red', lty=3, lwd=0.5)
 							box(col = "grey70")
@@ -69,7 +72,7 @@
 		{#(d) 
 						#par(mar=c(2.7,0,0,2), ps=12, mgp=c(0.5,0.35,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
 						plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 
-						mtext(expression(bold("d")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+						mtext(expression(bold("D")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
 						axis(1, at = seq(0,1, 0.5),labels=seq(0,24,12),cex.axis=0.5,mgp=c(0,-0.15,0))
 						polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
 						lines(c(0,0.6,0.6,1),c(0.9,0.9,0.55,0.55), lwd=1.5, col='black')
@@ -78,11 +81,11 @@
 				}
 				
 		mtext('Time [h]',side=1,line=0.6, cex=0.6, las=1, outer=TRUE, col="grey30")
-		mtext('Nest attendance',side=2,line=1.3, cex=0.6, las=0,outer=TRUE,col="grey30")
+		mtext('Nest attendance',side=2,line=1.2, cex=0.6, las=0,outer=TRUE,col="grey30")
 			
 		if(PNG == TRUE) {dev.off()}
 	}
-				
+	
 
 # METHODS
 	{# Recording incubation and escape distance
@@ -267,7 +270,7 @@
 	}
 
 	{# Compensation for absence of parental care 
-		{# Supplementary Table 1
+		{# Table S1
 			{# 1 - simple model 
 			m=lmer(inc_eff~exper+(1|bird_ID),b, REML=FALSE) # best
 			 
@@ -334,7 +337,25 @@
 
 			}				
 			
-	
+			{# AICc comparison - find out which model fits better
+				# a) model with or without control for bout length
+				# b )model with sex
+		
+			  m1=lmer(inc_eff~exper+(1|bird_ID),b, REML=FALSE) # best
+			  m2=lmer(inc_eff~scale(bout_length)+exper+(1|bird_ID),b, REML=FALSE)
+			  m3=lmer(inc_eff~exper*sex+(1|bird_ID),b, REML=FALSE)
+				o=data.frame(model=c('simple','control_bout','sex'), AIC=c(AICc(m1, nobs=25*2),AICc(m2,nobs=25*2),AICc(m3,nobs=25*2)))
+						o$delta=o$AIC-min(o$AIC)
+						o$prob=exp(-0.5*o$delta)/sum(exp(-0.5*o$delta))
+						o$ER=max(o$prob)/o$prob
+						o$AIC=round(o$AIC,2)
+						o$delta=round(o$delta,2)
+						o$prob=round(o$prob,3)
+						o$ER=round(o$ER,2)
+						#o[order(o$delta),]
+				
+			}
+		
 			{# combine and export to excel table
 						sname = tempfile(fileext='.xls')
 						wb = loadWorkbook(sname,create = TRUE)	
@@ -458,8 +479,8 @@
 		
 		}
 			{# not in the ms - models withou s806 that has only RFID based nest attendance
-				m=lmer(inc_eff~exper+(1|bird_ID),b, REML=FALSE) # best
-				m=lmer(inc_eff~exper+(1|bird_ID),b[b$nest!='s806',], REML=FALSE) # best
+				m=lmer(inc_eff~exper+(1|bird_ID),b, REML=FALSE) 
+				m=lmer(inc_eff~exper+(1|bird_ID),b[b$nest!='s806',], REML=FALSE) 
 			}
 				
 		{# % compensation and probability that compensation is higher than 0.5
@@ -523,7 +544,14 @@
 			
 			}	
 			{# plot dist, boxplot - no y-axis labels
-			dev.new(width=3.5,height=1.85)
+			if(PNG == TRUE) {
+					
+					#png(paste(outdir,"Figure_2.png", sep=""), width=3.5,height=1.85,units="in",res=600)	 
+					jpeg(paste(outdir,"Figure_3.jpeg", sep=""), width=3.5,height=1.85,units="in",res=600) 
+					}else{
+					dev.new(width=3.5,height=1.85) #dev.new(width=3.5, height=1.97)
+					}	
+		
 			#png(paste(outdir,"Figure_2.png", sep=""), width=3.5,height=1.85,units="in",res=600)
 			#png(paste(outdir,"Figure_2_dist-box_in_sex.png", sep=""), width=3.5,height=1.85,units="in",res=600)
 			#jpeg(paste(outdir,"Figure_2_dist-box_smaller_font.jpeg", sep=""), width=3.5,height=1.85,units="in",res=100)
@@ -550,7 +578,7 @@
 					text(x=0.05,y=0.95, labels='\u2640', col='#FCB42C', cex=0.6)
 					text(x=0.12,y=0.98, labels='\u2642', col='#535F7C', cex=0.6)
 					
-					mtext(expression(bold("a")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("A")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
 					# data
 					points(bb$inc_eff_treated~bb$inc_eff, col=bb$col_,bg=adjustcolor( bb$col_, alpha.f = 0.4), pch=21, cex=0.5)
 				
@@ -592,7 +620,7 @@
 					text(c(2.85), par("usr")[3]-0.18, labels = c('Period'),  xpd = TRUE, cex=0.6, col="grey30")
 					axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 					
-					mtext(expression(bold("b")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("B")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# predictions	
 						points(y=pp$pred,x=c(1.5,4.2), pch=20, cex=0.9,col="red")
@@ -603,8 +631,7 @@
 					
 					}
 
-
-			dev.off()
+			if(PNG == TRUE) {dev.off()}
 			}
 			
 			{# not used
@@ -1236,10 +1263,14 @@
 								#legend.title=element_text(size=8, colour="grey30")
 								)
 						##### despite 4.35 width it saved it as 4.34
-						if(PNG == TRUE){ggsave(paste(outdir,"constancy_per_nest_with_constancy_sex_labels_after_period_in_grey_smaller_na.png", sep=""),width=7.4, height=4.35, units='in',dpi=600)}
+						if(PNG == TRUE){
+						ggsave(paste(outdir,"Figure_4.jpeg", sep=""),width=7.4, height=4.35, units='in',dpi=600)#ggsave(paste(outdir,"constancy_per_nest_with_constancy_sex_labels_after_period_in_grey_smaller_na.png", sep=""),width=7.4, height=4.35, units='in',dpi=600)
+						}
 						#ggsave(paste(outdir,"constancy_per_nest_with_nest_labels_sex_after_period_3.png", sep=""))
+						
 				}
-				
+			}
+		}			
 				{# not used				
 				{# 7x4 with labels -with constancy lables and color sex
 				nn$label=paste(nn$bb,nn$bt,"              ",sep="       ")
@@ -1339,8 +1370,7 @@
 						ggsave(paste(outdir,"constancy_per_nest_with_nest_labels_tick.png", sep=""))
 				}
 				}
-			}
-		}
+			
 	}
 		
 	{# Explaining the diversity in compensation 
@@ -1374,7 +1404,6 @@
 			}
 			{# load 2011 data
 					g=read.csv(paste(wd,'Data/bout_length_constancy_2011.csv', sep=""), stringsAsFactors=FALSE)
-						g=g[-which(is.na(g$inc_eff)),]
 						g$bout_start=as.POSIXct(g$bout_start)
 						g$midbout=g$bout_start+60*g$bout_length/2
 						g$time = as.numeric(difftime(g$midbout,trunc(g$midbout,"day"),   #DO NOT USE rfid_T$day here!! (the time will be wrong)
@@ -1388,8 +1417,8 @@
 		}
 		}			
 									
-		{# explore relationship between time of day and temperature - Supplementary Figure 1
-			if(PNG == FALSE){dev.new(width = 1.9685, height = 1.9685)}
+		{# Figure S1- explore relationship between time of day and temperature
+			dev.new(width = 1.9685, height = 1.9685
 			ggplot(bt, aes(x = time, y = t_ambient_med)) + geom_point(size=1.15)+ stat_smooth(size=0.8, color='orange',fill='orange') + 
 			xlab('Time of day [h]') + ylab('Median tundra temperature [°C]') + annotate(geom="text", x=24, y=27, label="a",fontface =2, size = 8*0.352777778)+ scale_x_continuous(limits = c(0,24), breaks = c(0,6,12,18,24)) + scale_y_continuous(limits = c(-5,27), breaks = c(-5,0,5,10,15,20,25))+ 
 			theme_light()+
@@ -1410,6 +1439,7 @@
 					panel.grid.minor=element_blank(),
 					plot.background=element_blank()
 					)
+			
 			if(PNG == TRUE){ggsave(paste(outdir,"Supplementary_Figure_1a.png", sep=""),width = 5, height = 5, units = "cm",  dpi = 300)}
 			
 			ggplot(bt, aes(x = time, y = t_amb_avg)) + geom_point(size=1.15)+ stat_smooth(size=0.8, color='orange',fill='orange') +
@@ -1455,6 +1485,7 @@
 					plot.background=element_blank()
 					)
 			if(PNG == TRUE){ggsave(paste(outdir,"Supplementary_Figure_1c.png", sep=""),width = 5, height = 5, units = "cm",  dpi = 300)}
+			
 			# not used
 			ggplot(bt, aes(x = t_ambient_med, y = esc)) + geom_point()+ stat_smooth()
 			ggplot(bt, aes(x = t_ambient_med, y = inc_eff)) + geom_point()+ stat_smooth(method='lm')
@@ -1477,65 +1508,12 @@
 					apply(bsim@coef, 2,quantile, prob=c(0.5))
 					apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
 		}
-		{# Supplementary Figure 4c
-			{# predicitons
-				bt$inc_start_j = as.numeric(format(bt$inc_start, "%j"))
-				
-				m=lm(inc_eff~inc_start_j, bt)
-					# simulation		
-							nsim <- 2000
-							bsim <- sim(m, n.sim=nsim)  
-							#apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
-						# coefficients
-							v <- apply(bsim@coef, 2, quantile, prob=c(0.5))
-						# predicted values		
-							newD=data.frame(inc_start=seq(as.POSIXct('2013-06-10'),as.POSIXct('2013-06-30'),length.out =300))
-							newD$inc_start_j=seq(as.numeric(format(min(newD$inc_start), "%j")),as.numeric(format(max(newD$inc_start), "%j")),length.out =300)									
-						# exactly the model which was used has to be specified here 
-							X <- model.matrix(~ inc_start_j,data=newD)	
-										
-						# calculate predicted values and creditability intervals
-							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
-									predmatrix <- matrix(nrow=nrow(newD), ncol=nsim)
-									for(i in 1:nsim) predmatrix[,i] <- X%*%bsim@coef[i,]
-									newD$lwr <- apply(predmatrix, 1, quantile, prob=0.025)
-									newD$upr <- apply(predmatrix, 1, quantile, prob=0.975)
-									#newD$other <- apply(predmatrix, 1, quantile, prob=0.5)
-									#newD=newD[order(newD$t_tundra),]
-								ptt=newD
-					}			
-			{# plot
-				png(paste(outdir,"Figs/Figure_S4c.png", sep=""), width=1.85,height=1.85,units="in",res=600)
-				#dev.new(width=1.85,height=1.85)	
-				
-				par(mar=c(2,2,0.2,0.5), ps=12, mgp=c(1.2,0.35,0), las=1, cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
-							
-				plot(inc_eff~inc_start,data = bt, xlim = as.POSIXct(c('2013-06-10','2013-06-30')), xaxt='n', ylab ='Nest attendance', xlab = NA,type='n' )
-				axis(1,at = as.POSIXct(c('2013-06-10','2013-06-15','2013-06-20','2013-06-25','2013-06-30')),labels = c('June 10','','June 20','','June 30'),cex.axis=0.5,mgp=c(0,-0.15,0))
-				mtext('Nest initiation date',side=1,line=0.6, cex=0.6, las=1, col='grey30')
-				#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
-				
-				polygon(c(ptt$inc_start, rev(ptt$inc_start)), c(ptt$lwr, 
-								rev(ptt$upr)), border=NA, col=adjustcolor(col_t ,alpha.f = 0.2)) #0,0,0 black 0.5 is transparents RED
-							lines(ptt$inc_start, ptt$pred, col=col_t,lwd=1)
-				
-				points(bt$inc_start, bt$inc_eff, col=col_t,bg=adjustcolor(col_t ,alpha.f = 0.4), pch=21,cex=0.5)
-			
-				mtext(expression(bold("c")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
-
-				
-				dev.off()
-			
-				
-			}	
-		
-		}
 		{# explore relationship between esc and day_inc and inc_start 
 			ggplot(bt, aes(x = inc_start, y = day_inc)) + geom_point()+ stat_smooth(method='lm')
 			ggplot(bt, aes(x = inc_start, y = esc)) + geom_point()+ stat_smooth(method='lm')
 					}
-		{# explore predictors with sex - Supplementary Figure 3
-			if(PNG == FALSE){dev.new(width = 1.9685, height = 1.9685)}
+		{# Figure S3 - explore predictors with sex
+			dev.new(width = 1.9685, height = 1.9685)
 			ggplot(bt, aes(x=sex, y = time)) + geom_boxplot() + 
 				geom_dotplot(aes(fill = sex),binaxis = 'y', stackdir = 'center',  position = position_dodge())+
 				ylab('Time of day [h]') + xlab('Sex')+annotate(geom="text", x=2.5, y=20, label="a",fontface =2)+ 
@@ -1620,7 +1598,7 @@
 			ggplot(bt, aes(x = disturb, y = inc_eff)) + geom_point()+ stat_smooth(method='lm')
 			
 		}
-		{# explore relationship between time of capture and compensation
+		{# Figure S4ab - explore relationship between time of capture and compensation
 			{# prepare data
 			x =read.csv(paste(wd,'Data/focal_bird_captures_2013.csv', sep=""),stringsAsFactors=FALSE)
 				x[duplicated(x$bird_ID),]
@@ -1648,7 +1626,7 @@
 
 			}
 			{# Supplementary Figure 4a
-			dev.new(width = 1.9685, height = 1.9685)
+			dev.new(width = 2.2, height = 1.9685)
 			ggplot(bt, aes(x = captured, y = inc_eff)) +
 				geom_dotplot(binaxis = 'y', stackdir = 'center',  col = col_t, fill = adjustcolor(col_t ,alpha.f = 0.4), alpha = 0.5,position = position_dodge())+
 				xlab('Focal parent captured') + annotate(geom="text", x=3.5, y=1, label="a",fontface =2)+ 
@@ -1698,8 +1676,8 @@
 								ptt=newD
 					}			
 				{# plot
-				png(paste(outdir,"Figs/Figure_S4b.png", sep=""), width=1.85,height=1.85,units="in",res=600)
-				#dev.new(width=1.85,height=1.85)	
+				if(PNG == TRUE)	{png(paste(outdir,"Figs/Figure_S4b.png", sep=""), width=1.85,height=1.85,units="in",res=600)}else{
+				dev.new(width=1.85,height=1.85)}	
 				
 				par(mar=c(2,2,0.2,0.5), ps=12, mgp=c(1.2,0.35,0), las=1, cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
 							
@@ -1717,15 +1695,68 @@
 				mtext(expression(bold("b")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
 
 				
-				dev.off()
+				if(PNG == TRUE)	{dev.off()}
 			
 				
 			}	
 			}
 		}
+		{# Figure S4c - nest initiation and compensation
+			{# predicitons
+				bt$inc_start_j = as.numeric(format(bt$inc_start, "%j"))
+				
+				m=lm(inc_eff~inc_start_j, bt)
+					# simulation		
+							nsim <- 2000
+							bsim <- sim(m, n.sim=nsim)  
+							#apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
+						# coefficients
+							v <- apply(bsim@coef, 2, quantile, prob=c(0.5))
+						# predicted values		
+							newD=data.frame(inc_start=seq(as.POSIXct('2013-06-10'),as.POSIXct('2013-06-30'),length.out =300))
+							newD$inc_start_j=seq(as.numeric(format(min(newD$inc_start), "%j")),as.numeric(format(max(newD$inc_start), "%j")),length.out =300)									
+						# exactly the model which was used has to be specified here 
+							X <- model.matrix(~ inc_start_j,data=newD)	
+										
+						# calculate predicted values and creditability intervals
+							newD$pred <- X%*%v # #newD$fit_b <- plogis(X%*%v) # in case on binomial scaleback
+									predmatrix <- matrix(nrow=nrow(newD), ncol=nsim)
+									for(i in 1:nsim) predmatrix[,i] <- X%*%bsim@coef[i,]
+									newD$lwr <- apply(predmatrix, 1, quantile, prob=0.025)
+									newD$upr <- apply(predmatrix, 1, quantile, prob=0.975)
+									#newD$other <- apply(predmatrix, 1, quantile, prob=0.5)
+									#newD=newD[order(newD$t_tundra),]
+								ptt=newD
+					}			
+			{# plot
+				png(paste(outdir,"Figs/Figure_S4c.png", sep=""), width=1.85,height=1.85,units="in",res=600)
+				#dev.new(width=1.85,height=1.85)	
+				
+				par(mar=c(2,2,0.2,0.5), ps=12, mgp=c(1.2,0.35,0), las=1, cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
+							
+				plot(inc_eff~inc_start,data = bt, xlim = as.POSIXct(c('2013-06-10','2013-06-30')), xaxt='n', ylab ='Nest attendance', xlab = NA,type='n' )
+				axis(1,at = as.POSIXct(c('2013-06-10','2013-06-15','2013-06-20','2013-06-25','2013-06-30')),labels = c('June 10','','June 20','','June 30'),cex.axis=0.5,mgp=c(0,-0.15,0))
+				mtext('Nest initiation date',side=1,line=0.6, cex=0.6, las=1, col='grey30')
+				#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
+				
+				polygon(c(ptt$inc_start, rev(ptt$inc_start)), c(ptt$lwr, 
+								rev(ptt$upr)), border=NA, col=adjustcolor(col_t ,alpha.f = 0.2)) #0,0,0 black 0.5 is transparents RED
+							lines(ptt$inc_start, ptt$pred, col=col_t,lwd=1)
+				
+				points(bt$inc_start, bt$inc_eff, col=col_t,bg=adjustcolor(col_t ,alpha.f = 0.4), pch=21,cex=0.5)
+			
+				mtext(expression(bold("c")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+
+				
+				dev.off()
+			
+				
+			}	
 		
+		}
+			
 		
-		{# Supplementary Table 2
+		{# Table S2
 			{# 1 - Temperature, proportion, escape
 				m=lm(inc_eff~scale(t_ambient_med) + scale(prop)+scale(esc), bt)
 						pred=c('Intercept','T','Proportion','Escape')
@@ -1960,14 +1991,12 @@
 				
 				}		
 		}
-		
-		{# not in the ms - models withou s806 (only RFID based nest attendance) and s628 (only imputed escape)
+				{# not in the ms - models withou s806 (only RFID based nest attendance) and s628 (only imputed escape)
 				m=lm(inc_eff~scale(t_ambient_med) + scale(prop)+scale(esc), bt)
 				m=lm(inc_eff~scale(t_ambient_med) + scale(prop)+scale(esc), bt[!bt$nest%in%c('s804','s628'),])
 		
 			}
-				
-		{# Supplementary Table 2 - with sex not used
+				{# with sex not used
 			{# 1 - Temperation, proportion, escape
 				m=lm(inc_eff~prop+esc+t_ambient_med, bt)
 						pred=c('Intercept','Proportion','Escape','T')
@@ -2253,7 +2282,7 @@
 				}
 				
 		}
-		{# Supplementary Table 3
+		{# Table S3
 				{# 4 - Time model - control
 					m=lm(inc_eff~sin_+cos_, b[b$exper=='c',])
 						pred=c('Intercept','Sin','Cos')
@@ -2274,8 +2303,9 @@
 					# simulation		
 						nsim <- 2000
 						bsim <- sim(m, n.sim=nsim)  
-						apply(bsim@fixef, 2, quantile, prob=c(0.025,0.975))	
+						v <- apply(bsim@fixef, 2,quantile, prob=c(0.5))
 						ci=apply(bsim@fixef, 2, quantile, prob=c(0.025,0.975))	
+						pred=c('Intercept','Sin','Cos')
 						oi=data.frame(model='time_2011',type='fixed',effect=pred,estimate=v, lwr=ci[1,], upr=ci[2,])
 						rownames(oi) = NULL
 						oi$estimate_r=round(oi$estimate,3)
@@ -2554,8 +2584,11 @@
 				{# with polygons
 				  #dev.new(width=3.5,height=1.85)
 				  #dev.new(width=4.5,height=1.85)
-				  png(paste(outdir,"Figs/Figure_4_polygons_a-d_.png", sep=""), width=4.5,height=1.85,units="in",res=600)
+				  #png(paste(outdir,"Figure_5.png", sep=""), width=4.5,height=1.85,units="in",res=600)
+				 # png(paste(outdir,"Figure_5.png", sep=""), width=4.5,height=1.85,units="in",res=600)
+				  jpeg(paste(outdir,"Figure_5.jpeg", sep=""), width=4.5,height=1.85,units="in",res=600)
 				  par(mfrow=c(1,4),mar=c(0.0,0,0,0.4),oma = c(1.9, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70", bty='n') # 0.6 makes font 7pt, 0.7 8pt
+				  #layout(matrix(c(1,2,2,2,3,4,5,6), nrow = 2, ncol = 4, byrow = TRUE))
 				{# time
 				#par(mar=c(2.2,2.1,0.5,0.1), ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
 				
@@ -2568,7 +2601,7 @@
 					axis(2, at=seq(0,1,by=0.25), labels=c('0.0','','0.5','','1.0'))
 						mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
-					mtext(expression(bold("a")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("A")),side=3,line=-0.45, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# treated
 							polygon(c(ptt$time_, rev(ptt$time_)), c(ptt$lwr, 
@@ -2604,13 +2637,14 @@
 					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
-					mtext(expression(bold("b")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					
 					
 					# treated
 							polygon(c(pte$t_ambient_med, rev(pte$t_ambient_med)), c(pte$lwr, 
 								rev(pte$upr)), border=NA, col=adjustcolor(col_t ,alpha.f = 0.2)) #0,0,0 black 0.5 is transparents RED
 							lines(pte$t_ambient_med, pte$pred, col=col_t,lwd=1)
 							points(bt$t_ambient_med, bt$inc_eff, col=col_t,bg=adjustcolor(col_t ,alpha.f = 0.4), pch=21,cex=0.5)
+					mtext(expression(bold("B")),side=3,line=-0.45, cex=0.7, las=1,adj=1, col="grey30")		
 				}
 				{# proportion
 					par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
@@ -2622,7 +2656,7 @@
 					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
-					mtext(expression(bold("c")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("C")),side=3,line=-0.45, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# treated
 							polygon(c(pp_$prop*100, rev(pp_$prop*100)), c(pp_$lwr, 
@@ -2640,7 +2674,7 @@
 					#axis(2, at=seq(0,1,by=0.25), labels=FALSE)
 						#mtext('Nest attendance',side=2,line=1, cex=0.6, las=3, col='grey30')
 					
-					mtext(expression(bold("d")),side=3,line=-0.4, cex=0.7, las=1,adj=1, col="grey30")
+					mtext(expression(bold("D")),side=3,line=-0.45, cex=0.7, las=1,adj=1, col="grey30")
 					
 					# treated
 							polygon(c(pe$esc, rev(pe$esc)), c(pe$lwr, 
@@ -2652,7 +2686,8 @@
 				}										
 				{# 2011 add small panel on top
 					#dev.new(width=3.5,height=1.85/5)
-					png(paste(outdir,"Figure_4_2011_abcd.png", sep=""), width=4.5,height=1.85/5,units="in",res=600)
+					jpeg(paste(outdir,"Figure_4_2011.jpeg", sep=""), width=4.5,height=1.85/5,units="in",res=600)
+					#png(paste(outdir,"Figure_4_2011_abcd.png", sep=""), width=4.5,height=1.85/5,units="in",res=600)
 						  par(mfrow=c(1,4),mar=c(0.0,0,0,0.4),oma = c(0.01, 1.8, 0.2, 0.5),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
 					
 						par(ps=12,	cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="n",xpd=TRUE)
@@ -3015,12 +3050,9 @@
 					apply(bsim@coef, 2, quantile, prob=c(0.025,0.975))	
 				
 		}
-		
-		
+} 
 
-	} 
-
-	{# Supplementary - Post treatment effects -  only for nests where somebody returned
+	{# Post treatment effects -  only for nests where somebody returned
 		{# prepare data
 			#u=read.csv(paste(wd,'experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
 			e=read.csv(file=paste(wd,'Data/experiment_metadata.csv', sep=""), sep=",",stringsAsFactors =FALSE)
@@ -3275,7 +3307,7 @@
 		{# starved birds (s402, s510 deaath
 			p = data.frame(bird_ID =c(257188558,257188571,257188564,255174350,257188570,257188566,255174353,257188572) , nest = c('s502','s702','s509','s711','s402','s510','s516','s404'), stringsAsFactors=FALSE)
 		}
-		{# return from captivity and mass change in captivity  (N = 25 nests minus two were female died) - of the starved ones s404, s502, s509, s702
+		{# Table S9, Figure S6 & S7 - return from captivity and mass change in captivity  (N = 25 nests minus two were female died) - of the starved ones s404, s502, s509, s702
 
 		  {# prepare
 			ee=read.csv(file=paste(wd,'Data/experiment_metadata.csv', sep=""), sep=",",stringsAsFactors =FALSE)
@@ -3305,6 +3337,7 @@
 			u=read.csv(paste(wd,'Data/experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
 			d =read.csv(paste(wd,'Data/captivity.csv', sep=""),stringsAsFactors=FALSE)
 				dd = d[!is.na(d$mass) & d$phase %in%c('start','end'),]
+				dd = dd[!dd$ring_num%in%c(257188570,257188566),]	# removes the dead females 257188570 257188566
 				v = ddply(dd,.(ring_num), summarise, rel_mass = (mass[phase=='end'] - mass[phase=='start'])/mass[phase=='start'], abs_mass = (mass[phase=='end'] - mass[phase=='start']))
 			u$rel_mass = v$rel_mass[match(u$ID_taken, v$ring_num)]
 			u$abs_mass = v$abs_mass[match(u$ID_taken, v$ring_num)]
@@ -3319,7 +3352,7 @@
 			med = ddply(ee,.(sex,starved,returned),summarise,abs_mass = median(abs_mass, na.rm =TRUE))
 			
 			}
-		  {# return
+		  {# Figure S6 - return
 			
 			ggplot(inc_,aes(x = starved, y = return_time)) + geom_boxplot() +geom_point(aes(fill = starved),shape = 21,  position = position_jitterdodge())
 			ggplot(ee[ee$returned=='yes',],aes(x = starved, y = return_time)) + geom_boxplot() +geom_point(aes(fill = starved),shape = 21,  position = position_jitterdodge())
@@ -3343,7 +3376,7 @@
 				) 
 			if(PNG==TRUE){ggsave(paste(outdir,"Supplementary_Figure_6.png", sep=""),width = 5, height = 6, units = "cm",  dpi = 300)}
 			}
-		  {# mass loss
+		  {# Figure S7 - mass loss
 			plot(rel_mass~abs_mass,u)
 			plot(mass_loss~abs_mass,u)
 			plot(mass_loss~abs_mass,ee)
@@ -3419,7 +3452,7 @@
 			if(PNG ==TRUE){ggsave(paste(outdir,"Supplementary_Figure_6.png", sep=""),width = 6, height = 5, units = "cm",  dpi = 300)}
 			}
 		   }	
-		  {# Supplementary Table 9 - return ~ mass loss
+		  {# Table S9 - return ~ mass loss
 				nrow(ee[!(is.na(ee$return_time)|is.na(ee$mass_loss)),])
 
 				m = lm(return_time~scale(mass_loss)*sex,ee[!(is.na(ee$return_time)|is.na(ee$mass_loss)),])	
@@ -3446,7 +3479,7 @@
 			}
 			}
 
-		{# Supplementary Table 4
+		{# Table S4
 			{# constancy
 				{# 1 - model of interest
 				 m1=lmer(inc_eff~exper*bout_start_j_c+(bout_start_j_c|bird_ID),inc, weights=sqrt(bout_length),REML=FALSE)
@@ -3783,7 +3816,7 @@
 					{# 2
 						dev.new(width=6,height=9)
 									
-						m==lmer(bout_length~exper+(1|bird_ID),inc, REML=FALSE)
+						m=lmer(bout_length~exper+(1|bird_ID),inc, REML=FALSE)
 						par(mfrow=c(4,3))
 						
 						scatter.smooth(fitted(m),resid(m),col='red');abline(h=0, lty=2)
@@ -3854,7 +3887,7 @@
 				}
 			}					
 		}
-		{# Supplementary Table 5			
+		{# Table S5			
 			{# gap presence
 				table(gap$bird_ID_filled, gap$exper)
 				length(unique(gap$bird_ID_filled))
@@ -4272,7 +4305,7 @@
 			}					
 		}	
 		
-		{# Supplementary Figure 4
+		{# Figure S5
 			{# run first - prepare predictions
 				{# constancy
 					{# simple model (prediction for day 	
@@ -4513,7 +4546,7 @@
 		
 			{# plot a,b,c, even less labels
 				  dev.new(width=3.5,height=1.85*2.15)
-				  #png(paste(outdir,"Figure_5_.png", sep=""), width=3.5,height=1.85*2.15,units="in",res=600)
+				  #png(paste(outdir,"Figure_S5.png", sep=""), width=3.5,height=1.85*2.15,units="in",res=600)
 				   par(mfrow=c(3,3),mar=c(1,0,0,0.5),oma = c(2, 1.8, 0.7, 0.1),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
 				{# constancy
 					{# medians
@@ -4821,8 +4854,6 @@
 												
 				dev.off()
 			}	
-				
-		
 									
 			{# not used	
 				{# plot
@@ -6613,9 +6644,9 @@
 			}
 		}
 	
-		{# Supplementary Table 6 - after bout of captive bird in relation to mass loss
+		{# Table S6 - after bout of captive bird in relation to mass loss
 			{# run first - add mass loss to data
-				u=read.csv(paste(wd,'experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
+				u=read.csv(paste(wd,'Data/experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
 					#uu = u[9:nrow(u),]
 					#summary(-uu$mass_loss)
 				a=inc[inc$exper=='a' & inc$treated_bird=='n',]
@@ -6904,7 +6935,7 @@
 			}					
 				
 		}	
-		{# Supplementary Table 7 - after bouts of focal bird in relation to amount of compensation
+		{# Table S7 - after bouts of focal bird in relation to amount of compensation
 			{# run first - add compensatin to data
 				bb$compensation=bb$inc_eff_treated/bb$inc_eff
 								
@@ -7169,8 +7200,8 @@
 						qqnorm(resid(m), main=list("Normal Q-Q Plot: residuals", cex=0.8),col='red') 
 						qqline(resid(m))
 			 
-						qqnorm(unlist(ranef(m)$bird_ID[1]), main = " Bird")
-						qqline(unlist(ranef(m)$bird_ID[1]))
+						qqnorm(unlist(ranef(m)$nest[1]), main = " Bird")
+						qqline(unlist(ranef(m)$nest[1]))
 						
 						scatter.smooth(resid(m)~a$compensation);abline(h=0, lty=2, col='red')
 						plot(resid(m)~factor(a$sex)); abline(h=0, lty=2, col='red')
@@ -7488,9 +7519,9 @@
 			}	
 		}
 		
-		{# Supplementary Figure 6
+		{# Figure S6
 			{# run first - add mass loss to data
-				u=read.csv(paste(wd,'experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
+				u=read.csv(paste(wd,'Data/experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
 				a=inc[inc$exper=='a' & inc$treated_bird=='n',]
 				a$mass_loss=u$mass_loss[match(a$bird_ID_filled, u$ID_taken)]
 				a$col_=ifelse(a$sex=="f", "#FCB42C","#535F7C")
@@ -7627,9 +7658,11 @@
 				}
 			}
 				{# plot a,b,c, even less labels
-				  dev.new(width=3.5-1.06299,height=(1.85*2.15)-1.14173)
-				  #png(paste(outdir,"Figure_6_abcd.png", sep=""), width=3.5-1.06299,height=(1.85*2.15)-1.14173,units="in",res=600)
-				   par(mfrow=c(2,2),mar=c(0.5,0,0,0.5),oma = c(2.2, 1.8, 1.2, 0.1),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
+				  if(PNG==FALSE){dev.new(width=3.5-1.06299,height=(1.85*2.15)-1.14173)}else{
+				  png(paste(outdir,"Figure_6_abcd.png", sep=""), width=3.5-1.06299,height=(1.85*2.15)-1.14173,units="in",res=600)
+				    # 0.6 makes font 7pt, 0.7 8pt
+				   }
+				   par(mfrow=c(2,2),mar=c(0.5,0,0,0.5),oma = c(2.2, 1.8, 1.2, 0.1),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70")
 				{# constancy
 					{# mass loss
 						par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
@@ -7757,12 +7790,12 @@
 					}
 				}
 															
-				dev.off()
+				if(PNG==TRUE){dev.off()}
 			}	
 		
 		}
-		
-				{# not in the MS -  effect of cage on before treatment
+			
+			{# not in the MS -  effect of cage on before treatment
 			cc =  read.csv(paste(wd,'Data/cages.csv', sep=""), stringsAsFactors = FALSE)
 			cc$on = as.POSIXct(cc$on)
 			cc$off = as.POSIXct(cc$off)
@@ -7792,7 +7825,7 @@
 		
 	}	
 	
- 	{# Supplementary Ethics
+ 	{# Ethics
 		{# nest fate
 			# experimental nests
 				d=read.csv(paste(wd,'Data/experiment_metadata.csv', sep=""),stringsAsFactors=FALSE)
@@ -7835,7 +7868,7 @@
 				text(seq(10,14,by=1), par("usr")[3]-0.35, labels = seq(10,14,by=1),  xpd = TRUE, cex=0.6, col="grey30") #labels = z_g$genus
 				mtext('Control bout length [h]',side=1,line=0.6, cex=0.7, las=1, col='grey30')
 		}
-		{# fat a change in removed parents
+		{# fat change in removed parents
 		d =read.csv(paste(wd,'Data/captivity.csv', sep=""),stringsAsFactors=FALSE)
 		dd = d[!is.na(d$mass) & d$phase %in%c('start','end'),]
 		d = d[!is.na(d$fat) & d$phase %in%c('start','end'),]
@@ -7845,9 +7878,8 @@
 		pd <- position_dodge(0.4)
 		v$phase = factor(v$phase, levels = c('start','end'))
 		ggplot(v,aes(x=phase, y = fat, col = factor(ring_num)))+geom_point( position = pd) +geom_line(position = pd, aes(group = factor(ring_num), col = factor(ring_num))) +
-		ggplot(v,aes(x=phase, y = fat, col = factor(ring_num)))+geom_point( position = pd) +geom_line(position = pd, aes(group = factor(ring_num), col = factor(ring_num))) +
 			theme(legend.position = "none") + ylab('fat score') + xlab('captivity phase')
-			xyplot(fat~numeric(phase), group = factor(ring_num), data = v)
+		xyplot(fat~phase, group = factor(ring_num), data = v, type=c('p','l'))
 	}
 	}
 	
