@@ -26,6 +26,70 @@
 					
 					#png(paste(outdir,"Figure_1", ".png", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
 					
+					jpeg(paste(outdir,"Figure_1_rev", ".jpeg", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
+					}else{
+					dev.new(width=0.984252*2, height=0.984252*2) #dev.new(width=3.5, height=1.97)
+					}	
+			
+		#par(mfrow=c(2,2),mar=c(2,2,0.7,0.7), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5)) # cex is multiplied as in multiplot figure the cex is reduced to 0.66	
+		par(mfrow=c(2,2),mar=c(0,0,0,0), ps=12, mgp=c(1.2,0.35,0), las=1, cex=1,tcl=-0.15,bty="o", oma = c(2, 2, 0.5, 0.5),col.axis="grey30",col.lab="grey30", col.main="grey30", fg="grey70") 
+		
+		{#(a)	
+							#par(mar=c(0,2,2.7,0), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
+							#par(mar=c(0,0,1,0))
+							plot(c(0,1), c(0,1),xlab=NA, ylab=NA, xlim=c(-0.125,1.125),ylim=c(-0.05,1.1),type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
+							axis(2, at = seq(0,1, 0.5),cex.axis=0.5)	
+							mtext(expression(bold("A")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							lines(c(0,0.4,0.4,0.8,0.8,1),c(0.9,0.9,0,0,0.9,0.9), lwd=1.5, col='black')
+							#abline(v=0.4, col='red', lty=3, lwd=0.5)
+							box(col = "grey70")
+		}
+		{#(b) 
+							#par(mar=c(0,0,2.7,2), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
+							plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
+							mtext(expression(bold("B")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							lines(c(0,1),c(0.9,0.9), lwd=1.5, col='black')
+							#abline(v=0.4, col='red', lty=3, lwd=0.5)
+							box(col = "grey70")
+		}
+		{#(c) 
+							#par(mar=c(2.7,2,0,0), ps=12, mgp=c(0.25,0,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
+							#par(mgp=c(0.2,0.15,0))
+							plot(c(0,1), c(0,1),xlab=NA, ylab=NA, xlim=c(-0.125,1.125),ylim=c(-0.05,1.1),type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 	
+							axis(2,  at = seq(0,1, 0.5),cex.axis=0.5)
+							#axis(1, col = "grey40", col.axis = "grey20", at = seq(0,1, 0.5),labels=FALSE)# seq(0,24,12),cex.axis=0.6)
+							axis(1, at = seq(0,1, 0.5),labels=seq(0,24,12),cex.axis=0.5,mgp=c(0,-0.15,0))
+							#text(seq(0,1, 0.5),  par("usr")[3], labels = seq(0,24,12),  xpd = TRUE, cex=0.6) 
+							#mtext(text = seq(0,24,12),seq(0,1, 0.5),  par("usr")[3],   outer = TRUE, cex=0.6) 
+							polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+							mtext(expression(bold("C")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+							lines(c(0,0.6,0.6,1),c(0.9,0.9,0,0), lwd=1.5, col='black')
+							#abline(v=0.4, col='red', lty=3, lwd=0.5)
+							box(col = "grey70")
+		}
+		{#(d) 
+						#par(mar=c(2.7,0,0,2), ps=12, mgp=c(0.5,0.35,0), las=1, cex.lab=0.7, cex.axis=0.6, tcl=-0.15,bty="o")
+						plot(c(0,1), c(0,1),xlab=NA, ylab=NA,xlim=c(-0.125,1.125),ylim=c(-0.05,1.1), type="n",xaxt='n',yaxt='n')#,yaxt='n')#, )#, 
+						mtext(expression(bold("D")),side=3,line=-0.65, cex=0.6, las=1,adj=0.04, col='black')
+						axis(1, at = seq(0,1, 0.5),labels=seq(0,24,12),cex.axis=0.5,mgp=c(0,-0.15,0))
+						polygon(x=c(c(0.4, 0.8),rev(c(0.4, 0.8))), y=c(c(-0.096,-0.096),c(1.155,1.155)), col='grey95', border=FALSE)
+						lines(c(0,0.4,0.4,1),c(0.9,0.9,0.55,0.55), lwd=1.5, col='black')
+						#abline(v=0.4, col='red', lty=3, lwd=0.5)
+						box(col = "grey70")				
+				}
+				
+		mtext('Time [h]',side=1,line=0.6, cex=0.6, las=1, outer=TRUE, col="grey30")
+		mtext('Nest attendance',side=2,line=1.2, cex=0.6, las=0,outer=TRUE,col="grey30")
+			
+		if(PNG == TRUE) {dev.off()}
+	}
+	{# Figure 1 - predictions
+		if(PNG == TRUE) {
+					
+					#png(paste(outdir,"Figure_1", ".png", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
+					
 					jpeg(paste(outdir,"Figure_1", ".jpeg", sep = ""), width=0.984252*2, height=0.984252*2, units = "in", res = 600)	 
 					}else{
 					dev.new(width=0.984252*2, height=0.984252*2) #dev.new(width=3.5, height=1.97)
@@ -85,18 +149,30 @@
 			
 		if(PNG == TRUE) {dev.off()}
 	}
-	
+		
 
 # METHODS
 	{# Recording incubation and escape distance
 	   {# escape distance - note there are no visits with both gps and estimated distance
 		v=read.csv(paste(wd,'Data/escape.csv', sep=""), stringsAsFactors=FALSE)
 		v_ = v[-which(v$nest%in%c('s410','s514','s524','s624')),] # limit to experimental individulas
+		v_$nest_sex = paste(v_$nest, v_$sex)
 		nrow(v_)
 		length(unique(v_$nest))
 		25*2-length(unique(paste(v_$nest, v_$sex))) # one individual without escape
 			 
-		v_$nest_sex = paste(v_$nest, v_$sex)
+		# distribution of visits for focal parent
+			e=read.csv(file=paste(wd,'Data/experiment_metadata.csv', sep=""), sep=",",stringsAsFactors =FALSE)
+			vv = v_[v_$bird_ID%in%e$ID_treated,]
+			length(unique(vv$nest))
+			length(unique(paste(vv$nest, vv$sex)))
+			vv$n =1
+			es=ddply(vv,.(nest,sex, bird_ID),summarise, esc=median(distm),n=sum(n))
+			x = data.frame(table(vv$nest_sex))
+			summary(factor(x$Freq))
+			summary(c(x$Freq,0)) # distribution of escape
+			 
+		
 		x = data.frame(table(v_$nest_sex))
 		summary(factor(x$Freq))
 		summary(c(x$Freq,0)) # distribution of escape
@@ -106,7 +182,8 @@
 		ggplot(v,aes(x = paste(nest,sex), y = distm)) + geom_boxplot() + geom_dotplot(aes(fill = paste(nest,sex)),binaxis = 'y', stackdir = 'center',  position = position_dodge())
 		densityplot(~v$distm)
 		densityplot(~log(v$distm+0.5))
-	
+		
+		
 	}
 	   {# escape distance 2011-2012 - repeatability
 
@@ -187,13 +264,27 @@
 				load(file=paste(wd,'Data/experimental.Rdata', sep=""))
 				b=b[-which(b$nest%in%c('s410','s514','s524','s624')),] 
 				b$inc_eff[b$nest=='s806']=b$inc_eff_2[b$nest=='s806'] 
+				
+				b$bout_start=as.POSIXct(b$bout_start)
+				b$midbout=b$bout_start+60*60*b$bout_length/2
+				b$time = as.numeric(difftime(b$midbout,trunc(b$midbout,"day"),   #DO NOT USE rfid_T$day here!! (the time will be wrong)
+								units = "hours"))
+				b$rad=b$time*pi/12
+				b$sin_=sin(b$rad)
+				b$cos_=cos(b$rad)
+				
 				bb=b[b$exper=='c',]
 				bt=b[b$exper=='t',]
+				
 				bb$inc_eff_treated=bt$inc_eff[match(bb$nest, bt$nest)]
 				bb$compensation=bb$inc_eff_treated/bb$inc_eff
 				
 				cor(bb$compensation,bb$inc_eff_treated,method='pearson')
 				cor(bb$compensation,bb$inc_eff_treated,method='spearman')
+				cor(bb$t_ambient_med,bb$sin_,method='pearson')
+				cor(bb$t_ambient_med,bb$cos_,method='pearson')
+				cor(bb$t_ambient_med,bb$sin_,method='spearman')
+				cor(bb$t_ambient_med,bb$cos_,method='spearman')
 				plot(bb$inc_eff_treated~bb$compensation)
 			}
 	{# Mass of removed individuals
@@ -1391,7 +1482,17 @@
 			{# add escape distance - imputed for a bird from nest s628
 				v=read.csv(paste(wd,'Data/escape.csv', sep=""), stringsAsFactors=FALSE)
 				v = v[-which(v$nest%in%c('s410','s514','s524','s624')),] # limit to experimental individulas
-				es=ddply(v,.(nest,sex),summarise, esc=median(distm))
+				v$taken = as.POSIXct(u$taken[match(v$nest, u$nest)])
+				v$days_before_exper = as.numeric(difftime(v$datetime_,v$taken,units = 'days'))
+				v$day_j = as.numeric(difftime(v$datetime_,min(v$datetime_),units = 'days'))
+				v$n=1
+				
+				es=ddply(v,.(nest,sex, bird_ID),summarise, esc=median(distm),n=sum(n))
+					et = es[es$bird_ID%in%bt$bird_ID_filled,]
+					ggplot(es,aes(x = n, y = esc))+geom_point() +geom_smooth()+xlab('# of visits')+ylab('median escape distance [m]')
+					ggplot(v[which(v$bird_ID%in%es$bird_ID[es$n>2]),],aes(x = day_j, y = distm, col = factor(bird_ID)))+geom_point()+xlab('Julian date')+ylab('escape distance [m]')+facet_wrap(~bird_ID)
+					ggplot(v[which(v$bird_ID%in%es$bird_ID[es$n>2]),],aes(x = days_before_exper, y = distm, col = factor(bird_ID)))+geom_point()+xlab('Days to experiment')+ylab('Escape distance [m]')+facet_wrap(~bird_ID)+ theme(legend.position="none") +scale_x_continuous(breaks = c(-10,-5,0), labels=c(10,5,0))
+					if(PNG == TRUE){ggsave(paste(outdir,"Esc_over_time.png", sep=""),width = 15, height = 15, units = "cm",  dpi = 300)}
 				bt$esc=es$esc[match(paste(bt$nest, bt$sex),paste(es$nest,es$sex))]
 				bt$esc[bt$nest=='s628']=34.05681 # value based on imputation # see the script: escape_distance_imputation.R
 			}
@@ -1401,6 +1502,9 @@
 				 e$inc_start = as.POSIXct(e$inc_start, tz = 'UTC')
 				 bt$inc_start = e$inc_start[match(bt$nest,e$nest)] 	
 				 bt$day_inc=as.numeric(difftime(bt$bout_start,bt$inc_start, units = "days"))	
+				 
+					v$inc_start = e$inc_start[match(v$nest,e$nest)] 	
+					v[v$inc_start>v$datetime_,] # this bird was the captivity one
 			}
 			{# load 2011 data
 					g=read.csv(paste(wd,'Data/bout_length_constancy_2011.csv', sep=""), stringsAsFactors=FALSE)
@@ -1790,6 +1894,7 @@
 					
 			}
 			{# 3 - Time model - treated
+					m=lm(inc_eff~sin(rad)*sex+cos(rad)*sex, bt)
 					m=lm(inc_eff~sin_+cos_, bt)
 						pred=c('Intercept','Sin','Cos')
 						nsim <- 2000
@@ -4305,7 +4410,7 @@
 			}					
 		}	
 		
-		{# Figure S5
+		{# Figure 6
 			{# run first - prepare predictions
 				{# constancy
 					{# simple model (prediction for day 	
@@ -4530,8 +4635,8 @@
 				{# gap
 					y=ddply(gapp,.(nest,sex,exper, treated_bird), summarise, med_gap=median(bout_length), num_gaps=sum(present))
 				
-					yb=y[y$exper=='b',] s622 s527 
-					ya=y[y$exper=='a',] s527 s519 
+					yb=y[y$exper=='b',] #s622 s527 
+					ya=y[y$exper=='a',] #s527 s519 
 					yb$med_gap_after=ya$med_gap[match(paste(yb$nest,yb$sex),paste(ya$nest,ya$sex))]
 					yb$col_=ifelse(yb$treated_bird=="y", "#FCB42C","#535F7C")
 					yb = yb[!is.na(yb$med_gap_after),]
@@ -4546,7 +4651,8 @@
 		
 			{# plot a,b,c, even less labels
 				  dev.new(width=3.5,height=1.85*2.15)
-				  #png(paste(outdir,"Figure_S5.png", sep=""), width=3.5,height=1.85*2.15,units="in",res=600)
+				  #png(paste(outdir,"Figure_6.png", sep=""), width=3.5,height=1.85*2.15,units="in",res=600)
+				  #png(paste(outdir,"Figure_6.jpg", sep=""), width=3.5,height=1.85*2.15,units="in",res=600)
 				   par(mfrow=c(3,3),mar=c(1,0,0,0.5),oma = c(2, 1.8, 0.7, 0.1),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70") # 0.6 makes font 7pt, 0.7 8pt
 				{# constancy
 					{# medians
@@ -4572,7 +4678,7 @@
 						text(x=0.65,y=1, labels='Focal', col='#FCB42C', cex=0.5,adj=0)
 						text(x=0.65,y=0.96, labels='Removed', col='#535F7C', cex=0.5,adj=0)
 						
-						mtext(expression(bold("a")),side=3,line=0, cex=0.7, las=1, col="grey30")
+						mtext(expression(bold("A")),side=3,line=0, cex=0.7, las=1, col="grey30")
 					# predictions	
 						# 95%CI for before
 						arrows(y0=pcsB$lwr, x0=pcsA$pred,y1=pcsB$upr, x1=pcsA$pred,
@@ -4615,7 +4721,7 @@
 						points(x=10.5,y=0.58, pch=20 ,col=col_2011_light, cex=0.5) #labels='0, 0.3, 0.4, 0.6'
 						#outliers 0.0129349,0.2786890,0.3592990, 0.5777780
 						
-						mtext(expression(bold("b")),side=3,line=0, cex=0.7, las=1, col="grey30")
+						mtext(expression(bold("B")),side=3,line=0, cex=0.7, las=1, col="grey30")
 						}
 					{# day
 						par(ps=12,cex.lab=0.6,cex.main=0.7, cex.axis=0.5, tcl=-0.15,bty="l",xpd=TRUE)
@@ -4643,7 +4749,7 @@
 							lines(pconA$bout_start_j_c, pconA$pred, col=col_c,lwd=1)
 												
 						# text	
-							mtext(expression(bold("c")),side=3,line=0, cex=0.7, las=1, col="grey30")
+							mtext(expression(bold("C")),side=3,line=0, cex=0.7, las=1, col="grey30")
 							#text(x=inc$bout_start_j_c[inc$inc_eff<0.6],y=0.6, labels='*', col=col_2011_light, cex=0.6) #labels='0, 0.3, 0.4, 0.6' #round(inc$inc_eff[inc$inc_eff<0.6],2 )
 							points(x=inc$bout_start_j_c[inc$inc_eff<0.6],y=rep(0.6,length(inc$bout_start_j_c[inc$inc_eff<0.6])), pch=20, col=col_2011_light, cex=0.5) 
 							text(x=1.20,y=0.66, labels='0.28', col='grey30', cex=0.4)
@@ -7519,7 +7625,7 @@
 			}	
 		}
 		
-		{# Figure S6
+		{# Figure 7
 			{# run first - add mass loss to data
 				u=read.csv(paste(wd,'Data/experiment_metadata.csv', sep=""), stringsAsFactors=FALSE)	
 				a=inc[inc$exper=='a' & inc$treated_bird=='n',]
@@ -7659,7 +7765,8 @@
 			}
 				{# plot a,b,c, even less labels
 				  if(PNG==FALSE){dev.new(width=3.5-1.06299,height=(1.85*2.15)-1.14173)}else{
-				  png(paste(outdir,"Figure_6_abcd.png", sep=""), width=3.5-1.06299,height=(1.85*2.15)-1.14173,units="in",res=600)
+				  png(paste(outdir,"Figure_7.jpeg", sep=""), width=3.5-1.06299,height=(1.85*2.15)-1.14173,units="in",res=600)
+				 # png(paste(outdir,"Figure_6_abcd.png", sep=""), width=3.5-1.06299,height=(1.85*2.15)-1.14173,units="in",res=600)
 				    # 0.6 makes font 7pt, 0.7 8pt
 				   }
 				   par(mfrow=c(2,2),mar=c(0.5,0,0,0.5),oma = c(2.2, 1.8, 1.2, 0.1),ps=12, mgp=c(1.2,0.35,0), las=1, cex=1, col.axis="grey30",font.main = 1, col.lab="grey30", col.main="grey30", fg="grey70")
@@ -7676,7 +7783,7 @@
 						axis(2, at=seq(0.6,1,by=0.2),labels=c('0.6','0.8','1.0'))	
 							mtext('Nest attendance',side=2,line=1.1, cex=0.6, las=3, col='grey30')
 																	
-						mtext(expression(bold("a")),side=3,line=0, cex=0.7, las=1, col="grey30")
+						mtext(expression(bold("A")),side=3,line=0, cex=0.7, las=1, col="grey30")
 						
 						text(x=1.3,y=0.70, labels='\u2640', col='#FCB42C', cex=0.6)
 						text(x=1.6,y=0.72, labels='\u2642', col='#535F7C', cex=0.6)
@@ -7710,7 +7817,7 @@
 						axis(2, at=seq(0.6,1,by=0.2),labels=FALSE)	
 							#mtext('Nest attendance',side=2,line=1.1, cex=0.6, las=3, col='grey30')
 						
-						mtext(expression(bold("b")),side=3,line=0, cex=0.7, las=1, col="grey30")
+						mtext(expression(bold("B")),side=3,line=0, cex=0.7, las=1, col="grey30")
 						
 						#text(x=-3,y=0.60, labels='\u2640', col='#FCB42C', cex=0.6)
 						#text(x=-2.7,y=0.62, labels='\u2642', col='#535F7C', cex=0.6)

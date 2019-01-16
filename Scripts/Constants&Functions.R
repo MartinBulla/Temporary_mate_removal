@@ -15,10 +15,7 @@
 		require(XLConnect)
 		require(zoo)
 }
-{# connect to database
-	conMy=dbConnect(MySQL(),user='root',host='127.0.0.1', password='',dbname='')
-	wet=dbGetQuery	
-}
+
 # define time and load packages
 		Sys.setenv(TZ="UTC")	
 # define constants
